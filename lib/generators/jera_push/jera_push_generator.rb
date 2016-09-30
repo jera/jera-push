@@ -5,4 +5,8 @@ class JeraPushGenerator < Rails::Generators::Base
   def copy_initializer_file
     copy_file "jera_push.rb", "config/initializers/jera_push.rb"
   end
+
+  def generate_migrations
+    generate "active_record:jera_push", 'devices'
+  end
 end
