@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     jera_push (0.0.1)
+      enumerize
       rails (~> 4.2.6)
 
 GEM
@@ -45,6 +46,8 @@ GEM
     arel (6.0.3)
     builder (3.2.2)
     concurrent-ruby (1.0.2)
+    enumerize (2.0.0)
+      activesupport (>= 3.2)
     erubis (2.7.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
