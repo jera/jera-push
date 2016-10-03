@@ -1,7 +1,6 @@
 require 'jera_push/engine'
 
 module JeraPush
-  class Engine < Rails::Engine; end
 
   autoload :Device, 'jera_push/models/device.rb'
   autoload :Message, 'jera_push/models/message.rb'

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :devices, only: [:create] do
         collection do
-          delete :destroy, path: '/'
+          delete :destroy
         end
       end
     end
