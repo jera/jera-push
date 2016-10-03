@@ -1,4 +1,5 @@
 require 'jera_push/engine'
+require 'jera_push/firebase/client'
 
 module JeraPush
   class Engine < Rails::Engine; end
