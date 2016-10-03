@@ -1,3 +1,5 @@
+require 'enumerize'
+
 class JeraPush::Device < ActiveRecord::Base
   extend Enumerize
 
