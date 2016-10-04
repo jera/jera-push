@@ -1,5 +1,7 @@
+require 'httparty'
 require 'jera_push/engine'
 require 'jera_push/firebase/client'
+require 'jera_push/firebase/api_result'
 
 module JeraPush
 
