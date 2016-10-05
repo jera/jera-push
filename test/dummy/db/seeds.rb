@@ -1,7 +1,7 @@
 module Populate
   USER_COUNT = 30
   DEVICES_PER_USER = 2
-  MESSAGES_PER_DEVICE = 10000
+  MESSAGES_COUNT = 10000
 
   def self.run_users
     return nil unless USER_COUNT
@@ -20,7 +20,7 @@ module Populate
       platforms = [:ios, :chrome, :android].shuffle
       DEVICES_PER_USER.times do
           devices << {
-            token: SecureRandom.urlsafe_base64(nil, false),
+            token: Faker::Crypto.sha256,
             user_id: user.id,
             platform: platforms.pop
           }
@@ -31,16 +31,17 @@ module Populate
   end
 
   def self.run_push_messages
-    return nil unless Device.any? || MESSAGES_PER_DEVICE
+    return nil unless JeraPush::Device.any? || MESSAGES_PER_DEVICE
 
     messages = []
-    JeraPush::Device.all.each do |device|
-      MESSAGES_PER_DEVICE.times do
-        messages << {
-          
-        }
-      end
+    MESSAGES_COUNT.times do
+      messages << {
+        message: { title: Faker::Lorem.sentence(3), text: Faker::Hacker.say_something_smart },
+        status: :sent
+      }
     end
+
+    ActiveRecord::Base.transaction { JeraPush::Message.create messages }
   end
 end
 

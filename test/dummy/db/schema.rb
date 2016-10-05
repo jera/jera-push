@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161005200652) do
+ActiveRecord::Schema.define(version: 20161005171637) do
 
   create_table "jera_push_devices", force: :cascade do |t|
     t.string   "token"

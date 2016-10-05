@@ -16,11 +16,9 @@ class JeraPush::Message < ActiveRecord::Base
   end
 
   def message=(message)
-    if message
-      super(message.to_json)
-    else
-      super(nil)
-    end
+    raise 'Invalid message format. Hash format expected' unless message.is_a? Hash
+
+    super(message.to_json)
   end
 
   def message

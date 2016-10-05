@@ -1,3 +1,40 @@
-= JeraPush
+![Jera Logo](http://jera.com.br/images/logo-jera-header.png)
 
-This project rocks and uses MIT-LICENSE.
+JeraPush is a easy tool to work with push messages and firebase API.
+
+It's composed for:
+
+ * [Device](#devices): model responsible for register and interact with device tokens to send push messages.
+ * [Message](#messages): model responsible for register the message content and status after sending.
+ * [MessageDevice](#message-devise): model responsible for connect the message sent and the target devices.
+ * [Firebase::Client](#firebase-client): class responsible to interact with Firebase.
+
+---
+
+# Device
+
+> Model responsible for register and interact with device tokens to send push messages.
+
+## Attributes
+
+| Attribute|    Type    | Description |
+|----------|------------|-------------|
+| Token | String | Token for target device |
+| Platform | Enumerize | Type of device platform. Can be `:ios`, `:android` or `:chrome` |
+
+---
+
+# Message
+
+> Model responsible for register the message content and status after sending.
+
+## Attributes
+
+| Attribute|    Type    | Description |
+|----------|------------|-------------|
+| Token | String | Token for target device |
+| Platform | Enumerize | Type of device platform. Can be `:ios`, `:android` or `:chrome` |
+
+~~~ruby
+aaa
+~~~
