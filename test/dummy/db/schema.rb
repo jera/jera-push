@@ -11,11 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160929153247) do
+ActiveRecord::Schema.define(version: 20161005200652) do
 
   create_table "jera_push_devices", force: :cascade do |t|
     t.string   "token"
     t.string   "platform"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -32,15 +33,21 @@ ActiveRecord::Schema.define(version: 20160929153247) do
   end
 
   create_table "jera_push_messages_devices", force: :cascade do |t|
-    t.integer  "jera_push_device_id"
-    t.integer  "jera_push_message_id"
+    t.integer  "device_id"
+    t.integer  "message_id"
     t.string   "status"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_index "jera_push_messages_devices", ["jera_push_device_id", "jera_push_message_id"], name: "jera_push_index_messages_id_devices_id", unique: true
-  add_index "jera_push_messages_devices", ["jera_push_device_id"], name: "index_jera_push_messages_devices_on_jera_push_device_id"
-  add_index "jera_push_messages_devices", ["jera_push_message_id"], name: "index_jera_push_messages_devices_on_jera_push_message_id"
+  add_index "jera_push_messages_devices", ["device_id", "message_id"], name: "jera_push_index_messages_id_devices_id", unique: true
+  add_index "jera_push_messages_devices", ["device_id"], name: "index_jera_push_messages_devices_on_device_id"
+  add_index "jera_push_messages_devices", ["message_id"], name: "index_jera_push_messages_devices_on_message_id"
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end

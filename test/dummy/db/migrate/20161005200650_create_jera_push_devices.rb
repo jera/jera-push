@@ -3,6 +3,7 @@ class CreateJeraPushDevices < ActiveRecord::Migration
     create_table :jera_push_devices do |t|
       t.string :token, index: true
       t.string :platform, index: true
+      t.references :user, foreign_key: true
 
       t.timestamps null: false
     end

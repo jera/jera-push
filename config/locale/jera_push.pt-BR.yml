@@ -1,0 +1,8 @@
+pt-BR:
+  jera_push:
+    admin:
+      messages:
+        attributes:
+          id: ID
+          message: Mensagem
+          date: Data
