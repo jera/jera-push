@@ -21,7 +21,7 @@ module Populate
       DEVICES_PER_USER.times do
           devices << {
             token: Faker::Crypto.sha256,
-            user_id: user.id,
+            resource_id: user.id,
             platform: platforms.pop
           }
       end
