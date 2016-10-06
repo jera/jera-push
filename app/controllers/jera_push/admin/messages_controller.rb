@@ -2,7 +2,7 @@ module JeraPush
   class Admin::MessagesController < Admin::AdminController
 
     def index
-      @messages = JeraPush::Message.all
+      @messages = JeraPush::Message.page(params[:page])
     end
 
     def show

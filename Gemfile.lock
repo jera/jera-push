@@ -4,6 +4,7 @@ PATH
     jera_push (0.0.1)
       enumerize
       httparty
+      kaminari
       rails (~> 4.2.6)
       sass-rails
 
@@ -59,6 +60,9 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (0.7.0)
     json (1.8.3)
+    kaminari (0.17.0)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
