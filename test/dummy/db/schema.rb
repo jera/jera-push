@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161005171637) do
+ActiveRecord::Schema.define(version: 20161006144838) do
 
   create_table "jera_push_devices", force: :cascade do |t|
     t.string   "token"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20161005171637) do
   add_index "jera_push_devices", ["token"], name: "index_jera_push_devices_on_token"
 
   create_table "jera_push_messages", force: :cascade do |t|
-    t.text     "message"
+    t.text     "content"
     t.string   "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

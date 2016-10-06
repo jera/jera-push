@@ -4,5 +4,5 @@ pt-BR:
       messages:
         attributes:
           id: ID
-          message: Mensagem
+          content: Conteúdo
           date: Data

@@ -3,10 +3,10 @@ class JeraPush::Message < ActiveRecord::Base
   has_many :devices, through: :message_devices
   has_many :message_devices
 
-  def self.send_to(target, message: {})
-    return nil if target.blank? || message.blank?
+  def self.send_to(target, content: {})
+    return nil if target.blank? || content.blank?
 
-    push_message = JeraPush::Message.create message: message
+    push_message = JeraPush::Message.create content: content
 
     if push_message && target.is_a?(JeraPush::Device)
       push_message.send_to_device device: target
@@ -15,13 +15,13 @@ class JeraPush::Message < ActiveRecord::Base
     end
   end
 
-  def message=(message)
-    raise 'Invalid message format. Hash format expected' unless message.is_a? Hash
+  def content=(content)
+    raise 'Invalid message format. Hash format expected' unless content.is_a? Hash
 
-    super(message.to_json)
+    super(content.to_json)
   end
 
-  def message
+  def content
     JSON.parse(super()) if super()
   end
 
@@ -31,43 +31,44 @@ class JeraPush::Message < ActiveRecord::Base
     client = JeraPush::Firebase::Client.instance
 
     platform_devices.keys.each do |platform|
-      payload = self.send("body_#{platform.to_s}", self.message)
+      payload = self.send("body_#{platform.to_s}", self.content)
       client.send_message(message: payload, devices: platform_devices[platform])
     end
   end
 
   def send_to_device(device: nil)
     return nil if device.nil?
-    payload = self.message
+
+    payload = {}
     if device.platform.ios?
-      payload = body_ios(self.message)
+      payload = body_ios(self.content)
     elsif device.platform.android?
-      payload = body_android(self.message)
+      payload = body_android(self.content)
     elsif device.platform.chrome?
-      payload = body_chrome(self.message)
+      payload = body_chrome(self.content)
     end
     client = JeraPush::Firebase::Client.instance
     client.send_message(message: payload, devices: [device])
   end
 
   private
-  def body_ios(message)
+  def body_ios(content)
     params = [:title, :body, :sound, :badge, :click_action, :body_loc_key, :body_loc_args, :title_loc_key, :title_loc_args]
     return {
-      notification: message.select { |key, value| params.include?(key) },
-      data: message.reject { |key, value| params.include?(key) }
+      notification: content.select { |key, value| params.include?(key) },
+      data: content.reject { |key, value| params.include?(key) }
     }
   end
 
-  def body_android(message)
+  def body_android(content)
     return {
-      data: message
+      data: content
     }
   end
 
-  def body_chrome(message)
+  def body_chrome(content)
     return {
-      data: message
+      data: content
     }
   end
 end

@@ -36,7 +36,7 @@ module Populate
     messages = []
     MESSAGES_COUNT.times do
       messages << {
-        message: { title: Faker::Lorem.sentence(3), text: Faker::Hacker.say_something_smart },
+        content: { title: Faker::Lorem.sentence(3), text: Faker::Hacker.say_something_smart },
         status: :sent
       }
     end
