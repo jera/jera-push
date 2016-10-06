@@ -6,6 +6,10 @@ test/dummy/db/*.sqlite3-journal
 test/dummy/log/*.log
 test/dummy/tmp/
 test/dummy/.sass-cache
+test/dummy/config/initializers/jera_push.rb
+test/dummy/db/migrate/*create_jera_push_devices.rb
+test/dummy/db/migrate/*create_jera_push_messages.rb
+test/dummy/db/migrate/*create_jera_push_messages_devices.rb
 
 # Created by https://www.gitignore.io/api/osx,linux,ruby
 
