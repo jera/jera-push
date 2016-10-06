@@ -1,32 +1,27 @@
 <div class="filter-container row">
-  <%= form_tag search_jera_push_admin_devices_path, class: 'col s12' do |f| %>
+  <%= form_tag jera_push_admin_devices_path, method: :get, class: 'col s12' do |f| %>
+    <div class="row">
+      <% JeraPush::Device.platform.values.each do |platform|  %>
+        <div class="input-field col s2">
+          <p>
+            <%= check_box_tag :"platform[]", platform, @filter.platform.include?(platform), id: "platform_#{platform}"  %>
+            <label for="platform_<%= platform %>"><%= platform %><label>
+          </p>
+        </div>
+      <% end %>
+    </div>
     <div class="row">
       <div class="input-field col s3">
-        <%= select_tag :field, options_for_select(devices_fields_for_filter_select ) %>
+        <%= select_tag :field, options_for_select(devices_fields_for_filter_select, @filter.field) %>
       </div>
       <div class="input-field col s9">
-        <input id="email" type="email" class="validate">
-        <label for="email">Email</label>
+        <%= text_field_tag :value, @filter.value %>
+        <label for="value">Valor</label>
       </div>
     </div>
     <div class="row">
       <div class="input-field col s3">
-        <p>
-          <input type="checkbox" id="test5" />
-          <label for="test5">Android</label>
-        </p>
-      </div>
-      <div class="input-field col s3">
-        <p>
-          <input type="checkbox" id="test6" checked="checked" />
-          <label for="test6">iOS</label>
-        </p>
-      </div>
-      <div class="input-field col s3">
-        <p>
-          <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" />
-          <label for="filled-in-box">chrome</label>
-        </p>
+        <%= submit_tag 'Filtrar', class: 'btn' %>
       </div>
     </div>
   <% end %>

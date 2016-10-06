@@ -9,6 +9,7 @@ module JeraPush
   autoload :Device, 'jera_push/models/device.rb'
   autoload :Message, 'jera_push/models/message.rb'
   autoload :MessageDevice, 'jera_push/models/message_device.rb'
+  autoload :DeviceFilter, 'jera_push/models/device_filter.rb'
 
   mattr_accessor :firebase_api_key
   @@firebase_api_key = nil

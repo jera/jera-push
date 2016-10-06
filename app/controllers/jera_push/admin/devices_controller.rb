@@ -2,11 +2,16 @@ module JeraPush
   class Admin::DevicesController < Admin::AdminController
 
     def index
-      @devices = JeraPush::Device.page(params[:page])
+      @filter = JeraPush::DeviceFilter.new params_filter
+      @devices = @filter.search
     end
 
     def search
-      
+
+    end
+
+    def params_filter
+      params.permit(:value, :field, :page, :per, platform: [])
     end
 
   end
