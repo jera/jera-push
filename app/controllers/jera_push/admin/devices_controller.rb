@@ -5,5 +5,9 @@ module JeraPush
       @devices = JeraPush::Device.page(params[:page])
     end
 
+    def search
+      
+    end
+
   end
 end

@@ -16,4 +16,14 @@ module JeraPush::Admin::DevicesHelper
     end
   end
 
+  def devices_fields_for_filter_select
+    fields = [:token]
+    if JeraPush.resource_attributes && JeraPush.resource_attributes.any?
+      JeraPush.resource_attributes.each do |attribute|
+        fields << attribute
+      end
+    end
+    fields
+  end
+
 end
