@@ -8,6 +8,7 @@ module JeraPush
 
     def show
       @message = JeraPush::Message.find_by id: params[:id]
+      @message = JeraPush::MessagePresenter.new(@message)
     end
 
   end

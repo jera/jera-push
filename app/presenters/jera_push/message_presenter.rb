@@ -1,7 +1,7 @@
 class JeraPush::MessagePresenter < BasePresenter
 
-	def display_content
-		"\{ title: \'#{item.content["title"]}\' , body: \'#{item.content["body"]}\' \}".html_safe
+	def list_content
+		"\{\n\t\"title\": #{item.content["title"]},\n\t\"body\": #{item.content["body"]}\n\}"
 	end
 
 	def display_created_at
