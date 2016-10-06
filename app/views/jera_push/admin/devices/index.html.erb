@@ -1,0 +1,59 @@
+<div class="filter-container row">
+  <%= form_tag search_jera_push_admin_devices_path, class: 'col s12' do |f| %>
+    <div class="row">
+      <div class="input-field col s3">
+        <%= select_tag :field, options_for_select(devices_fields_for_filter_select ) %>
+      </div>
+      <div class="input-field col s9">
+        <input id="email" type="email" class="validate">
+        <label for="email">Email</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s3">
+        <p>
+          <input type="checkbox" id="test5" />
+          <label for="test5">Android</label>
+        </p>
+      </div>
+      <div class="input-field col s3">
+        <p>
+          <input type="checkbox" id="test6" checked="checked" />
+          <label for="test6">iOS</label>
+        </p>
+      </div>
+      <div class="input-field col s3">
+        <p>
+          <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" />
+          <label for="filled-in-box">chrome</label>
+        </p>
+      </div>
+    </div>
+  <% end %>
+</div>
+<table class="highlight">
+  <thead>
+    <tr>
+      <th data-field="id"><%= t('jera_push.admin.devices.attributes.id') %></th>
+      <th data-field="token"><%= t('jera_push.admin.devices.attributes.token') %></th>
+      <th data-field="platform"><%= t('jera_push.admin.devices.attributes.platform') %></th>
+      <th data-field="resource"><%= t('jera_push.admin.devices.attributes.resource') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @devices.each do |device| %>
+      <tr>
+        <td><%= device.id %></td>
+        <td><%= device.token.truncate(50) %></td>
+        <td><%= device.platform %></td>
+        <td>
+          <% resource_extras(device).each do |attribute| %>
+            <div><%= attribute %></div>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @devices %>

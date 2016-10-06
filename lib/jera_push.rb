@@ -16,6 +16,9 @@ module JeraPush
   mattr_accessor :resource_name
   @@resource_name = nil
 
+  mattr_accessor :resource_attributes
+  @@resource_attributes = []
+
   def self.setup
     yield self
   end

@@ -6,6 +6,7 @@ class JeraPush::Device < ActiveRecord::Base
   self.table_name = "jera_push_devices"
 
   has_many :messages, through: :message_devices
+  belongs_to :resource, class_name: JeraPush.resource_name
 
   validates :token, :platform, presence: true
 
@@ -14,10 +15,6 @@ class JeraPush::Device < ActiveRecord::Base
   scope :ios,  -> { where(platform: :ios) }
   scope :android, -> { where(platform: :android) }
   scope :chrome, -> { where(platform: :chrome) }
-
-  def resources
-    JeraPush.resource_name.classify.constantize
-  end
 
   def send_message(message)
     JeraPush::Message.send message: message, devices: [ self ]

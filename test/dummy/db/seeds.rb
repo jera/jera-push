@@ -7,7 +7,7 @@ module Populate
     return nil unless USER_COUNT
 
     users = []
-    USER_COUNT.times { users << {name: Faker::Name.name} }
+    USER_COUNT.times { users << { name: Faker::Name.name, email: Faker::Internet.email} }
 
     ActiveRecord::Base.transaction { User.create users }
   end
