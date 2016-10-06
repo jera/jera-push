@@ -4,8 +4,12 @@ class JeraPushGenerator < Rails::Generators::NamedBase
 
   MissingModel = Class.new(Thor::Error)
 
-  def copy_initializer_file
-    template "jera_push.rb", 'config/initializers/jera_push.rb'
+  def initializer_file
+    template 'jera_push.rb', 'config/initializers/jera_push.rb'
+  end
+
+  def locale_file
+    copy_file '../../../../config/locale/jera_push.pt-BR.yml', 'config/locales/jera_push.pt-BR.yml'
   end
 
   def generate_migrations
