@@ -1,6 +1,8 @@
 pt-BR:
   jera_push:
     admin:
+      buttons:
+        details: Detalhes
       messages:
         attributes:
           id: ID
