@@ -2,7 +2,8 @@ module JeraPush
   class Admin::MessagesController < Admin::AdminController
 
     def index
-      @messages = JeraPush::Message.page(params[:page])
+      @messages = JeraPush::MessagePresenter.wrap(JeraPush::Message.all)
+      @messages = Kaminari.paginate_array(@messages).page(params[:page])
     end
 
     def show

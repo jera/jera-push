@@ -11,9 +11,9 @@
     <% @messages.each do |message| %>
       <tr>
         <td><%= message.id %></td>
-        <td><%= format_message(message.content) %></td>
-        <td><%= message.created_at.strftime('%d/%m/%Y %H:%M') %></td>
-        <td><%= link_to t('jera_push.admin.messages.action.details'), jera_push_admin_message_path(message), class: 'waves-effect waves-light btn' %></td>
+        <td><%= raw(message.display_content) %></td>
+        <td><%= message.display_created_at %></td>
+        <td><%= message.show_link %></td>
       </tr>
     <% end %>
   </tbody>
