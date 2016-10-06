@@ -3,7 +3,7 @@ class CreateJeraPushDevices < ActiveRecord::Migration
     create_table :jera_push_devices do |t|
       t.string :token, index: true
       t.string :platform, index: true
-      t.references :<%= file_name.underscore %>, foreign_key: true
+      t.integer :resource_id, index: true
 
       t.timestamps null: false
     end

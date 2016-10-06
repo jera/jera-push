@@ -13,6 +13,9 @@ module JeraPush
   mattr_accessor :firebase_api_key
   @@firebase_api_key = nil
 
+  mattr_accessor :resource_name
+  @@resource_name = nil
+
   def self.setup
     yield self
   end

@@ -15,6 +15,10 @@ class JeraPush::Device < ActiveRecord::Base
   scope :android, -> { where(platform: :android) }
   scope :chrome, -> { where(platform: :chrome) }
 
+  def resources
+    JeraPush.resource_name.classify.constantize
+  end
+
   def send_message(message)
     JeraPush::Message.send message: message, devices: [ self ]
   end

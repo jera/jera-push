@@ -11,17 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161005171637) do
+ActiveRecord::Schema.define(version: 20161006144814) do
 
   create_table "jera_push_devices", force: :cascade do |t|
     t.string   "token"
     t.string   "platform"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "resource_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   add_index "jera_push_devices", ["platform"], name: "index_jera_push_devices_on_platform"
+  add_index "jera_push_devices", ["resource_id"], name: "index_jera_push_devices_on_resource_id"
   add_index "jera_push_devices", ["token", "platform"], name: "index_jera_push_devices_on_token_and_platform", unique: true
   add_index "jera_push_devices", ["token"], name: "index_jera_push_devices_on_token"
 

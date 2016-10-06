@@ -5,7 +5,7 @@ class JeraPushGenerator < Rails::Generators::NamedBase
   MissingModel = Class.new(Thor::Error)
 
   def copy_initializer_file
-    copy_file "jera_push.rb", "config/initializers/jera_push.rb"
+    template "jera_push.rb", 'config/initializers/jera_push.rb'
   end
 
   def generate_migrations
