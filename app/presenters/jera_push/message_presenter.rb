@@ -1,8 +1,14 @@
 class JeraPush::MessagePresenter < BasePresenter
-	include ActionView::Helpers::UrlHelper
+
+	def list_content
+		JSON.pretty_generate({
+			title: item.content["title"],
+			body: item.content["body"]
+		})
+	end
 
 	def display_content
-		"\{ title: \'#{item.content["title"]}\' , body: \'#{item.content["body"]}\' \}".html_safe
+		JSON.pretty_generate(item.content)
 	end
 
 	def display_created_at
@@ -10,8 +16,8 @@ class JeraPush::MessagePresenter < BasePresenter
 	end
 
 	def show_link
-		link_to(
-			I18n.t('jera_push.admin.buttons.details'),
+		helpers.link_to(
+			helpers.t('jera_push.admin.buttons.details'),
 			Rails.application.routes.url_helpers.jera_push_admin_message_path(item), class: 'waves-effect waves-light btn'
 		)
 	end

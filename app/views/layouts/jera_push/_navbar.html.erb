@@ -1,0 +1,17 @@
+<nav>
+  <div class="nav-wrapper">
+    <a href="#" class="brand-logo">Logo</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li class="<%= 'active' if current_page?(jera_push_admin_devices_path) %>">
+      	<a href="<%= jera_push_admin_devices_path %>">
+      		<%= t('jera_push.active_record.model.device.other') %>
+    		</a>
+    	</li>
+      <li class="<%= 'active' if current_page?(jera_push_admin_messages_path) %>">
+      	<a href="<%= jera_push_admin_messages_path %>">
+      		<%= t('jera_push.active_record.model.message.other') %>
+  			</a>
+      </li>
+    </ul>
+  </div>
+</nav>
