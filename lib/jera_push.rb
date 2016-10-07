@@ -1,4 +1,6 @@
 require 'httparty'
+require 'responders'
+require 'jquery-rails'
 require 'kaminari'
 require 'jera_push/engine'
 require 'jera_push/firebase/client'

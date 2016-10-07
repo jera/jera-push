@@ -1,10 +1,55 @@
-<h3><%= t('jera_push.active_record.model.message.one') %></h3>
+<div class="messages-show-container">
 
-<p><%= t('jera_push.active_record.messages.attributes.id') %></p>
-<blockquote class="json-message"><%= @message.id %></blockquote>
+  <div class="details">
+    <h3><%= t('jera_push.active_record.model.message.one') %></h3>
 
-<p><%= t('jera_push.active_record.messages.attributes.content') %></p>
-<blockquote class="json-message"><%= @message.display_content %></blockquote>
+    <span class="field"><%= t('jera_push.active_record.messages.attributes.id') %></span>
+    <blockquote class="json-message"><%= @message.id %></blockquote>
 
-<p><%= t('jera_push.active_record.messages.attributes.status') %></p>
-<blockquote class="json-message"><%= @message.status %></blockquote>
+    <span class="field"><%= t('jera_push.active_record.messages.attributes.content') %></span>
+    <blockquote class="json-message"><%= @message.display_content %></blockquote>
+
+    <span class="field"><%= t('jera_push.active_record.messages.attributes.status') %></span>
+    <blockquote class="json-message"><%= @message.status %></blockquote>
+  </div>
+
+  <div class="devices">
+    <h3><%= t('jera_push.active_record.model.device.other') %></h3>
+
+    <div class="filter-container row">
+      <%= form_tag device_filter_jera_push_admin_message_path(@message), method: :get, class: 'col s12', remote: true do |f| %>
+        <div class="row">
+          <% JeraPush::Device.platform.values.each do |platform|  %>
+            <div class="input-field col s2">
+              <p>
+                <%= check_box_tag :"platform[]", platform, @filter.platform.include?(platform), id: "platform_#{platform}"  %>
+                <label for="platform_<%= platform %>"><%= platform %><label>
+              </p>
+            </div>
+          <% end %>
+        </div>
+        <div class="row">
+          <div class="input-field col s3">
+            <%= select_tag :field, options_for_select(devices_fields_for_filter_select, @filter.field) %>
+          </div>
+          <div class="input-field col s9">
+            <div class="col s6">
+              <%= text_field_tag :value, @filter.value %>
+              <label for="value">Valor</label>
+            </div>
+
+            <div class="input-field col s3">
+              <%= submit_tag 'Filtrar', class: 'btn' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="devices-list" id="device_list">
+      <%= render partial: 'jera_push/admin/devices/list', locals: {devices: @devices} %>
+    </div>
+
+  </div>
+
+</div>

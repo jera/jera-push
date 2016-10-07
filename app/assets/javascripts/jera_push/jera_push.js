@@ -1,3 +1,5 @@
+//= require jquery
+//= require jquery_ujs
 //= require ./jquery-2.1.4.js
 //= require ./materialize/bin/materialize.js
 

@@ -1,7 +1,8 @@
 module Populate
   USER_COUNT = 30
   DEVICES_PER_USER = 2
-  MESSAGES_COUNT = 10000
+  MESSAGES_COUNT = 1000
+  MESSAGES_PER_DEVICE = 6
 
   def self.run_users
     return nil unless USER_COUNT
@@ -36,15 +37,34 @@ module Populate
     messages = []
     MESSAGES_COUNT.times do
       messages << {
-        content: { title: Faker::Lorem.sentence(3), text: Faker::Hacker.say_something_smart },
+        content: { title: Faker::Lorem.sentence(3), body: Faker::Hacker.say_something_smart },
         status: :sent
       }
     end
 
     ActiveRecord::Base.transaction { JeraPush::Message.create messages }
   end
+
+  def self.run_message_devices
+    return false if JeraPush::Message.blank? || JeraPush::Device.blank?
+
+    device_ids = JeraPush::Device.all.pluck(:id)
+    message_ids = JeraPush::Message.all.pluck(:id)
+    message_devices = []
+
+    message_ids.each do |message_id|
+      MESSAGES_PER_DEVICE.times do
+        record = { device_id: device_ids.sample, message_id: message_id }
+        message_devices << record unless message_devices.include? record
+      end
+    end
+
+    ActiveRecord::Base.transaction { JeraPush::MessageDevice.create message_devices }
+
+  end
 end
 
 Populate.run_users
 Populate.run_devices
 Populate.run_push_messages
+Populate.run_message_devices
