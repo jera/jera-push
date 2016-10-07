@@ -6,10 +6,6 @@ module JeraPush
       @devices = @filter.search
     end
 
-    def search
-
-    end
-
     def params_filter
       params.permit(:value, :field, :page, :per, platform: [])
     end

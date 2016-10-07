@@ -2,7 +2,7 @@ module JeraPush
   class DeviceFilter
     include ActiveModel::Model
 
-    attr_accessor :platform, :value, :field, :page, :per
+    attr_accessor :platform, :value, :field, :page, :per, :message_id
 
     def platform
       @platform ||= []
@@ -10,6 +10,9 @@ module JeraPush
 
     def search
       @scope = JeraPush::Device.joins(:resource).includes(:resource)
+      if message_id
+        @scope = @scope.joins(:messages).where('jera_push_messages.id = ?', message_id)
+      end
       if platform.any?
         @scope = @scope.where('jera_push_devices.platform in (?)', platform)
       end

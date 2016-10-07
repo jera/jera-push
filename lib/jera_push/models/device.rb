@@ -3,12 +3,17 @@ require 'enumerize'
 class JeraPush::Device < ActiveRecord::Base
   extend Enumerize
 
+  DEFAULT_TOPIC = 'general'
+
   self.table_name = "jera_push_devices"
 
-  has_many :messages, through: :message_devices
+  has_many :messages, through: :message_devices, table_name: "jera_push_messages"
+  has_many :message_devices, table_name: "jera_push_message_devices"
   belongs_to :resource, class_name: JeraPush.resource_name
 
   validates :token, :platform, presence: true
+
+  after_create :register_to_default_topic
 
   enumerize :platform, in: [:android, :ios, :chrome], predicate: true
 
@@ -28,5 +33,9 @@ class JeraPush::Device < ActiveRecord::Base
   def unsubscribe(topic)
     client = JeraPush::Firebase::Client.instance
     client.remove_device_from_topic(device: [self], topic: topic)
+  end
+
+  def register_to_default_topic
+    subscribe(DEFAULT_TOPIC)
   end
 end
