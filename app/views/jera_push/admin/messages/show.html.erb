@@ -1,5 +1,10 @@
-Message:
-<%= @message.inspect %>
+<h3><%= t('jera_push.active_record.model.message.one') %></h3>
 
-Devices:
-<%= @message.devices.inspect %>
+<p><%= t('jera_push.active_record.messages.attributes.id') %></p>
+<blockquote class="json-message"><%= @message.id %></blockquote>
+
+<p><%= t('jera_push.active_record.messages.attributes.content') %></p>
+<blockquote class="json-message"><%= @message.display_content %></blockquote>
+
+<p><%= t('jera_push.active_record.messages.attributes.status') %></p>
+<blockquote class="json-message"><%= @message.status %></blockquote>

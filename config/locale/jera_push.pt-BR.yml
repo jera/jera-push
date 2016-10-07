@@ -2,12 +2,17 @@ pt-BR:
   jera_push:
     active_record:
       model:
-        messages: Mensagens
-    admin:
-      buttons:
-        details: Detalhes
+        message:
+          one: Mensagem
+          other: Mensagens
+        device:
+          one: Aparelho
+          other: Aparelhos
       messages:
         attributes:
           id: ID
           content: Conteúdo
           date: Data
+    admin:
+      buttons:
+        details: Detalhes

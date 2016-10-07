@@ -1,7 +1,14 @@
 class JeraPush::MessagePresenter < BasePresenter
 
 	def list_content
-		"\{\n\t\"title\": #{item.content["title"]},\n\t\"body\": #{item.content["body"]}\n\}"
+		JSON.pretty_generate({
+			title: item.content["title"],
+			body: item.content["body"]
+		})
+	end
+
+	def display_content
+		JSON.pretty_generate(item.content)
 	end
 
 	def display_created_at
