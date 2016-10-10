@@ -21,6 +21,15 @@ module JeraPush
       respond_to :js
     end
 
+    def create
+      client = JeraPush::Firebase::Client.instance
+      message_content = message_params.map{ |obj| { obj["key"].to_sym => obj["value"] } }.reduce(:merge)
+
+      client.send_message(message: message_content)
+
+      respond_to :js
+    end
+
     private
 
       def apply_filter
@@ -30,6 +39,10 @@ module JeraPush
 
       def device_filter_params
         params.permit(:value, :field, :page, :per, platform: []).merge({ message_id: params[:id] })
+      end
+
+      def message_params
+        params.require(:message)
       end
 
   end
