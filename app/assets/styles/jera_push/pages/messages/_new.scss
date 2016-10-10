@@ -1,5 +1,19 @@
 .container-messages-new {
 
+  .options {
+    margin-bottom: 32px;
+  }
+
+  .message-attributes {
+    margin-bottom: 0;
+  }
+
+  .new-attribute {
+    text-decoration: underline;
+    color: #0000EE;
+    cursor: pointer;
+  }
+
   .btn-submit {
     margin-right: 24px;
   }

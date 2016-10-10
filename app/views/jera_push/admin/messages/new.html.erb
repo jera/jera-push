@@ -9,13 +9,29 @@
       <%= render partial: 'jera_push/admin/messages/message_attributes' %>
     </div>
 
+    <div class="row center">
+      <span class="new-attribute" onclick="newMessageAttribute()">Novo Atributo</span>
+    </div>
+
+    <div class="row options">
+      <p class="col s4">
+        <%= radio_button_tag :type, :broadcast, true, class: 'with-gap' %>
+        <%= label_tag :type_broadcast, 'Broadcast' %>
+      </p>
+      <!-- <p class="col s4">
+        <%= #radio_button_tag :type, :private, false, class: 'with-gap' %>
+        <%= #label_tag :type_private, 'Privada' %>
+      </p> -->
+
+      <!-- <div class="private-params">
+      </div> -->
+    </div>
+
+
     <%= button_tag type: 'submit', class: 'btn btn-submit' do %>
       <%= t('jera_push.admin.buttons.send') %>
       <i class="material-icons right">send</i>
     <% end -%>
-    <a class="btn-floating btn-small waves-effect waves-light" onclick="newMessageAttribute()">
-      <i class="material-icons">add</i>
-    </a>
    <% end -%>
   </div>
 

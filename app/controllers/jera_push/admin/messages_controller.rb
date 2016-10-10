@@ -22,10 +22,17 @@ module JeraPush
     end
 
     def create
-      client = JeraPush::Firebase::Client.instance
-      message_content = message_params.map{ |obj| { obj["key"].to_sym => obj["value"] } }.reduce(:merge)
+      return render_invalid_params if params[:message].blank? || params[:type].blank?
 
-      client.send_message(message: message_content)
+      client = JeraPush::Firebase::Client.instance
+      message_content = params[:message].map{ |obj| { obj["key"].to_sym => obj["value"] } }.reduce(:merge)
+
+      case params[:type].to_sym
+      when :broadcast
+        devices = JeraPush::Device.all
+      end
+
+      JeraPush::Message.send_to(devices, content: message_content)
 
       respond_to :js
     end
@@ -39,10 +46,6 @@ module JeraPush
 
       def device_filter_params
         params.permit(:value, :field, :page, :per, platform: []).merge({ message_id: params[:id] })
-      end
-
-      def message_params
-        params.require(:message)
       end
 
   end
