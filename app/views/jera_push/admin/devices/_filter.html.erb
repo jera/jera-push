@@ -17,11 +17,11 @@
       <div class="input-field col s9">
         <div class="col s6">
           <%= text_field_tag :value, filter.value %>
-          <label for="value">Valor</label>
+          <label for="value"><%= t('jera_push.admin.filter.value') %></label>
         </div>
 
         <div class="input-field col s3">
-          <%= submit_tag 'Filtrar', class: 'btn' %>
+          <%= submit_tag t('jera_push.admin.filter.button'), class: 'btn' %>
         </div>
       </div>
     </div>

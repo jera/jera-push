@@ -18,9 +18,11 @@ pt-BR:
         devices: Aparelhos
         messages: Mensagens
         new_message: Nova Mensagem
+      filter:
+        value: Valor
+        button: Filtrar
       buttons:
         details: Detalhes
         send: Enviar
-        filter: Filtrar
       message:
         title: Título
