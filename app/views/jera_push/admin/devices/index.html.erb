@@ -1,9 +1,11 @@
-<%= render partial: 'jera_push/admin/devices/filter', locals: {filter_path: jera_push_admin_devices_path, filter: @filter} %>
+<div class="devices-list-container">
+  <%= render partial: 'jera_push/admin/devices/filter', locals: {filter_path: jera_push_admin_devices_path, filter: @filter} %>
 
-<div id="device_list">
-  <%= render partial: 'jera_push/admin/devices/list', locals: {devices: @devices} %>
-</div>
+  <div class="devices-list" id="device_list">
+    <%= render partial: 'jera_push/admin/devices/list', locals: {devices: @devices} %>
+  </div>
 
-<div id="paginator">
-  <%= paginate @devices, remote: true %>
+  <div id="paginator">
+    <%= paginate @devices, remote: true %>
+  </div>
 </div>
