@@ -14,6 +14,10 @@ pt-BR:
           content: Conteúdo
           date: Data
     admin:
+      navbar:
+        devices: Aparelhos
+        messages: Mensagens
+        new_message: Nova Mensagem
       buttons:
         details: Detalhes
         send: Enviar

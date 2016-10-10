@@ -1,6 +1,5 @@
 module JeraPush
   class Admin::MessagesController < Admin::AdminController
-    respond_to :js
 
     def index
       @messages = JeraPush::MessagePresenter.wrap(JeraPush::Message.all)
