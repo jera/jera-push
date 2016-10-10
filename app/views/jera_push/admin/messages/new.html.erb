@@ -1,0 +1,15 @@
+<div class="row">
+  <%= form_tag jera_push_admin_messages_path, class: 'col s12' do %>
+    <div class="row">
+      <div class="input-field col s6">
+        <%= text_field_tag :key, nil, class: "validate" %>
+        <label for="first_name">First Name</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s12">
+        <%= submit_tag t('jera_push.admin.buttons.send'), class: 'btn' %>
+      </div>
+    </div>
+  <% end %>
+</div>
