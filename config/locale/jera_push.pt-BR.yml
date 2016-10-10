@@ -17,5 +17,6 @@ pt-BR:
       buttons:
         details: Detalhes
         send: Enviar
+        filter: Filtrar
       message:
         title: Título

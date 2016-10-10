@@ -1,4 +1,6 @@
 .messages-show-container {
+  padding-bottom: 40px;
+
   .details {
     margin-bottom: 36px;
     .field {
@@ -16,12 +18,5 @@
         margin-bottom: 0;
       }
     }
-  }
-
-  .devices-list {
-    height: 300px;
-    overflow-y: scroll;
-    width: 100%;
-    margin-bottom: 120px;
   }
 }

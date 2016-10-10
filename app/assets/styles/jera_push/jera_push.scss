@@ -4,6 +4,9 @@
 
 @import "helpers";
 
+// Components
+@import "components/devices";
+
 // Pages
 @import "pages/devices/list";
 @import "pages/messages/show";

@@ -5,7 +5,7 @@
     <%= render partial: 'jera_push/admin/devices/list', locals: {devices: @devices} %>
   </div>
 
-  <div id="paginator">
+  <div class="center" id="paginator">
     <%= paginate @devices, remote: true %>
   </div>
 </div>
