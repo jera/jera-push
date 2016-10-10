@@ -4,6 +4,11 @@ module JeraPush
     def index
       @filter = JeraPush::DeviceFilter.new params_filter
       @devices = @filter.search
+
+      respond_to do |format|
+        format.js {}
+        format.html
+      end
     end
 
     def params_filter

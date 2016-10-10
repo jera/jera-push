@@ -15,9 +15,6 @@ module JeraPush
 
     def device_filter
       apply_filter
-
-      logger.info "OLÁAA"
-
       respond_to :js
     end
 

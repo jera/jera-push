@@ -1,54 +1,5 @@
-<div class="filter-container row">
-  <%= form_tag jera_push_admin_devices_path, method: :get, class: 'col s12' do |f| %>
-    <div class="row">
-      <% JeraPush::Device.platform.values.each do |platform|  %>
-        <div class="input-field col s2">
-          <p>
-            <%= check_box_tag :"platform[]", platform, @filter.platform.include?(platform), id: "platform_#{platform}"  %>
-            <label for="platform_<%= platform %>"><%= platform %><label>
-          </p>
-        </div>
-      <% end %>
-    </div>
-    <div class="row">
-      <div class="input-field col s3">
-        <%= select_tag :field, options_for_select(devices_fields_for_filter_select, @filter.field) %>
-      </div>
-      <div class="input-field col s9">
-        <%= text_field_tag :value, @filter.value %>
-        <label for="value">Valor</label>
-      </div>
-    </div>
-    <div class="row">
-      <div class="input-field col s3">
-        <%= submit_tag 'Filtrar', class: 'btn' %>
-      </div>
-    </div>
-  <% end %>
-</div>
-<table class="highlight">
-  <thead>
-    <tr>
-      <th data-field="id"><%= t('jera_push.admin.devices.attributes.id') %></th>
-      <th data-field="token"><%= t('jera_push.admin.devices.attributes.token') %></th>
-      <th data-field="platform"><%= t('jera_push.admin.devices.attributes.platform') %></th>
-      <th data-field="resource"><%= t('jera_push.admin.devices.attributes.resource') %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @devices.each do |device| %>
-      <tr>
-        <td><%= device.id %></td>
-        <td><%= device.token.truncate(50) %></td>
-        <td><%= device.platform %></td>
-        <td>
-          <% resource_extras(device).each do |attribute| %>
-            <div><%= attribute %></div>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render partial: 'jera_push/admin/devices/filter', locals: {filter_path: jera_push_admin_devices_path, filter: @filter} %>
 
-<%= paginate @devices %>
+<div id="device_list">
+  <%= render partial: 'jera_push/admin/devices/list', locals: {devices: @devices} %>
+</div>

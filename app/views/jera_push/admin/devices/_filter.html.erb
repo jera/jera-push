@@ -1,0 +1,29 @@
+<div class="filter-container row">
+  <%= form_tag filter_path, method: :get, class: 'col s12', remote: true do |f| %>
+    <div class="row">
+      <% JeraPush::Device.platform.values.each do |platform|  %>
+        <div class="input-field col s2">
+          <p>
+            <%= check_box_tag :"platform[]", platform, filter.platform.include?(platform), id: "platform_#{platform}"  %>
+            <label for="platform_<%= platform %>"><%= platform %><label>
+          </p>
+        </div>
+      <% end %>
+    </div>
+    <div class="row">
+      <div class="input-field col s3">
+        <%= select_tag :field, options_for_select(devices_fields_for_filter_select, filter.field) %>
+      </div>
+      <div class="input-field col s9">
+        <div class="col s6">
+          <%= text_field_tag :value, filter.value %>
+          <label for="value">Valor</label>
+        </div>
+
+        <div class="input-field col s3">
+          <%= submit_tag 'Filtrar', class: 'btn' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

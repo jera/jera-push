@@ -1,0 +1,4 @@
+$('#paginator').html('<%= j paginate(@devices, remote: true).to_s %>');
+
+$('#device_list').html("<%= j render partial: 'jera_push/admin/devices/list', locals: {devices: @devices} %>");
+

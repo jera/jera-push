@@ -18,9 +18,9 @@
   <tbody>
     <% @messages.each do |message| %>
       <tr>
-        <td width="10%"><%= message.id %></td>
-        <td width="50%"><div class="json-message"><%= message.list_content %></div></td>
-        <td width="30%"><%= message.display_created_at %></td>
+        <td width="5%"><%= message.id %></td>
+        <td width="75%"><div class="json-message"><%= message.list_content %></div></td>
+        <td width="20%"><%= message.display_created_at %></td>
         <td width="10%"><%= message.show_link %></td>
       </tr>
     <% end %>
