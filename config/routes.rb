@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   namespace :jera_push do
     namespace :admin do
-      resources :messages, only: [:index, :show]
+      resources :messages, only: [:index, :show, :new, :create]
       resources :devices, only: [:index]
     end
 

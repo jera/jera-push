@@ -22,7 +22,11 @@ class JeraPush::Message < ActiveRecord::Base
   end
 
   def content
-    JSON.parse(super()) if super()
+    if super()
+      JSON.parse(super())
+    else
+      return {}
+    end
   end
 
   def send_to_devices(devices: [])

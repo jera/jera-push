@@ -11,5 +11,9 @@ module JeraPush
       @message = JeraPush::MessagePresenter.new(@message)
     end
 
+    def new
+      @message = JeraPush::Message.new
+    end
+
   end
 end
