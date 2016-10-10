@@ -16,3 +16,6 @@ pt-BR:
     admin:
       buttons:
         details: Detalhes
+        send: Enviar
+      message:
+        title: Título

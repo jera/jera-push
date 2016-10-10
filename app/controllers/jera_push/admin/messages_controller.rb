@@ -13,6 +13,10 @@ module JeraPush
       apply_filter
     end
 
+    def new
+      @message = JeraPush::Message.new
+    end
+
     def device_filter
       apply_filter
       respond_to :js
