@@ -1,15 +1,22 @@
-<div class="row">
-  <%= form_tag jera_push_admin_messages_path, class: 'col s12' do %>
-    <div class="row">
-      <div class="input-field col s6">
-        <%= text_field_tag :key, nil, class: "validate" %>
-        <label for="first_name">First Name</label>
-      </div>
+<div class="container-messages-new">
+
+  <h3><%= t('jera_push.admin.messages.new.title') %></h3>
+
+  <div class="row">
+   <%= form_tag jera_push_admin_messages_path, remote: true, class: 'col s12' do %>
+
+    <div class="row" id="message_attributes_content">
+      <%= render partial: 'jera_push/admin/messages/message_attributes' %>
     </div>
-    <div class="row">
-      <div class="col s12">
-        <%= submit_tag t('jera_push.admin.buttons.send'), class: 'btn' %>
-      </div>
-    </div>
-  <% end %>
+
+    <%= button_tag type: 'submit', class: 'btn btn-submit' do %>
+      <%= t('jera_push.admin.buttons.send') %>
+      <i class="material-icons right">send</i>
+    <% end -%>
+    <a class="btn-floating btn-small waves-effect waves-light" onclick="newMessageAttribute()">
+      <i class="material-icons">add</i>
+    </a>
+   <% end -%>
+  </div>
+
 </div>

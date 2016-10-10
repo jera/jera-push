@@ -3,13 +3,19 @@
   <div class="details">
     <h3><%= t('jera_push.active_record.model.message.one') %></h3>
 
-    <span class="field"><%= t('jera_push.active_record.messages.attributes.id') %></span>
+    <span class="field">
+      <%= t('jera_push.active_record.messages.attributes.id') %>
+    </span>
     <blockquote class="json-message"><%= @message.id %></blockquote>
 
-    <span class="field"><%= t('jera_push.active_record.messages.attributes.content') %></span>
+    <span class="field">
+      <%= t('jera_push.active_record.messages.attributes.content') %>
+    </span>
     <blockquote class="json-message"><%= @message.display_content %></blockquote>
 
-    <span class="field"><%= t('jera_push.active_record.messages.attributes.status') %></span>
+    <span class="field">
+      <%= t('jera_push.active_record.messages.attributes.status') %>
+    </span>
     <blockquote class="json-message"><%= @message.status %></blockquote>
   </div>
 
