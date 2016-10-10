@@ -22,6 +22,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'httparty'
   s.add_dependency 'sass-rails'
   s.add_dependency 'kaminari'
+  s.add_dependency 'responders'
+  s.add_dependency 'jquery-rails'
 
   s.add_development_dependency "sqlite3"
 end

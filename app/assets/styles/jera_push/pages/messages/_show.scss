@@ -1,0 +1,27 @@
+.messages-show-container {
+  .details {
+    margin-bottom: 36px;
+    .field {
+      font-size: 16px;
+      margin: 0;
+      font-weight: 400;
+      text-transform: uppercase;
+    }
+
+    blockquote {
+      margin-top: 8px;
+      margin-bottom: 12px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .devices-list {
+    height: 300px;
+    overflow-y: scroll;
+    width: 100%;
+    margin-bottom: 120px;
+  }
+}

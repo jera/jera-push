@@ -1,10 +1,27 @@
-<h3><%= t('jera_push.active_record.model.message.one') %></h3>
+<div class="messages-show-container">
 
-<p><%= t('jera_push.active_record.messages.attributes.id') %></p>
-<blockquote class="json-message"><%= @message.id %></blockquote>
+  <div class="details">
+    <h3><%= t('jera_push.active_record.model.message.one') %></h3>
 
-<p><%= t('jera_push.active_record.messages.attributes.content') %></p>
-<blockquote class="json-message"><%= @message.display_content %></blockquote>
+    <span class="field"><%= t('jera_push.active_record.messages.attributes.id') %></span>
+    <blockquote class="json-message"><%= @message.id %></blockquote>
 
-<p><%= t('jera_push.active_record.messages.attributes.status') %></p>
-<blockquote class="json-message"><%= @message.status %></blockquote>
+    <span class="field"><%= t('jera_push.active_record.messages.attributes.content') %></span>
+    <blockquote class="json-message"><%= @message.display_content %></blockquote>
+
+    <span class="field"><%= t('jera_push.active_record.messages.attributes.status') %></span>
+    <blockquote class="json-message"><%= @message.status %></blockquote>
+  </div>
+
+  <div class="devices">
+    <h3><%= t('jera_push.active_record.model.device.other') %></h3>
+
+    <%= render partial: 'jera_push/admin/devices/filter', locals: {filter_path: device_filter_jera_push_admin_message_path(@message), filter: @filter} %>
+
+    <div class="devices-list" id="device_list">
+      <%= render partial: 'jera_push/admin/devices/list', locals: {devices: @devices} %>
+    </div>
+
+  </div>
+
+</div>
