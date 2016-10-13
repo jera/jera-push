@@ -18,9 +18,14 @@ class JeraPushGenerator < Rails::Generators::NamedBase
 				"\n\tModel \"#{file_name.titlecase}\" doesn't exists. Please, create your Model and try again."
 		end
 
-		inject_into_file model_path, "\n\thas_many :devices, class_name: 'JeraPush::Device'", after: ' < ActiveRecord::Base'
+		inject_into_file model_path, "\n\thas_many :devices, foreign_key: :resource_id, class_name: 'JeraPush::Device'", after: ' < ActiveRecord::Base'
 
-    generate "active_record:jera_push", file_name
+    case self.behavior
+    when :invoke
+      generate "active_record:jera_push", file_name
+    when :revoke
+      Rails::Generators.invoke "active_record:jera_push", [file_name], behavior: :revoke
+    end
   end
 
   private
