@@ -16,7 +16,11 @@
     <span class="field">
       <%= t('jera_push.active_record.messages.attributes.status') %>
     </span>
-    <blockquote class="json-message"><%= @message.status %></blockquote>
+    <blockquote class="json-message">
+      <%= @message.status %>
+      <%= t('jera_push.admin.messages.failures', value: @message.failure_count) %>
+      <%= t('jera_push.admin.messages.success', value: @message.success_count) %>
+    </blockquote>
   </div>
 
   <div class="devices">
@@ -25,7 +29,7 @@
     <%= render partial: 'jera_push/admin/devices/filter', locals: {filter_path: device_filter_jera_push_admin_message_path(@message), filter: @filter} %>
 
     <div class="devices-list" id="device_list">
-      <%= render partial: 'jera_push/admin/devices/list', locals: {devices: @devices} %>
+      <%= render partial: 'jera_push/admin/messages/message_device', locals: {messages_devices: @message_devices} %>
     </div>
 
   </div>

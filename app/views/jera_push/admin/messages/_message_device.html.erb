@@ -1,0 +1,39 @@
+<table class="highlight">
+  <thead>
+    <tr>
+      <th data-field="id"><%= t('jera_push.admin.message_devices.attributes.id') %></th>
+      <th data-field="token"><%= t('jera_push.admin.message_devices.attributes.token') %></th>
+      <th data-field="platform"><%= t('jera_push.admin.message_devices.attributes.platform') %></th>
+      <th data-field="resource"><%= t('jera_push.admin.message_devices.attributes.resource') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% messages_devices.each do |message_device| %>
+      <tr>
+        <td>
+          <% resource_extras(message_device).each do |attribute| %>
+            <div><%= attribute %></div>
+          <% end %>
+        </td>
+        <td>
+          <%= t("jera_push.admin.message_devices.status.#{message_device.status}") %>
+        </td>
+        <td>
+          <% if message_device.status.error? %>
+            <div><%= t('jera_push.admin.message_devices.attributes.error_message') %></div>
+            <div><%= message_device.error_message %></div>
+          <% end %>
+
+          <% if message_device.status.success? %>
+            <div><%= t('jera_push.admin.message_devices.attributes.firebase_id') %></div>
+            <div><%= message_device.firebase_id %></div>
+          <% end %>
+        </td>
+        <td>
+          <div><%= message_device.device.platform %></div>
+          <div><%= message_device.device.token.truncate(20) %></div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

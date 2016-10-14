@@ -24,6 +24,17 @@ pt-BR:
       buttons:
         details: Detalhes
         send: Enviar
+      message_devices:
+        attributes:
+          device: Aparelho
+          status: Status
+          metadata: Metadados
+          firebase_id: Id da mensagem
+        status:
+          success: "Enviada com sucesso"
+          error: "Falha ao enviar"
       messages:
+        failures: "Falhas: %{value}"
+        success: "Sucessos: %{value}"
         new:
           title: Nova Mensagem

@@ -42,6 +42,7 @@ module JeraPush
       def apply_filter
         @filter = JeraPush::DeviceFilter.new device_filter_params
         @devices = @filter.search
+        @message_devices = JeraPush::MessageDevice.includes(:resource, :device).where('message_id = :id and device_id in (:device_ids)', id: params[:id], device_ids: @devices.pluck(:id))
       end
 
       def device_filter_params
