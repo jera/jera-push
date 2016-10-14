@@ -11,18 +11,20 @@
       </div>
 
       <div class="row center">
-        <span class="new-attribute" onclick="newMessageAttribute()">Novo Atributo</span>
+        <span class="new-attribute" onclick="newMessageAttribute()">
+          <%= t('jera_push.admin.messages.new.new_attribute') %>
+        </span>
       </div>
 
       <div class="row options" id="message_options">
         <div class="row">
           <p class="col s3">
             <%= radio_button_tag :type, :broadcast, true, class: 'with-gap' %>
-            <%= label_tag :type_broadcast, 'Broadcast' %>
+            <%= label_tag :type_broadcast, t('jera_push.admin.messages.new.broadcast') %>
           </p>
           <p class="col s4">
             <%= radio_button_tag :type, :specific, false, class: 'with-gap' %>
-            <%= label_tag :type_specific, 'Específica' %>
+            <%= label_tag :type_specific, t('jera_push.admin.messages.new.specific') %>
           </p>
         </div>
       </div>

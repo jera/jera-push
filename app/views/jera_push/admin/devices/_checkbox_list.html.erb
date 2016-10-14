@@ -7,10 +7,10 @@
       <th data-field="platform"><%= t('jera_push.admin.devices.attributes.platform') %></th>
       <th data-field="resource"><%= t('jera_push.admin.devices.attributes.resource') %></th>
       <th>
-        <%= button_tag 'Selecionar Todos', type: 'button', class: 'btn btn-action', onclick: 'addAllDevices()' %>
+        <%= button_tag t('jera_push.admin.buttons.send_all'), type: 'button', class: 'btn btn-action', onclick: 'addAllDevices()' %>
       </th>
       <th width="5%">
-        <%= button_tag 'Nenhum', type: 'button', class: 'btn btn-action', onclick: 'removeAllDevices()' %>
+        <%= button_tag t('jera_push.admin.buttons.remove_all'), type: 'button', class: 'btn btn-action', onclick: 'removeAllDevices()' %>
       </th>
     </tr>
   </thead>

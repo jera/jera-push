@@ -24,6 +24,11 @@ pt-BR:
       buttons:
         details: Detalhes
         send: Enviar
+        send_all: Todos
+        remove_all: Nenhum
       messages:
         new:
           title: Nova Mensagem
+          new_attribute: Novo Atributo
+          specific: Específico
+          broadcast: Broadcast
