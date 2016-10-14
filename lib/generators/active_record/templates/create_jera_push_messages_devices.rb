@@ -4,6 +4,8 @@ class CreateJeraPushMessagesDevices < ActiveRecord::Migration
       t.references :device, index: true, foreign_key: true
       t.references :message, index: true, foreign_key: true
       t.string :status
+      t.string :error_message
+      t.string :firebase_id
 
       t.timestamps null: false
     end

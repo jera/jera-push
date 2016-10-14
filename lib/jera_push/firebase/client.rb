@@ -19,9 +19,10 @@ module JeraPush
       end
 
       def send_message(message:, devices: [])
-        body = { registration_ids: devices.map(&:token), priority: 'high' }
+        registration_ids = devices.map(&:token)
+        body = { registration_ids: registration_ids, priority: 'high' }
         response = HTTParty.post(FIREBASE_URL, { body: body.merge!(message).to_json, headers: default_headers })
-        ApiResult.new(response)
+        ApiResult.new(response, registration_ids: registration_ids)
       end
 
       def device_details(device:)

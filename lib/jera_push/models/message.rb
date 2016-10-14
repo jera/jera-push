@@ -7,12 +7,14 @@ class JeraPush::Message < ActiveRecord::Base
     return nil if target.blank? || content.blank?
 
     push_message = JeraPush::Message.create content: content
+    push_message.devices << target
 
     if push_message && target.is_a?(JeraPush::Device)
       push_message.send_to_device device: target
     else
       push_message.send_to_devices devices: target
     end
+    push_message
   end
 
   def self.format_hash(messages = [])
@@ -44,7 +46,10 @@ class JeraPush::Message < ActiveRecord::Base
 
     platform_devices.keys.each do |platform|
       payload = self.send("body_#{platform.to_s}", self.content)
-      client.send_message(message: payload, devices: platform_devices[platform])
+      response = client.send_message(message: payload, devices: platform_devices[platform])
+      if response
+        response.result_to(message: self)
+      end
     end
   end
 
@@ -60,7 +65,10 @@ class JeraPush::Message < ActiveRecord::Base
       payload = body_chrome(self.content)
     end
     client = JeraPush::Firebase::Client.instance
-    client.send_message(message: payload, devices: [device])
+    response = client.send_message(message: payload, devices: [device])
+    if response
+      response.result_to(message: self)
+    end
   end
 
   private

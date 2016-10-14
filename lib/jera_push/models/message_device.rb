@@ -3,5 +3,7 @@ class JeraPush::MessageDevice < ActiveRecord::Base
 
   belongs_to :device
   belongs_to :message
-  
+
+  has_one :resource, through: :device
+
 end
