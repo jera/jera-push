@@ -1,13 +1,17 @@
 <div class="row message-attributes valign-wrapper">
   <div class="input-field col s4">
-    <%= text_field_tag 'message[][key]', '', required: true %>
+    <%= text_field_tag 'message[][key]', key %>
     <%= label_tag 'message[][key]', 'Chave' %>
   </div>
   <div class="input-field col s7">
-    <%= text_field_tag 'message[][value]', '', required: true %>
+    <%= text_field_tag 'message[][value]' %>
     <%= label_tag 'message[][value]', 'Valor' %>
   </div>
-  <a class="valign btn-floating btn-small waves-effect waves-light" onclick="removeMessageAttribute($(this))">
-    <i class="material-icons">remove</i>
-  </a>
+  <div class="col s1">
+    <% unless default %>
+      <a class="valign btn-floating btn-small waves-effect waves-light" onclick="removeMessageAttribute($(this))">
+        <i class="material-icons">remove</i>
+      </a>
+    <% end %>
+  </div>
 </div>

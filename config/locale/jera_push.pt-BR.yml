@@ -24,6 +24,8 @@ pt-BR:
       buttons:
         details: Detalhes
         send: Enviar
+        send_all: Todos
+        remove_all: Nenhum
       message_devices:
         attributes:
           device: Aparelho
@@ -38,3 +40,6 @@ pt-BR:
         success: "Sucessos: %{value}"
         new:
           title: Nova Mensagem
+          new_attribute: Novo Atributo
+          specific: Específico
+          broadcast: Broadcast

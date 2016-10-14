@@ -3,36 +3,51 @@
   <h3><%= t('jera_push.admin.messages.new.title') %></h3>
 
   <div class="row">
-   <%= form_tag jera_push_admin_messages_path, remote: true, class: 'col s12' do %>
+    <%= form_tag jera_push_admin_messages_path, remote: true, class: 'col s12' do %>
 
-    <div class="row" id="message_attributes_content">
-      <%= render partial: 'jera_push/admin/messages/message_attributes' %>
-    </div>
+      <div class="row" id="message_attributes_content">
+        <%= render partial: 'jera_push/admin/messages/message_attributes', locals: {key: 'title', default: true} %>
+        <%= render partial: 'jera_push/admin/messages/message_attributes', locals: {key: 'body', default: true} %>
+      </div>
 
-    <div class="row center">
-      <span class="new-attribute" onclick="newMessageAttribute()">Novo Atributo</span>
-    </div>
+      <div class="row center">
+        <span class="new-attribute" onclick="newMessageAttribute()">
+          <%= t('jera_push.admin.messages.new.new_attribute') %>
+        </span>
+      </div>
 
-    <div class="row options">
-      <p class="col s4">
-        <%= radio_button_tag :type, :broadcast, true, class: 'with-gap' %>
-        <%= label_tag :type_broadcast, 'Broadcast' %>
-      </p>
-      <!-- <p class="col s4">
-        <%= radio_button_tag :type, :private, false, class: 'with-gap' %>
-        <%= label_tag :type_private, 'Privada' %>
-      </p> -->
+      <div class="row options" id="message_options">
+        <div class="row">
+          <p class="col s3">
+            <%= radio_button_tag :type, :broadcast, true, class: 'with-gap' %>
+            <%= label_tag :type_broadcast, t('jera_push.admin.messages.new.broadcast') %>
+          </p>
+          <p class="col s4">
+            <%= radio_button_tag :type, :specific, false, class: 'with-gap' %>
+            <%= label_tag :type_specific, t('jera_push.admin.messages.new.specific') %>
+          </p>
+        </div>
+      </div>
 
-      <!-- <div class="private-params">
-      </div> -->
-    </div>
+      <div id="message_devices"></div>
 
-
-    <%= button_tag type: 'submit', class: 'btn btn-submit' do %>
-      <%= t('jera_push.admin.buttons.send') %>
-      <i class="material-icons right">send</i>
+      <%= button_tag type: 'submit', class: 'btn btn-submit' do %>
+        <%= t('jera_push.admin.buttons.send') %>
+        <i class="material-icons right">send</i>
+      <% end -%>
     <% end -%>
-   <% end -%>
+
+  </div>
+
+  <div class="device-attributes" id="device_attributes">
+    <!-- TODO APLICAR LIMITE NAS CONFIGURAÇÕES DA GEM -->
+    <%= render partial: 'jera_push/admin/devices/filter', locals: {filter_path: device_filter_jera_push_admin_messages_path(limit: 50), filter: @filter} %>
+
+    <div class="devices-list checkbox" id="device_list_checkbox"></div>
   </div>
 
 </div>
+
+<script>
+  <%= render partial: 'jera_push/admin/messages/new', formats: [:js] %>
+</script>

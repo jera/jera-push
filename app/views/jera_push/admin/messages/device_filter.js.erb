@@ -1,1 +1,10 @@
-$('#device_list').html("<%= j render partial: 'jera_push/admin/messages/message_device', locals: {messages_devices: @message_devices} %>");
+$('#device_list_checkbox').html("<%= j render partial: 'jera_push/admin/devices/checkbox_list', locals: {devices: @devices} %>");
+
+$('#device_list_checkbox tr input').on('change', function(){
+  var checkboxValue = $(this)[0].value;
+  if($(this).is(':checked')){
+    $('#message_devices').append("<input type='text' name='devices[]' value=" + checkboxValue + " >");
+  } else {
+    $('#message_devices input[value=' + checkboxValue + ']').remove();
+  }
+});

@@ -2,7 +2,7 @@ module JeraPush
   class DeviceFilter
     include ActiveModel::Model
 
-    attr_accessor :platform, :value, :field, :page, :per, :message_id
+    attr_accessor :platform, :value, :field, :message_id
 
     def platform
       @platform ||= []
@@ -19,7 +19,7 @@ module JeraPush
       if field.present? && value.present?
         @scope = search_with_value_field(@scope)
       end
-      @scope.order(created_at: :desc).page(page).per(per)
+      @scope
     end
 
     private
