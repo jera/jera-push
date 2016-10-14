@@ -6,7 +6,8 @@
     <%= form_tag jera_push_admin_messages_path, remote: true, class: 'col s12' do %>
 
       <div class="row" id="message_attributes_content">
-        <%= render partial: 'jera_push/admin/messages/message_attributes' %>
+        <%= render partial: 'jera_push/admin/messages/message_attributes', locals: {key: 'title', default: true} %>
+        <%= render partial: 'jera_push/admin/messages/message_attributes', locals: {key: 'body', default: true} %>
       </div>
 
       <div class="row center">
@@ -40,8 +41,11 @@
     <!-- TODO APLICAR LIMITE NAS CONFIGURAÇÕES DA GEM -->
     <%= render partial: 'jera_push/admin/devices/filter', locals: {filter_path: device_filter_jera_push_admin_messages_path(checkbox: true, limit: 50), filter: @filter} %>
 
-    <div class="devices-list checkbox" id="device_list_checkbox">
-    </div>
+    <div class="devices-list checkbox" id="device_list_checkbox"></div>
   </div>
 
 </div>
+
+<script>
+  <%= render partial: 'jera_push/admin/messages/new', formats: [:js] %>
+</script>

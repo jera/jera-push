@@ -36,10 +36,7 @@ module JeraPush
         devices = JeraPush::Device.where(id: params[:devices].map(&:to_i))
       end
 
-      logger.info "-------------> #{message_content.inspect}"
-      logger.info "-------------> #{devices.inspect}"
-
-      #JeraPush::Message.send_to(devices, content: message_content)
+      JeraPush::Message.send_to(devices, content: message_content)
 
       respond_to :js
     end
