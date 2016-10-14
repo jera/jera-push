@@ -15,6 +15,14 @@ class JeraPush::Message < ActiveRecord::Base
     end
   end
 
+  def self.format_hash(messages = [])
+    return false if messages.blank?
+    messages.collect do |obj|
+      hash = { obj[:key].to_sym => obj[:value] }
+      hash.delete_if { |key, value| key.blank? || value.blank? }
+    end.reduce(:merge)
+  end
+
   def content=(content)
     raise 'Invalid message format. Hash format expected' unless content.is_a? Hash
 

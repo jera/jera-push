@@ -22,7 +22,7 @@
   <div class="devices">
     <h3><%= t('jera_push.active_record.model.device.other') %></h3>
 
-    <%= render partial: 'jera_push/admin/devices/filter', locals: {filter_path: device_filter_jera_push_admin_message_path(@message), filter: @filter} %>
+    <%= render partial: 'jera_push/admin/devices/filter', locals: {filter_path: device_filter_jera_push_admin_messages_path, filter: @filter} %>
 
     <div class="devices-list" id="device_list">
       <%= render partial: 'jera_push/admin/devices/list', locals: {devices: @devices} %>

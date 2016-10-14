@@ -5,6 +5,17 @@
 
 $(document).ready(function(){
   $('select').material_select();
+
+  $('#device_attributes').hide();
+
+  $('#message_options input[type=radio]').on('change', function(){
+    if($(this)[0].value == 'broadcast'){
+      $('#device_attributes').hide();
+    } else {
+      $('#device_attributes').show();
+    }
+  });
+
 });
 
 function newMessageAttribute(){
@@ -18,3 +29,18 @@ function removeMessageAttribute(scope){
     scope.parent().remove();
   }
 };
+
+function addAllDevices(){
+  var devices = $('#device_list_checkbox tr input'), devices_input = '';
+  for(var i = 0, l = devices.length; i < l; i++){
+    var checkboxValue = devices[0].value;
+    devices_input += "<input type='text' name='devices[]' value=" + checkboxValue + " >";
+  }
+  devices.prop('checked', true);
+  $('#message_devices').append(devices_input);
+};
+
+function removeAllDevices(){
+  $('#message_devices').empty();
+  $('#device_list_checkbox tr input').prop('checked', false);
+}
