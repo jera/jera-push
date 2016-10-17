@@ -174,11 +174,11 @@ JeraPush::Message.first.send_to_device(device: JeraPush::Device.last)
 
 ---
 
-## API
+## API - Current Version: **V1**
 
 ### Endpoints
 
-#### Create a devices
+#### Create a device
 > /jera_push/v1/devices | `POST`
 
 | Parameter |    Type    | Description |
@@ -187,7 +187,7 @@ JeraPush::Message.first.send_to_device(device: JeraPush::Device.last)
 | platform `required` | String | Device platform. Can be `'android'`, `'ios'` or `'chrome'`. |
 | resource_id | Integer | Model object which will have the device |
 
-- `Request`
+`Request`
 Header
 ```json
 {
@@ -202,7 +202,8 @@ Body
   "resource_id": 10
 }
 ```
-- `Response` | `Status: 200`
+
+`Response` | `Status: 200`
 ```json
 {
   "data": {
@@ -216,7 +217,8 @@ Body
   "status": "success"
 }
 ```
-- `Error` | `Status: 422`
+
+`Error` | `Status: 422`
 ```json
 {
   "data": {
@@ -243,7 +245,8 @@ Body
 | token | String | Target device which will be deleted |
 | platform | String | Device platform. Can be `'android'`, `'ios'` or `'chrome'`. |
 
-- `Request`
+`Request`
+
 Header
 ```json
 {
@@ -257,7 +260,8 @@ Body
   "platform": "android"
 }
 ```
-- `Response` | `Status: 200`
+
+`Response` | `Status: 200`
 ```json
 {
   "data": {
@@ -271,7 +275,8 @@ Body
   "status": "success"
 }
 ```
-- `Error` | `Status: 404`
+
+`Error` | `Status: 404`
 ```
 No Content
 ```
