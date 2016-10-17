@@ -12,6 +12,10 @@ test/dummy/db/migrate/*create_jera_push_messages.rb
 test/dummy/db/migrate/*create_jera_push_messages_devices.rb
 test/dummy/config/locales/jera_push.pt-BR.yml
 
+test/dummy/app/views/jera_push/*
+test/dummy/app/views/kaminari/*
+test/dummy/app/views/layouts/jera_push/*
+
 # Created by https://www.gitignore.io/api/osx,linux,ruby
 
 ### OSX ###
