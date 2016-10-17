@@ -19,12 +19,12 @@
           <%= t("jera_push.admin.message_devices.status.#{message_device.status}") %>
         </td>
         <td>
-          <% if message_device.status.error? %>
+          <% if message_device.status && message_device.status.error? %>
             <div><%= t('jera_push.admin.message_devices.attributes.error_message') %></div>
             <div><%= message_device.error_message %></div>
           <% end %>
 
-          <% if message_device.status.success? %>
+          <% if message_device.status && message_device.status.success? %>
             <div><%= t('jera_push.admin.message_devices.attributes.firebase_id') %></div>
             <div><%= message_device.firebase_id %></div>
           <% end %>

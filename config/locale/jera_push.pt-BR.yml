@@ -39,6 +39,9 @@ pt-BR:
         failures: "Falhas: %{value}"
         success: "Sucessos: %{value}"
         new:
+          toast:
+            success: Mensagem criada com sucesso
+            error: Falha no envio da mensagem
           title: Nova Mensagem
           new_attribute: Novo Atributo
           specific: Específico

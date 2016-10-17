@@ -28,22 +28,16 @@ module JeraPush
     end
 
     def create
-      return render_invalid_params if params[:message].blank? || params[:type].blank?
+      push_message = JeraPush::Service::SendMessage.new(params).call
 
-      client = JeraPush::Firebase::Client.instance
-      message_content = JeraPush::Message.format_hash params[:message]
-
-      case params[:type].to_sym
-      when :broadcast
-        devices = JeraPush::Device.all
-      when :specific
-        return render_invalid_params if params[:devices].blank?
-        devices = JeraPush::Device.where(id: params[:devices].uniq.map(&:to_i))
+      if push_message
+        flash[:notice] = t('jera_push.admin.messages.new.toast.success')
+        redirect_to jera_push_admin_message_path(push_message)
+      else
+        flash[:error] = t('jera_push.admin.messages.new.toast.error')
+        apply_filter
+        render :new
       end
-
-      JeraPush::Message.send_to(devices, content: message_content)
-
-      respond_to :js
     end
 
     private

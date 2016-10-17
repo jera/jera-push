@@ -28,7 +28,7 @@ module JeraPush
       end
 
       def result_to(message:)
-        return if result.nil? && result['results'].nil?
+        return if result.nil? || result['results'].nil?
         message.status = :sent
         message.failure_count += result['failure'].to_i
         message.success_count += result['success'].to_i
