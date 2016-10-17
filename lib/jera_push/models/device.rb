@@ -22,7 +22,7 @@ class JeraPush::Device < ActiveRecord::Base
   scope :chrome, -> { where(platform: :chrome) }
 
   def send_message(message)
-    JeraPush::Message.send message: message, devices: [ self ]
+    JeraPush::Message.send_to self, content: message
   end
 
   def subscribe(topic)
