@@ -35,7 +35,9 @@ class JeraPush::Device < ActiveRecord::Base
     client.remove_device_from_topic(device: [self], topic: topic)
   end
 
-  def register_to_default_topic
-    subscribe(DEFAULT_TOPIC)
-  end
+  private
+
+    def register_to_default_topic
+      subscribe(DEFAULT_TOPIC)
+    end
 end
