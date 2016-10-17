@@ -3,7 +3,7 @@
   <h3><%= t('jera_push.admin.messages.new.title') %></h3>
 
   <div class="row">
-    <%= form_tag jera_push_admin_messages_path, remote: true, class: 'col s12' do %>
+    <%= form_tag jera_push_admin_messages_path, class: 'col s12' do %>
 
       <div class="row" id="message_attributes_content">
         <%= render partial: 'jera_push/admin/messages/message_attributes', locals: {key: 'title', default: true} %>

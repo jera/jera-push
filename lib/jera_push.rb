@@ -5,6 +5,7 @@ require 'kaminari'
 require 'jera_push/engine'
 require 'jera_push/firebase/client'
 require 'jera_push/firebase/api_result'
+require 'jera_push/services/send_message'
 
 module JeraPush
 
