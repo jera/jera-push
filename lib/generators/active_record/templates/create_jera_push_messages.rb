@@ -3,6 +3,9 @@ class CreateJeraPushMessages < ActiveRecord::Migration
     create_table :jera_push_messages do |t|
       t.text :content
       t.string :status
+      t.string :topic
+      t.string :firebase_id
+      t.string :error_message
       t.integer :failure_count, default: 0
       t.integer :success_count, default: 0
 

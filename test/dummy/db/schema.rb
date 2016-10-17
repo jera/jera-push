@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161014203713) do
+ActiveRecord::Schema.define(version: 20161017145214) do
 
   create_table "jera_push_devices", force: :cascade do |t|
     t.string   "token"
@@ -29,6 +29,9 @@ ActiveRecord::Schema.define(version: 20161014203713) do
   create_table "jera_push_messages", force: :cascade do |t|
     t.text     "content"
     t.string   "status"
+    t.string   "topic"
+    t.string   "firebase_id"
+    t.string   "error_message"
     t.integer  "failure_count", default: 0
     t.integer  "success_count", default: 0
     t.datetime "created_at",                null: false

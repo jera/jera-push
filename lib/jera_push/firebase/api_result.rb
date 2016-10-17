@@ -4,14 +4,27 @@ module JeraPush
 
       attr_accessor :result
       attr_accessor :registration_ids
+      attr_accessor :topic
 
-      def initialize(firebase_response, registration_ids: [])
+      def initialize(firebase_response, registration_ids: [], topic: nil)
         @result = firebase_response
         @registration_ids = registration_ids
       end
 
       def success?
         result && result.code == 200
+      end
+
+      def topic_result(message:)
+        return if message.nil? || result.nil?
+        if !result['error'].nil?
+          message.status = :error
+          message.error_message = result['error']
+        else
+          message.status = :sent
+        end
+        message.firebase_id = result['message_id']
+        message.save
       end
 
       def result_to(message:)
