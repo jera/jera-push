@@ -1,4 +1,13 @@
 pt-BR:
+  activerecord:
+    errors:
+      models:
+        jera_push/device:
+          attributes:
+            token:
+              blank: não pode ficar em branco
+            platform:
+              blank: não pode ficar em branco
   jera_push:
     active_record:
       model:
@@ -13,6 +22,10 @@ pt-BR:
           id: ID
           content: Conteúdo
           date: Data
+      devices:
+        attributes:
+          id: ID
+          platform: Plataforma
     admin:
       navbar:
         devices: Aparelhos

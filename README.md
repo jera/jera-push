@@ -171,3 +171,108 @@ Sends current message to one target device.
 ```ruby
 JeraPush::Message.first.send_to_device(device: JeraPush::Device.last)
 ```
+
+---
+
+## API
+
+### Endpoints
+
+#### Create a devices
+> /jera_push/v1/devices | `POST`
+
+| Parameter |    Type    | Description |
+|----------|------------|-------------|
+| token `required` | String | Device token which will be registred |
+| platform `required` | String | Device platform. Can be `'android'`, `'ios'` or `'chrome'`. |
+| resource_id | Integer | Model object which will have the device |
+
+- `Request`
+Header
+```json
+{
+  "Content-Type": "application/json"
+}
+```
+Body
+```json
+{
+  "token": "804b56b7ab9cdf43fff540c5d93f3922aeaf65feb14f7ae88698b9b032a7a934",
+  "platform": "android",
+  "resource_id": 10
+}
+```
+- `Response` | `Status: 200`
+```json
+{
+  "data": {
+    "id": 1,
+    "token": "804b56b7ab9cdf43fff540c5d93f3922aeaf65feb14f7ae88698b9b032a7a934",
+    "platform": "android",
+    "resource_id": 10,
+    "created_at": "2016-10-17T14:19:58.776Z",
+    "updated_at": "2016-10-17T20:30:20.064Z"
+  },
+  "status": "success"
+}
+```
+- `Error` | `Status: 422`
+```json
+{
+  "data": {
+    "id": null,
+    "token": null,
+    "platform": null,
+    "resource_id": 10,
+    "created_at": null,
+    "updated_at": null
+  },
+  "errors": [
+    "Token não pode ficar em branco",
+    "Platform não pode ficar em branco"
+  ],
+  "status": "unprocessable_entity"
+}
+```
+
+#### Delete a device
+> /jera_push/v1/devices | `DELETE`
+
+| Parameter |    Type    | Description |
+|----------|------------|-------------|
+| token | String | Target device which will be deleted |
+| platform | String | Device platform. Can be `'android'`, `'ios'` or `'chrome'`. |
+
+- `Request`
+Header
+```json
+{
+  "Content-Type": "application/json"
+}
+```
+Body
+```json
+{
+  "token": "804b56b7ab9cdf43fff540c5d93f3922aeaf65feb14f7ae88698b9b032a7a934",
+  "platform": "android"
+}
+```
+- `Response` | `Status: 200`
+```json
+{
+  "data": {
+    "id": 1,
+    "token": "804b56b7ab9cdf43fff540c5d93f3922aeaf65feb14f7ae88698b9b032a7a934",
+    "platform": "android",
+    "resource_id": 10,
+    "created_at": "2016-10-17T14:19:58.776Z",
+    "updated_at": "2016-10-17T20:30:20.064Z"
+  },
+  "status": "success"
+}
+```
+- `Error` | `Status: 404`
+```
+No Content
+```
+---
