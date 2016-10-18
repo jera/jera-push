@@ -6,6 +6,7 @@ class JeraPushGenerator < Rails::Generators::NamedBase
 
   def initializer_file
     template 'jera_push.rb', 'config/initializers/jera_push.rb'
+    inject_into_file 'config/initializers/assets.rb', "Rails.application.config.assets.precompile += %w( jera_push/jera_push.css jera_push/jera_push.js )"
   end
 
   def locale_file
