@@ -44,6 +44,12 @@ JeraPush.setup do |config|
 end
 
 ```
+
+---
+
+### Scheduling Messages
+This gem doesn't support scheduled messages yet. For it, you need implement your own solution with another service like [Sidekiq](https://github.com/mperham/sidekiq), [Whenever](https://github.com/javan/whenever), [Rufus](https://github.com/jmettraux/rufus-scheduler) or other.
+
 ---
 
 ## Firebase::Client
