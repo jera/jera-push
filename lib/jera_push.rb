@@ -23,6 +23,10 @@ module JeraPush
   mattr_accessor :resource_attributes
   @@resource_attributes = []
 
+  mattr_accessor :admin_login
+  @@resource_name =  { username: 'jera_push', password: 'JeraPushAdmin' }
+
+
   def self.setup
     yield self
   end

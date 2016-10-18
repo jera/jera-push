@@ -6,4 +6,12 @@ JeraPush.setup do |config|
 
   # Resource attribute showed in views
   # config.resource_attributes = [:email, :name]
+
+  # Admin credentials
+  # config.admin_login = {
+  #   username: 'jera_push',
+  #   password: 'JeraPushAdmin'
+  # }
+
+
 end
