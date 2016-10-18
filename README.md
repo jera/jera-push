@@ -188,6 +188,7 @@ JeraPush::Message.first.send_to_device(device: JeraPush::Device.last)
 | resource_id | Integer | Model object which will have the device |
 
 `Request`
+
 Header
 ```json
 {
