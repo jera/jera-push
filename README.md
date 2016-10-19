@@ -54,7 +54,7 @@ JeraPush.setup do |config|
 end
 
 ```
-`you should change the default_topic for your environment, because that's the topic that a brodcast sends a message, and it wouldn't be the same in diferents environment `
+### You has to change the default_topic for your environment, because that's the topic that a brodcast sends a message, and it wouldn't be the same in diferents environment
 ---
 
 ### Scheduling Messages
