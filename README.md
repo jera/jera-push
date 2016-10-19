@@ -41,7 +41,7 @@ JeraPush.setup do |config|
 
   # Resource attribute showed in views
   # config.resource_attributes = [:email, :name]
-  
+
   # Topic default
   # You should put with your environment
   config.default_topic = 'jera_push_staging'
@@ -54,7 +54,7 @@ JeraPush.setup do |config|
 end
 
 ```
-
+`you should change the default_topic for your environment, because that's the topic that a brodcast sends a message, and it wouldn't be the same in diferents environment `
 ---
 
 ### Scheduling Messages
