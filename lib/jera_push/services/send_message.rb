@@ -13,8 +13,7 @@ module JeraPush
 
         case @type.to_sym
         when :broadcast
-          # Send to topic
-          false
+          JeraPush::Message.send_to_topic(topic: JeraPush.default_topic, content: message_content)
         when :specific
           target_devices = JeraPush::Device.where(id: @devices.uniq.map(&:to_i))
           JeraPush::Message.send_to(target_devices, content: message_content)

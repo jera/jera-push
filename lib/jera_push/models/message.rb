@@ -22,7 +22,7 @@ class JeraPush::Message < ActiveRecord::Base
 
     push_message = JeraPush::Message.create content: content, topic: topic
     client = JeraPush::Firebase::Client.instance
-    response = client.send_message_to_topic(message: {title: 'ola', message: 'wowow'}, topic: JeraPush::Device::DEFAULT_TOPIC)
+    response = client.send_message_to_topic(message: { data: content }, topic: topic)
     response.topic_result(message: push_message)
     push_message
   end

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    jera_push (0.0.1)
+    jera_push (1.0.0)
       enumerize
       httparty
       jquery-rails

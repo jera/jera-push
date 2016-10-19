@@ -17,6 +17,9 @@ module JeraPush
   mattr_accessor :firebase_api_key
   @@firebase_api_key = nil
 
+  mattr_accessor :default_topic
+  @@default_topic = 'jera_push_production'
+
   mattr_accessor :resource_name
   @@resource_name = nil
 
