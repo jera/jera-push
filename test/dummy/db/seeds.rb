@@ -1,7 +1,7 @@
 module Populate
-  USER_COUNT = 500
+  USER_COUNT = 30
   DEVICES_PER_USER = 2
-  MESSAGES_COUNT = 1000
+  MESSAGES_COUNT = 10
   MESSAGES_PER_DEVICE = 6
 
   def self.run_users

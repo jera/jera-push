@@ -1,10 +1,10 @@
 <table class="highlight">
   <thead>
     <tr>
-      <th data-field="id"><%= t('jera_push.admin.message_devices.attributes.id') %></th>
-      <th data-field="token"><%= t('jera_push.admin.message_devices.attributes.token') %></th>
-      <th data-field="platform"><%= t('jera_push.admin.message_devices.attributes.platform') %></th>
       <th data-field="resource"><%= t('jera_push.admin.message_devices.attributes.resource') %></th>
+      <th data-field="status"><%= t('jera_push.admin.message_devices.attributes.status') %></th>
+      <th data-field="message"><%= t('jera_push.admin.message_devices.attributes.metadata') %></th>
+      <th data-field="info"><%= t('jera_push.admin.message_devices.attributes.device') %></th>
     </tr>
   </thead>
   <tbody>
@@ -16,7 +16,7 @@
           <% end %>
         </td>
         <td>
-          <%= t("jera_push.admin.message_devices.status.#{message_device.status}") %>
+          <%= message_device.status ? t("jera_push.admin.message_devices.status.#{message_device.status}") : t("jera_push.admin.message_devices.status.undefined") %>
         </td>
         <td>
           <% if message_device.status && message_device.status.error? %>

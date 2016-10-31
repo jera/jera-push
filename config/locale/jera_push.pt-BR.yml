@@ -48,6 +48,7 @@ pt-BR:
         status:
           success: "Enviada com sucesso"
           error: "Falha ao enviar"
+          undefined: "Indefinido"
       messages:
         failures: "Falhas: %{value}"
         success: "Sucessos: %{value}"
