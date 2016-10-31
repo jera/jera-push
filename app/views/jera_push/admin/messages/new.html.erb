@@ -31,7 +31,7 @@
 
       <div id="message_devices"></div>
 
-      <%= button_tag type: 'submit', class: 'btn btn-submit' do %>
+      <%= button_tag type: 'submit', data: { confirm: t('jera_push.admin.messages.new.confirmation') }, class: 'btn btn-submit' do %>
         <%= t('jera_push.admin.buttons.send') %>
         <i class="material-icons right">send</i>
       <% end -%>

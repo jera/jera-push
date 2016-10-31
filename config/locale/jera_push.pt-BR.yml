@@ -56,6 +56,7 @@ pt-BR:
           toast:
             success: Mensagem criada com sucesso
             error: Falha no envio da mensagem
+          confirmation: Tem certeza que deseja enviar essa mensagem?
           title: Nova Mensagem
           new_attribute: Novo Atributo
           specific: Específico
