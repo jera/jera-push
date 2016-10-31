@@ -1,8 +1,8 @@
 class CreateJeraPushMessagesDevices < ActiveRecord::Migration
   def change
     create_table :jera_push_messages_devices do |t|
-      t.references :device, index: true, foreign_key: true
-      t.references :message, index: true, foreign_key: true
+      t.integer :device_id, index: true, foreign_key: true
+      t.integer :message_id, index: true, foreign_key: true
       t.string :status
       t.string :error_message
       t.string :firebase_id
