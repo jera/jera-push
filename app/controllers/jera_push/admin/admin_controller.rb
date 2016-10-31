@@ -4,9 +4,11 @@ module JeraPush
     before_filter :authenticate
 
     def authenticate
-      authenticate_or_request_with_http_basic do |username, password|
-    		username == JeraPush.admin_login[:username] && password == JeraPush.admin_login[:password]
-    	end
+      if JeraPush.try(:admin_login)
+        authenticate_or_request_with_http_basic do |username, password|
+          username == JeraPush.admin_login[:username] && password == JeraPush.admin_login[:password]
+        end
+      end
     end
 
   end
