@@ -17,6 +17,16 @@ class JeraPush::Message < ActiveRecord::Base
     push_message
   end
 
+  def self.send_to_topic( topic:, content: {})
+    return nil if topic.blank? || content.blank?
+
+    push_message = JeraPush::Message.create content: content, topic: topic
+    client = JeraPush::Firebase::Client.instance
+    response = client.send_message_to_topic(message: { data: content }, topic: topic)
+    response.topic_result(message: push_message)
+    push_message
+  end
+
   def self.format_hash(messages = [])
     return false if messages.blank?
     messages.collect do |obj|

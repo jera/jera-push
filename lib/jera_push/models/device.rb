@@ -38,6 +38,6 @@ class JeraPush::Device < ActiveRecord::Base
   private
 
     def register_to_default_topic
-      subscribe(DEFAULT_TOPIC)
+      subscribe(JeraPush.default_topic)
     end
 end

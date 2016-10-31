@@ -26,6 +26,13 @@ module JeraPush
         ApiResult.new(response, registration_ids: registration_ids)
       end
 
+      def send_message_to_topic(message:, topic:)
+        body = { to: "/topics/#{topic}", priority: 'high' }
+        response = HTTParty.post(FIREBASE_URL, { body: body.merge!(message).to_json, headers: default_headers })
+        puts response
+        ApiResult.new(response, topic: topic)
+      end
+
       def device_details(device:)
         url = "#{FIREBASE_INSTANCE_ID_URL}/info/#{device.token}/"
         response = HTTParty.post(url, { body: Hash.new.to_json, headers: default_headers })

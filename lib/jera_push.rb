@@ -17,11 +17,18 @@ module JeraPush
   mattr_accessor :firebase_api_key
   @@firebase_api_key = nil
 
+  mattr_accessor :default_topic
+  @@default_topic = 'jera_push_production'
+
   mattr_accessor :resource_name
   @@resource_name = nil
 
   mattr_accessor :resource_attributes
   @@resource_attributes = []
+
+  mattr_accessor :admin_login
+  @@resource_name =  { username: 'jera_push', password: 'JeraPushAdmin' }
+
 
   def self.setup
     yield self

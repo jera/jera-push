@@ -41,9 +41,25 @@ JeraPush.setup do |config|
 
   # Resource attribute showed in views
   # config.resource_attributes = [:email, :name]
+
+  # Topic default
+  # You should put with your environment
+  config.default_topic = 'jera_push_staging'
+
+  # Admin credentials
+  # config.admin_login = {
+  #   username: 'jera_push',
+  #   password: 'JeraPushAdmin'
+  # }
 end
 
 ```
+### You has to change the default_topic for your environment, because that's the topic that a brodcast sends a message, and it wouldn't be the same in diferents environment
+---
+
+### Scheduling Messages
+This gem doesn't support scheduled messages yet. For it, you need implement your own solution with another service like [Sidekiq](https://github.com/mperham/sidekiq), [Whenever](https://github.com/javan/whenever), [Rufus](https://github.com/jmettraux/rufus-scheduler) or other.
+
 ---
 
 ## Firebase::Client
@@ -188,6 +204,7 @@ JeraPush::Message.first.send_to_device(device: JeraPush::Device.last)
 | resource_id | Integer | Model object which will have the device |
 
 `Request`
+
 Header
 ```json
 {

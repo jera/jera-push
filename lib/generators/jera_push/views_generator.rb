@@ -9,7 +9,6 @@ module JeraPush
       copy_file message_view_path('_message_attributes.html.erb'), "app/views/#{message_view_path('_message_attributes.html.erb')}"
       copy_file message_view_path('_message_device.html.erb'), "app/views/#{message_view_path('_message_device.html.erb')}"
       copy_file message_view_path('_new.js.erb'), "app/views/#{message_view_path('_new.js.erb')}"
-      copy_file message_view_path('create.js.erb'), "app/views/#{message_view_path('create.js.erb')}"
       copy_file message_view_path('device_filter.js.erb'), "app/views/#{message_view_path('device_filter.js.erb')}"
       copy_file message_view_path('index.html.erb'), "app/views/#{message_view_path('index.html.erb')}"
       copy_file message_view_path('message_devices_filter.js.erb'), "app/views/#{message_view_path('message_devices_filter.js.erb')}"
