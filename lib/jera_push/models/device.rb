@@ -14,6 +14,7 @@ class JeraPush::Device < ActiveRecord::Base
   validates :token, :platform, presence: true
 
   after_create :register_to_default_topic
+  before_destroy :unregister_to_default_topic
 
   enumerize :platform, in: [:android, :ios, :chrome], predicate: true
 
@@ -39,5 +40,9 @@ class JeraPush::Device < ActiveRecord::Base
 
     def register_to_default_topic
       subscribe(JeraPush.default_topic)
+    end
+
+    def unregister_to_default_topic
+      unsubscribe(JeraPush.default_topic)
     end
 end
