@@ -56,7 +56,6 @@ class JeraPush::Message < ActiveRecord::Base
 
     platform_devices.keys.each do |platform|
       payload = self.send("body_#{platform.to_s}", self.content)
-      puts "----------> #{payload}"
       response = client.send_message(message: payload, devices: platform_devices[platform])
       if response
         response.result_to(message: self)
@@ -70,7 +69,6 @@ class JeraPush::Message < ActiveRecord::Base
     payload = {}
     if device.platform.ios?
       payload = body_ios(self.content)
-      puts "----------> #{payload}"
     elsif device.platform.android?
       payload = body_android(self.content)
     elsif device.platform.chrome?
