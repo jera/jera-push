@@ -56,6 +56,7 @@ class JeraPush::Message < ActiveRecord::Base
 
     platform_devices.keys.each do |platform|
       payload = self.send("body_#{platform.to_s}", self.content)
+      puts "----------> #{payload}"
       response = client.send_message(message: payload, devices: platform_devices[platform])
       if response
         response.result_to(message: self)
@@ -69,6 +70,7 @@ class JeraPush::Message < ActiveRecord::Base
     payload = {}
     if device.platform.ios?
       payload = body_ios(self.content)
+      puts "----------> #{payload}"
     elsif device.platform.android?
       payload = body_android(self.content)
     elsif device.platform.chrome?
@@ -84,9 +86,13 @@ class JeraPush::Message < ActiveRecord::Base
   private
 
     def body_ios(content)
-      params = ['title', 'body']
+      params = [:title, :body, :sound, :badge, :click_action, :body_loc_key, :body_loc_args, :title_loc_key, :title_loc_args]
+
+      content.symbolize_keys!
+      content[:sound] = 'default' unless content.has_key?(:sound)
+
       return {
-        notification: { aps: content.select { |key, value| params.include?(key) } },
+        notification: content.select { |key, value| params.include?(key) },
         data: content.reject { |key, value| params.include?(key) }
       }
     end

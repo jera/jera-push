@@ -39,13 +39,13 @@ module JeraPush
         ApiResult.new(response)
       end
 
-      def add_device_to_topic(topic: ,device:)
+      def add_device_to_topic(topic:, device:)
         url = "#{FIREBASE_INSTANCE_ID_URL}/v1/#{device.token}/rel/topics/#{topic}"
         response = HTTParty.post(url, { body: Hash.new.to_json, headers: default_headers })
         ApiResult.new(response)
       end
 
-      def add_devices_to_topic(topic: ,devices: [])
+      def add_devices_to_topic(topic:, devices: [])
         url = "#{FIREBASE_INSTANCE_ID_URL}/v1:batchAdd"
         body = {
           "to": "/topics/#{topic}",
@@ -55,7 +55,7 @@ module JeraPush
         ApiResult.new(response)
       end
 
-      def remove_device_from_topic(topic: , devices: [])
+      def remove_device_from_topic(topic:, devices: [])
         url = "#{FIREBASE_INSTANCE_ID_URL}/v1:batchRemove"
         body = {
           "to": "/topics/#{topic}",
