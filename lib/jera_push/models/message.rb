@@ -82,23 +82,24 @@ class JeraPush::Message < ActiveRecord::Base
   end
 
   private
-  def body_ios(content)
-    params = [:title, :body, :sound, :badge, :click_action, :body_loc_key, :body_loc_args, :title_loc_key, :title_loc_args]
-    return {
-      notification: content.select { |key, value| params.include?(key) },
-      data: content.reject { |key, value| params.include?(key) }
-    }
-  end
 
-  def body_android(content)
-    return {
-      data: content
-    }
-  end
+    def body_ios(content)
+      params = ['title', 'body']
+      return {
+        notification: { aps: content.select { |key, value| params.include?(key) } },
+        data: content.reject { |key, value| params.include?(key) }
+      }
+    end
 
-  def body_chrome(content)
-    return {
-      data: content
-    }
-  end
+    def body_android(content)
+      return {
+        data: content
+      }
+    end
+
+    def body_chrome(content)
+      return {
+        data: content
+      }
+    end
 end
