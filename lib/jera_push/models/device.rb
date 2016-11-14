@@ -12,6 +12,7 @@ class JeraPush::Device < ActiveRecord::Base
   belongs_to :resource, class_name: JeraPush.resource_name
 
   validates :token, :platform, presence: true
+  validates :token, :platform, uniqueness: true
 
   after_create :register_to_default_topic
   before_destroy :unregister_to_default_topic
@@ -28,12 +29,12 @@ class JeraPush::Device < ActiveRecord::Base
 
   def subscribe(topic)
     client = JeraPush::Firebase::Client.instance
-    client.add_device_to_topic(device: self, topic: topic)
+    client.add_device_to_topic(topic: topic, device: self)
   end
 
   def unsubscribe(topic)
     client = JeraPush::Firebase::Client.instance
-    client.remove_device_from_topic(device: [self], topic: topic)
+    client.remove_device_from_topic(topic: topic, devices: [self])
   end
 
   private
