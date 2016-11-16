@@ -12,6 +12,7 @@ class JeraPush::Device < ActiveRecord::Base
   belongs_to :resource, class_name: JeraPush.resource_name
 
   validates :token, :platform, presence: true
+  validates :token, uniqueness: { scope: :platform }
 
   after_create :register_to_default_topic
   before_destroy :unregister_to_default_topic
