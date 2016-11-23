@@ -2,7 +2,9 @@ class CreateJeraPushMessages < ActiveRecord::Migration
   def change
     create_table :jera_push_messages do |t|
       t.text :content
+      t.text :broadcast_result
       t.string :status
+      t.string :kind
       t.string :topic
       t.string :firebase_id
       t.string :error_message

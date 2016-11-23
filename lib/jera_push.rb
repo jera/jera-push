@@ -18,7 +18,7 @@ module JeraPush
   @@firebase_api_key = nil
 
   mattr_accessor :default_topic
-  @@default_topic = 'jera_push_production'
+  @@default_topic = 'jera_push_development'
 
   mattr_accessor :resource_name
   @@resource_name = nil
@@ -32,5 +32,17 @@ module JeraPush
 
   def self.setup
     yield self
+  end
+
+  def self.topic_android
+    @@android_topic ||= "#{@@default_topic}_android"
+  end
+
+  def self.topic_ios
+    @@ios_topic ||= "#{@@default_topic}_ios"
+  end
+
+  def self.topic_chrome
+    @@chrome_topic ||= "#{@@default_topic}_chrome"
   end
 end

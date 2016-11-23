@@ -15,6 +15,26 @@ module JeraPush
         result && result.code == 200
       end
 
+      def self.broadcast_result(message:, results:)
+        return nil if results.blank? || message.blank?
+
+        message.broadcast_result = []
+
+        results.each do |result|
+          obj = { platform: result.topic.split('_').last.titlecase }
+          if result['error'].nil?
+            message.status = :sent
+          else
+            message.status = :error
+            obj[:message] = result['error']
+          end
+          obj[:firebase_id] = result['message_id']
+
+          message.broadcast_result << obj
+        end
+        message.save
+      end
+
       def topic_result(message:)
         return if message.nil? || result.nil?
         if !result['error'].nil?
