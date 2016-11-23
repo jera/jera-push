@@ -52,6 +52,11 @@ pt-BR:
       messages:
         failures: "Falhas: %{value}"
         success: "Sucessos: %{value}"
+        show:
+          broadcast:
+            platform: Plataforma
+            status: Status
+            message: Mensagem
         new:
           toast:
             success: Mensagem criada com sucesso

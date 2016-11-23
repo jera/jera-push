@@ -9,13 +9,12 @@ JeraPush.setup do |config|
 
   # Topic default
   # You should put with your environment
-  config.default_topic = 'jera_push_production'
+  config.default_topic = 'jera_push_development'
 
   # Admin credentials
   # config.admin_login = {
   #   username: 'jera_push',
   #   password: 'JeraPushAdmin'
   # }
-
 
 end

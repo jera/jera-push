@@ -13,25 +13,34 @@
     </span>
     <blockquote class="json-message"><%= @message.display_content %></blockquote>
 
-    <span class="field">
-      <%= t('jera_push.active_record.messages.attributes.status') %>
-    </span>
-    <blockquote class="json-message">
-      <%= @message.status %>
-      <%= t('jera_push.admin.messages.failures', value: @message.failure_count) %>
-      <%= t('jera_push.admin.messages.success', value: @message.success_count) %>
-    </blockquote>
+    <% unless @message.kind.broadcast? %>
+      <span class="field">
+        <%= t('jera_push.active_record.messages.attributes.status') %>
+      </span>
+      <blockquote class="json-message">
+        <%= @message.status %>
+        <%= t('jera_push.admin.messages.failures', value: @message.failure_count) %>
+        <%= t('jera_push.admin.messages.success', value: @message.success_count) %>
+      </blockquote>
+    <% end %>
   </div>
 
-  <div class="devices">
-    <h3><%= t('jera_push.active_record.model.device.other') %></h3>
+  <% if @message.kind.broadcast? %>
+    <h3><%= JeraPush::Message.kind.broadcast.text %></h3>
+
+    <div class="message-info">
+      <%= render partial: 'jera_push/admin/messages/broadcast_message', message: @message %>
+    </div>
+  <% else %>
+    <div class="devices">
+      <h3><%= t('jera_push.active_record.model.device.other') %></h3>
 
       <%= render partial: 'jera_push/admin/devices/filter', locals: {filter_path: message_devices_filter_jera_push_admin_message_path(@message), filter: @filter} %>
 
-    <div class="devices-list" id="device_list">
-      <%= render partial: 'jera_push/admin/messages/message_device', locals: {message_devices: @message_devices} %>
+      <div class="devices-list" id="device_list">
+        <%= render partial: 'jera_push/admin/messages/message_device', locals: {message_devices: @message_devices} %>
+      </div>
     </div>
-
-  </div>
+  <% end -%>
 
 </div>

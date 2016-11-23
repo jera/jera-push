@@ -1,0 +1,30 @@
+<table class="highlight">
+  <thead>
+    <tr>
+      <th data-field="platform">
+        <%= t('jera_push.admin.messages.show.broadcast.platform') %>
+      </th>
+      <th data-field="status">
+        <%= t('jera_push.admin.messages.show.broadcast.status') %>
+      </th>
+      <th data-field="message">
+        <%= t('jera_push.admin.messages.show.broadcast.message') %>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @message.broadcast_result.each do |result| %>
+      <tr>
+        <td><%= result[:platform] %></td>
+        <td><%= @message.status %></td>
+        <td>
+          <% if @message.status.eql?('error') %>
+            <%= result[:message] || '-' %>
+          <% else %>
+            <%= t('jera_push.admin.message_devices.status.success') %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
