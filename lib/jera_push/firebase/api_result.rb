@@ -9,6 +9,7 @@ module JeraPush
       def initialize(firebase_response, registration_ids: [], topic: nil)
         @result = firebase_response
         @registration_ids = registration_ids
+        @topic = topic
       end
 
       def success?
@@ -22,13 +23,13 @@ module JeraPush
 
         results.each do |result|
           obj = { platform: result.topic.split('_').last.titlecase }
-          if result['error'].nil?
+          if result.success?
             message.status = :sent
           else
             message.status = :error
-            obj[:message] = result['error']
+            obj[:message] = result.result['error']
           end
-          obj[:firebase_id] = result['message_id']
+          obj[:firebase_id] = result.result['message_id']
 
           message.broadcast_result << obj
         end

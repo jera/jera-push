@@ -29,13 +29,14 @@ class JeraPush::Message < ActiveRecord::Base
     return nil if content.blank?
 
     push_message = JeraPush::Message.create content: content, kind: :broadcast
+    @@client ||= JeraPush::Firebase::Client.instance
 
     results = []
-    results << to_android_topic(push_message)
-    results << to_ios_topic(push_message)
-    results << to_chrome_topic(push_message)
+    results << push_message.to_android_topic
+    results << push_message.to_ios_topic
+    results << push_message.to_chrome_topic
 
-    ApiResult.broadcast_result(message: push_message, results: results)
+    JeraPush::Firebase::ApiResult.broadcast_result(message: push_message, results: results)
     push_message
   end
 
@@ -103,34 +104,28 @@ class JeraPush::Message < ActiveRecord::Base
     end
   end
 
+  def to_android_topic
+    @@client.send_message_to_topic(
+      message: body_android(content),
+      topic: JeraPush.topic_android
+    )
+  end
+
+  def to_ios_topic
+    @@client.send_message_to_topic(
+      message: body_ios(content),
+      topic: JeraPush.topic_ios
+    )
+  end
+
+  def to_chrome_topic
+    @@client.send_message_to_topic(
+      message: body_chrome(content),
+      topic: JeraPush.topic_chrome
+    )
+  end
+
   private
-
-    def to_android_topic(content)
-      @client ||= JeraPush::Firebase::Client.instance
-
-      client.send_message_to_topic(
-        message: body_android(content),
-        topic: JeraPush.topic_android
-      )
-    end
-
-    def to_ios_topic(content)
-      @client ||= JeraPush::Firebase::Client.instance
-
-      client.send_message_to_topic(
-        message: body_ios(content),
-        topic: JeraPush.topic_ios
-      )
-    end
-
-    def to_chrome_topic(content)
-      @client ||= JeraPush::Firebase::Client.instance
-
-      client.send_message_to_topic(
-        message: body_chrome(content),
-        topic: JeraPush.topic_chrome
-      )
-    end
 
     def body_ios(content)
       params = [:title, :body, :sound, :badge, :click_action, :body_loc_key, :body_loc_args, :title_loc_key, :title_loc_args]
