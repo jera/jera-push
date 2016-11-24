@@ -14,7 +14,7 @@ class JeraPush::Device < ActiveRecord::Base
   validates :token, :platform, presence: true
   validates :token, uniqueness: { scope: :platform }
 
-  after_create :register_to_current_topic
+  # after_create :register_to_current_topic
   before_destroy :unregister_from_current_topic
 
   enumerize :platform, in: [:android, :ios, :chrome], predicate: true
