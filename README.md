@@ -20,10 +20,16 @@ It's composed for:
 
 ## Getting started
 
-Add it to your Gemfile:
+Add it to your Gemfile
+for Rails < 4.2.7:
 ~~~ruby
 gem 'jera_push', git: 'git@bitbucket.org:jerasoftware/jera-push-gem.git'
 ~~~
+for Rails >= 5.0.0:
+~~~ruby
+gem 'jera_push', git: 'git@bitbucket.org:jerasoftware/jera-push-gem.git', branch: 'unlock-rails-version'
+~~~
+
 Run the `bundle install` command to install it.
 
 Next, you need to run the generator and inform the model to associate with devices. You can do it with this command:
