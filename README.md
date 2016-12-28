@@ -25,10 +25,13 @@ for Rails < 4.2.7:
 ~~~ruby
 gem 'jera_push', git: 'git@bitbucket.org:jerasoftware/jera-push-gem.git'
 ~~~
-for Rails >= 5.0.0:
+for Rails 5.0.0.1:
 ~~~ruby
 gem 'jera_push', git: 'git@bitbucket.org:jerasoftware/jera-push-gem.git', branch: 'unlock-rails-version'
 ~~~
+
+> **Warning
+> JeraPush Gem isn't working with Rails version >= 5.0.1.**
 
 Run the `bundle install` command to install it.
 
