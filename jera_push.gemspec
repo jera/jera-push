@@ -18,7 +18,7 @@ Gem::Specification.new 'jera_push', '1.0' do |s|
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency 'rails', '~> 4.2', '>= 4.2.7'
+  s.add_dependency 'rails', '>= 4.2.7', '< 5.0.1'
   s.add_dependency 'enumerize', '~> 2.0'
   s.add_dependency 'httparty', '~> 0.14'
   s.add_dependency 'sass-rails', '~> 5.0'
