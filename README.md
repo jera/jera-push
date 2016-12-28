@@ -20,14 +20,9 @@ It's composed for:
 
 ## Getting started
 
-Add it to your Gemfile
-for Rails < 4.2.7:
+Add it to your Gemfile:
 ~~~ruby
-gem 'jera_push', git: 'git@bitbucket.org:jerasoftware/jera-push-gem.git'
-~~~
-for Rails 5.0.0.1:
-~~~ruby
-gem 'jera_push', git: 'git@bitbucket.org:jerasoftware/jera-push-gem.git', branch: 'unlock-rails-version'
+gem 'jera_push', '~> 1.0'
 ~~~
 
 > **Warning
@@ -166,9 +161,17 @@ JeraPush::Device.first.unsubscribe('your_topic')
 | success_count | Integer | success count after sending |
 
 ### Methods
+* send_broadcast `static`
 * send_to `static`
 * send_to_devices
 * send_to_device
+
+#### `send_broadcast(content: {})`
+Sends message to all registered devices.
+
+```ruby
+JeraPush::Message.broadcast(content: { body: 'Hello World', title: 'Hey' })
+```
 
 #### `send_to(Object or ActiveRecord_Relation, content: {})`
 Creates message with content and relates with object or collection, then sends push message.
