@@ -4,12 +4,12 @@ $:.push File.expand_path("../lib", __FILE__)
 require "jera_push/version"
 
 # Describe your gem and declare its dependencies:
-Gem::Specification.new do |s|
+Gem::Specification.new 'jera_push', '1.0' do |s|
   s.name        = "jera_push"
   s.version     = JeraPush::VERSION
   s.authors     = ["Jera"]
-  s.email       = ["marcaoas@jera.com.br"]
-  s.homepage    = "https://bitbucket.org/jerasoftware/jera-push-gem"
+  s.email       = ["hospedagem@jera.com.br"]
+  s.homepage    = "https://github.com/jera/jera-push"
   s.summary     = "Gem to use firebase push messages."
   s.description = "This gem is for send push messages via firebase and track their status."
   s.license     = "MIT"
@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency 'rails', '~> 4.2.6'
+  s.add_dependency 'rails'
   s.add_dependency 'enumerize'
   s.add_dependency 'httparty'
   s.add_dependency 'sass-rails'
