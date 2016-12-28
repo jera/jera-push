@@ -6,7 +6,7 @@ require "jera_push/version"
 # Describe your gem and declare its dependencies:
 Gem::Specification.new 'jera_push', '1.0' do |s|
   s.name        = "jera_push"
-  s.version     = JeraPush::VERSION
+  s.version     = '>= 2.2.0'
   s.authors     = ["Jera"]
   s.email       = ["hospedagem@jera.com.br"]
   s.homepage    = "https://bitbucket.org/jerasoftware/jera-push-gem"
@@ -24,6 +24,7 @@ Gem::Specification.new 'jera_push', '1.0' do |s|
   s.add_dependency 'kaminari', '~> 0.17'
   s.add_dependency 'responders', '~> 2.3'
   s.add_dependency 'jquery-rails', '~> 4.2'
+
 
   s.add_development_dependency 'sqlite3', '~> 1.3'
 end
