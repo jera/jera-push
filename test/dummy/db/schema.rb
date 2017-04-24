@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -19,12 +18,11 @@ ActiveRecord::Schema.define(version: 20161123200421) do
     t.integer  "resource_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["platform"], name: "index_jera_push_devices_on_platform"
+    t.index ["resource_id"], name: "index_jera_push_devices_on_resource_id"
+    t.index ["token", "platform"], name: "index_jera_push_devices_on_token_and_platform", unique: true
+    t.index ["token"], name: "index_jera_push_devices_on_token"
   end
-
-  add_index "jera_push_devices", ["platform"], name: "index_jera_push_devices_on_platform"
-  add_index "jera_push_devices", ["resource_id"], name: "index_jera_push_devices_on_resource_id"
-  add_index "jera_push_devices", ["token", "platform"], name: "index_jera_push_devices_on_token_and_platform", unique: true
-  add_index "jera_push_devices", ["token"], name: "index_jera_push_devices_on_token"
 
   create_table "jera_push_messages", force: :cascade do |t|
     t.text     "content"
@@ -48,11 +46,10 @@ ActiveRecord::Schema.define(version: 20161123200421) do
     t.string   "firebase_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.index ["device_id", "message_id"], name: "jera_push_index_messages_id_devices_id", unique: true
+    t.index ["device_id"], name: "index_jera_push_messages_devices_on_device_id"
+    t.index ["message_id"], name: "index_jera_push_messages_devices_on_message_id"
   end
-
-  add_index "jera_push_messages_devices", ["device_id", "message_id"], name: "jera_push_index_messages_id_devices_id", unique: true
-  add_index "jera_push_messages_devices", ["device_id"], name: "index_jera_push_messages_devices_on_device_id"
-  add_index "jera_push_messages_devices", ["message_id"], name: "index_jera_push_messages_devices_on_message_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
