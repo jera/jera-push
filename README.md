@@ -22,15 +22,8 @@ It's composed for:
 
 Add it to your Gemfile:
 ~~~ruby
-gem 'jera_push', '~> 1.0'
+gem 'jera_push'
 ~~~
-Ruby Gems:
-~~~ruby
-gem 'jera_push', '~> 1.0', '>= 1.0.1.1'
-~~~
-
-> **Warning
-> JeraPush Gem isn't working with Rails version >= 5.0.1.**
 
 Run the `bundle install` command to install it.
 
