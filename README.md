@@ -29,6 +29,10 @@ for Rails 5.0.0.1:
 ~~~ruby
 gem 'jera_push', git: 'git@bitbucket.org:jerasoftware/jera-push-gem.git', branch: 'unlock-rails-version'
 ~~~
+Ruby Gems:
+~~~ruby
+gem 'jera_push', '~> 1.0', '>= 1.0.1.1'
+~~~
 
 > **Warning
 > JeraPush Gem isn't working with Rails version >= 5.0.1.**
