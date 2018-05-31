@@ -128,7 +128,7 @@ class JeraPush::Message < ActiveRecord::Base
   private
 
     def body_ios(content)
-      params = [:title, :body, :sound, :badge, :click_action, :body_loc_key, :body_loc_args, :title_loc_key, :title_loc_args]
+      params = [:title, :body, :'content-available', :sound, :badge, :click_action, :body_loc_key, :body_loc_args, :title_loc_key, :title_loc_args]
 
       content.symbolize_keys!
       content[:sound] = 'default' unless content.has_key?(:sound)
