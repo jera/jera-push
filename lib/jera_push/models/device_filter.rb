@@ -9,7 +9,7 @@ module JeraPush
     end
 
     def search
-      @scope = JeraPush::Device.joins(:resource).includes(:resource)
+      @scope = JeraPush::Device.joins(:pushable).includes(:pushable)
       if message_id
         @scope = @scope.joins(:messages).where('jera_push_messages.id = ?', message_id)
       end
