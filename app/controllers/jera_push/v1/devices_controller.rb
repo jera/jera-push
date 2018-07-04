@@ -5,9 +5,9 @@ module JeraPush
       @device = JeraPush::Device.find_by(token: device_params[:token], platform: device_params[:platform])
       device_params[:resource_type] ||= JeraPush.resource_name
       if @device.nil?
-        @device = JeraPush::Device.create(token: device_params[:token], platform: device_params[:platform], pushable_id: device_params[:resource_id], pushable_type: device_params[:resource_type])
+        @device = JeraPush::Device.create(token: device_params[:token], platform: device_params[:platform], pushable_id: device_params[:resource_id], pushable_type: device_params[:resource_type].upcase)
       else
-        @device.update_attributes(pushable_id: device_params[:resource_id], pushable_type: device_params[:resource_type])
+        @device.update_attributes(pushable_id: device_params[:resource_id], pushable_type: device_params[:resource_type].upcase)
       end
       render_object(@device)
     end
