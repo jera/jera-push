@@ -9,7 +9,7 @@ class JeraPush::Device < ActiveRecord::Base
 
   has_many :messages, through: :message_devices, table_name: "jera_push_messages"
   has_many :message_devices, table_name: "jera_push_message_devices"
-  belongs_to :resource, class_name: JeraPush.resource_name
+  belongs_to :pushable, polymorphic: true
 
   validates :token, :platform, presence: true
   validates :token, uniqueness: { scope: :platform }
