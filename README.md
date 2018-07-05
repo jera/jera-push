@@ -38,9 +38,10 @@ That command will create the necessary migrations and the initialize file. The f
 #here you will set up the jera push configuration
 JeraPush.setup do |config|
   config.firebase_api_key = "YOUR_API_KEY"
-  config.resource_name = "User"
+  config.resource_name = ["User"]
 
   # Resource attribute showed in views
+  # IMPORTANT: All resources need to have this attributes
   # config.resource_attributes = [:email, :name]
 
   # Topic default

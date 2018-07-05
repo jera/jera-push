@@ -49,7 +49,7 @@ module JeraPush
       end
 
       def device_filter_params
-        params.permit(:value, :field, platform: []).merge({ message_id: params[:id] })
+        params.permit(:value, :field, :resource_name, platform: []).merge({ message_id: params[:id] })
       end
 
   end
