@@ -22,7 +22,7 @@ class JeraPush::Device < ActiveRecord::Base
   scope :ios,  -> { where(platform: :ios) }
   scope :android, -> { where(platform: :android) }
   scope :chrome, -> { where(platform: :chrome) }
-  scope :with_joins, -> (resource_type) { joins("INNER JOIN #{resource_type.downcase.pluralize} ON  jera_push_devices.pushable_id = #{resource_type.downcase.pluralize}.id AND jera_push_devices.pushable_type  = '#{resource_type}'" }
+  scope :with_joins, -> (resource_type) { joins("INNER JOIN #{resource_type.downcase.pluralize} ON  jera_push_devices.pushable_id = #{resource_type.downcase.pluralize}.id AND jera_push_devices.pushable_type  = '#{resource_type}'") }
 
   def send_message(message)
     JeraPush::Message.send_to self, content: message
