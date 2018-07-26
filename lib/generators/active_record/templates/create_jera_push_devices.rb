@@ -1,9 +1,9 @@
-class CreateJeraPushDevices < ActiveRecord::Migration
+class CreateJeraPushDevices < ActiveRecord::Migration[5.2]
   def change
     create_table :jera_push_devices do |t|
       t.string :token, index: true
       t.string :platform, index: true
-      t.integer :resource_id, index: true
+      t.references :pushable, polymorphic: true, index: true
 
       t.timestamps null: false
     end

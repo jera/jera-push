@@ -12,7 +12,7 @@ module JeraPush
     end
 
     def params_filter
-      params.permit(:value, :field, platform: [])
+      params.permit(:value, :field, :resource_name, platform: [])
     end
 
   end

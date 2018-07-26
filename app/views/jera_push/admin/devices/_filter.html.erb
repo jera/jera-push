@@ -11,6 +11,11 @@
       <% end %>
     </div>
     <div class="row">
+      <div class="input-field col s12">
+        <%= select_tag :resource_name, options_for_select(JeraPush.resources_name, filter.resource_name) %>
+      </div>
+    </div>
+    <div class="row">
       <div class="input-field col s3">
         <%= select_tag :field, options_for_select(devices_fields_for_filter_select, filter.field) %>
       </div>

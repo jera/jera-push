@@ -9,7 +9,7 @@ class JeraPush::Device < ActiveRecord::Base
 
   has_many :messages, through: :message_devices, table_name: "jera_push_messages"
   has_many :message_devices, table_name: "jera_push_message_devices"
-  belongs_to :resource, class_name: JeraPush.resource_name
+  belongs_to :pushable, polymorphic: true
 
   validates :token, :platform, presence: true
   validates :token, uniqueness: { scope: :platform }
@@ -22,6 +22,7 @@ class JeraPush::Device < ActiveRecord::Base
   scope :ios,  -> { where(platform: :ios) }
   scope :android, -> { where(platform: :android) }
   scope :chrome, -> { where(platform: :chrome) }
+  scope :with_joins, -> (resource_type) { joins("INNER JOIN #{resource_type.downcase.pluralize} ON  jera_push_devices.pushable_id = #{resource_type.downcase.pluralize}.id AND jera_push_devices.pushable_type  = '#{resource_type}'") }
 
   def send_message(message)
     JeraPush::Message.send_to self, content: message

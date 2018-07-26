@@ -1,4 +1,4 @@
-class CreateJeraPushMessages < ActiveRecord::Migration
+class CreateJeraPushMessages < ActiveRecord::Migration[5.2]
   def change
     create_table :jera_push_messages do |t|
       t.text :content
