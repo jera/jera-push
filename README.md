@@ -39,12 +39,14 @@ That command will create the necessary migrations and the initialize file. The f
 JeraPush.setup do |config|
   config.firebase_api_key = "YOUR_API_KEY"
   #Update this for every new model
-  config.resource_name = ["User"]
+  config.resources_name = ["User"]
 
-  # Resource attribute showed in views
-  # IMPORTANT: All models need to have this attributes
-  # config.resource_attributes = [:email, :name]
-
+  ######################################################
+  # Resource attribute showed in views                 #
+  # IMPORTANT: All models need to have this attributes #
+  # config.resource_attributes = [:email, :name]       #
+  ######################################################
+  
   # Topic default
   # You should put with your environment
   config.default_topic = 'jera_push_staging'

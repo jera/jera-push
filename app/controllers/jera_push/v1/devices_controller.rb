@@ -3,10 +3,7 @@ module JeraPush
 
     def create
       @device = JeraPush::Device.find_by(token: device_params[:token], platform: device_params[:platform])
-      puts "device #{device_params[:resource_type]}"
-      puts "resource_name #{JeraPush.resource_name.first}"
-      puts "is blank #{device_params[:resource_type].blank?}"
-      params[:resource_type] = JeraPush.resource_name.first if device_params[:resource_type].blank?
+      params[:resource_type] = JeraPush.resources_name.first if device_params[:resource_type].blank?
 
       if @device.nil?
         @device = JeraPush::Device.create(token: device_params[:token], platform: device_params[:platform], pushable_id: device_params[:resource_id], pushable_type: params[:resource_type].capitalize)

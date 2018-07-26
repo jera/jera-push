@@ -8,12 +8,8 @@ module JeraPush
       @platform ||= []
     end
 
-    def search
-      if resource_name
-        @scope = JeraPush::Device.with_joins(resource_name)
-      else
-        @scope = JeraPush::Device.all
-      end
+    def search      
+      @scope = resource_name.present? ? JeraPush::Device.with_joins(resource_name) : @scope = JeraPush::Device.all
       if message_id
         @scope = @scope.joins(:messages).where('jera_push_messages.id = ?', message_id)
       end
