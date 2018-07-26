@@ -1,7 +1,7 @@
 module JeraPush
   class Admin::AdminController < JeraPush::JeraPushController
 
-    before_filter :authenticate
+    before_action :authenticate
 
     def authenticate
       if JeraPush.try(:admin_login)

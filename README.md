@@ -27,7 +27,7 @@ gem 'jera_push'
 
 Run the `bundle install` command to install it.
 
-Next, you need to run the generator and inform the model to associate with devices. You can do it with this command:
+Next, you need to run the generator and inform the model to associate with devices, you can add multiple models . You can do it with this command:
 ~~~bash
 $> rails generate jera_push MODEL_NAME
 ~~~
@@ -38,11 +38,15 @@ That command will create the necessary migrations and the initialize file. The f
 #here you will set up the jera push configuration
 JeraPush.setup do |config|
   config.firebase_api_key = "YOUR_API_KEY"
-  config.resource_name = "User"
+  #Update this for every new model
+  config.resources_name = ["User"]
 
-  # Resource attribute showed in views
-  # config.resource_attributes = [:email, :name]
-
+  ######################################################
+  # Resource attribute showed in views                 #
+  # IMPORTANT: All models need to have this attributes #
+  # config.resource_attributes = [:email, :name]       #
+  ######################################################
+  
   # Topic default
   # You should put with your environment
   config.default_topic = 'jera_push_staging'
@@ -211,6 +215,7 @@ JeraPush::Message.first.send_to_device(device: JeraPush::Device.last)
 | token `required` | String | Device token which will be registred |
 | platform `required` | String | Device platform. Can be `'android'`, `'ios'` or `'chrome'`. |
 | resource_id | Integer | Model object which will have the device |
+| resource_type | String | Model name which will have the device, needs to be the same of class. If not passed, the first model will be selected |
 
 `Request`
 
@@ -225,7 +230,8 @@ Body
 {
   "token": "804b56b7ab9cdf43fff540c5d93f3922aeaf65feb14f7ae88698b9b032a7a934",
   "platform": "android",
-  "resource_id": 10
+  "resource_id": 10,
+  "resource_type": "Driver"
 }
 ```
 
@@ -234,9 +240,10 @@ Body
 {
   "data": {
     "id": 1,
+    "pushable_id": 10,
+    "pushable_type": "Driver",
     "token": "804b56b7ab9cdf43fff540c5d93f3922aeaf65feb14f7ae88698b9b032a7a934",
     "platform": "android",
-    "resource_id": 10,
     "created_at": "2016-10-17T14:19:58.776Z",
     "updated_at": "2016-10-17T20:30:20.064Z"
   },
@@ -251,7 +258,8 @@ Body
     "id": null,
     "token": null,
     "platform": null,
-    "resource_id": 10,
+    "pushable_id": 10,
+    "pushable_type": "Driver",
     "created_at": null,
     "updated_at": null
   },
@@ -294,7 +302,8 @@ Body
     "id": 1,
     "token": "804b56b7ab9cdf43fff540c5d93f3922aeaf65feb14f7ae88698b9b032a7a934",
     "platform": "android",
-    "resource_id": 10,
+    "pushable_id": 10,
+    "pushable_type": "Driver",
     "created_at": "2016-10-17T14:19:58.776Z",
     "updated_at": "2016-10-17T20:30:20.064Z"
   },

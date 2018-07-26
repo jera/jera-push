@@ -1,4 +1,4 @@
-class CreateJeraPushMessagesDevices < ActiveRecord::Migration
+class CreateJeraPushMessagesDevices < ActiveRecord::Migration[5.2]
   def change
     create_table :jera_push_messages_devices do |t|
       t.integer :device_id, index: true, foreign_key: true
