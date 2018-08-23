@@ -4,8 +4,8 @@ class JeraPush::Message < ActiveRecord::Base
   extend Enumerize
   self.table_name = "jera_push_messages"
 
-  has_many :devices, through: :message_devices
   has_many :message_devices
+  has_many :devices, through: :message_devices
 
   serialize :broadcast_result
 
