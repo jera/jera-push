@@ -7,7 +7,7 @@ require "jera_push/version"
 Gem::Specification.new 'jera_push', '1.0' do |s|
   s.name                  = "jera_push"
   s.version               = JeraPush::VERSION
-  s.required_ruby_version = '>= 2.5.0'
+  s.required_ruby_version = '>= 2.3.7'
   s.authors               = ["Jera"]
   s.email                 = ["hospedagem@jera.com.br"]
   s.homepage              = "https://github.com/jera/jera-push"
