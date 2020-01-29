@@ -7,7 +7,7 @@ require "jera_push/version"
 Gem::Specification.new 'jera_push', '1.0' do |s|
   s.name                  = "jera_push"
   s.version               = JeraPush::VERSION
-  s.required_ruby_version = '>= 2.3.7'
+  s.required_ruby_version = '>= 2.5.0'
   s.authors               = ["Jera"]
   s.email                 = ["hospedagem@jera.com.br"]
   s.homepage              = "https://github.com/jera/jera-push"
@@ -18,7 +18,8 @@ Gem::Specification.new 'jera_push', '1.0' do |s|
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency 'rails', '~> 5.0.0'
+  s.add_dependency 'rails', '>= 5.2'
+  s.add_dependency 'mini_racer', '>= 0.1.14'
   s.add_dependency 'enumerize', '~> 2.2'
   s.add_dependency 'httparty', '~> 0.16'
   s.add_dependency 'sass-rails', '~> 5.0'
