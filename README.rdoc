@@ -1,4 +1,4 @@
-![Jera Logo](http://jera.com.br/images/logo-jera-header.png)
+![Jera Logo](https://jera.com.br/images/logo-facebook.png)
 
 JeraPush is a easy tool to work with push messages and firebase API.
 

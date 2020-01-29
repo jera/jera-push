@@ -1,4 +1,4 @@
-![Jera Logo](http://jera.com.br/images/logo-jera-header.png)
+![Jera Logo](http://jera.com.br/images/logo-facebook.png)
 
 JeraPush is a easy tool to work with push messages and firebase API.
 
@@ -171,7 +171,7 @@ JeraPush::Device.first.unsubscribe('your_topic')
 Sends message to all registered devices.
 
 ```ruby
-JeraPush::Message.broadcast(content: { body: 'Hello World', title: 'Hey' })
+JeraPush::Message.send_broadcast(content: { body: 'Hello World', title: 'Hey' })
 ```
 
 #### `send_to(Object or ActiveRecord_Relation, content: {})`
