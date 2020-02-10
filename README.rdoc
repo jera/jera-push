@@ -1,4 +1,4 @@
-![Jera Logo](https://www.dropbox.com/sh/mvhdyffw67dvq81/AADWkwbgfNouvImOkfYwZoFda?dl=0&preview=logo-secondary.png)
+![Jera Logo](https://raw.github.com/jera-push/feature/update-compatibility-rails/logo_jera.png)
 
 JeraPush is a easy tool to work with push messages and firebase API.
 
