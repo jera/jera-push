@@ -19,14 +19,12 @@ Gem::Specification.new 'jera_push', '1.0' do |s|
   s.test_files = Dir["test/**/*"]
 
   s.add_dependency 'rails', '>= 5.2'
-  s.add_dependency 'mini_racer', '>= 0.1.14'
   s.add_dependency 'enumerize', '~> 2.2'
   s.add_dependency 'httparty', '~> 0.16'
-  s.add_dependency 'sass-rails', '~> 5.0'
+  s.add_dependency 'sass-rails', '>= 5.0'
   s.add_dependency 'kaminari', '~> 1.1'
-  s.add_dependency 'responders', '~> 2.4'
+  s.add_dependency 'responders', '>= 2.4'
   s.add_dependency 'jquery-rails', '~> 4.3'
-
 
   s.add_development_dependency 'sqlite3', '~> 1.3' 
 end
