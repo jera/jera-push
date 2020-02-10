@@ -6,13 +6,26 @@ module ActiveRecord
       source_root File.expand_path("../templates", __FILE__)
 
       def create_devices_table
-        migration_template "create_jera_push_devices.rb", "db/migrate/create_jera_push_devices.rb"
+        migration_template "create_jera_push_devices.rb", "db/migrate/create_jera_push_devices.rb", migration_version: migration_version
       end
 
       def create_messages_table
-        migration_template "create_jera_push_messages.rb", "db/migrate/create_jera_push_messages.rb"
-        migration_template "create_jera_push_messages_devices.rb", "db/migrate/create_jera_push_messages_devices.rb"
+        migration_template "create_jera_push_messages.rb", "db/migrate/create_jera_push_messages.rb", migration_version: migration_version
+        migration_template "create_jera_push_messages_devices.rb", "db/migrate/create_jera_push_messages_devices.rb", migration_version: migration_version
       end
+
+      private
+
+      def rails5_and_up?
+        Rails::VERSION::MAJOR >= 5
+      end
+
+      def migration_version
+        if rails5_and_up?
+          "[#{Rails::VERSION::MAJOR}.#{Rails::VERSION::MINOR}]"
+        end
+      end
+
     end
   end
 end
