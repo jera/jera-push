@@ -1,4 +1,4 @@
-class CreateJeraPushDevices < ActiveRecord::Migration[5.2]
+class CreateJeraPushDevices < ActiveRecord::Migration<%= migration_version %>
   def change
     create_table :jera_push_devices do |t|
       t.string :token, index: true

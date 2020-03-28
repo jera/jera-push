@@ -39,6 +39,12 @@ pt-BR:
         send: Enviar
         send_all: Todos
         remove_all: Nenhum
+      devices: 
+        attributes:
+          id: Identificador
+          token: Token
+          platform: Plataforma
+          resource: Recurso 
       message_devices:
         attributes:
           device: Aparelho
@@ -66,3 +72,4 @@ pt-BR:
           new_attribute: Novo Atributo
           specific: Específico
           broadcast: Broadcast
+        

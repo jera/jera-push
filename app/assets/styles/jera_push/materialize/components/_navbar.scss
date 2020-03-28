@@ -50,6 +50,11 @@ nav {
     font-size: $navbar-brand-font-size;
     padding: 0;
     white-space: nowrap;
+    
+    img {
+      width: 100px;
+      height: auto;
+    }
 
     &.center {
       left: 50%;
