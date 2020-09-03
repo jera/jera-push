@@ -7,6 +7,4 @@ class JeraPush::MessageDevice < ActiveRecord::Base
   belongs_to :message
 
   enumerize :status, in: [:error, :success], predicate: true
-
-  has_one :pushable, through: :device
 end

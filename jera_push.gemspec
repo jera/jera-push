@@ -4,7 +4,7 @@ $:.push File.expand_path("../lib", __FILE__)
 require "jera_push/version"
 
 # Describe your gem and declare its dependencies:
-Gem::Specification.new 'jera_push', '1.0' do |s|
+Gem::Specification.new do |s|
   s.name                  = "jera_push"
   s.version               = JeraPush::VERSION
   s.required_ruby_version = '>= 2.5.0'
@@ -18,7 +18,7 @@ Gem::Specification.new 'jera_push', '1.0' do |s|
   s.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.rdoc"]
   s.test_files = Dir["test/**/*"]
 
-  s.add_dependency 'rails', '>= 5.2'
+  s.add_dependency 'rails', '>= 5.2', '~> 6'
   s.add_dependency 'enumerize', '~> 2.2'
   s.add_dependency 'httparty', '~> 0.16'
   s.add_dependency 'sass-rails', '>= 5.0'
@@ -26,5 +26,5 @@ Gem::Specification.new 'jera_push', '1.0' do |s|
   s.add_dependency 'responders', '>= 2.4'
   s.add_dependency 'jquery-rails', '~> 4.3'
 
-  s.add_development_dependency 'sqlite3', '~> 1.3' 
+  s.add_development_dependency 'sqlite3', '~> 1.3'
 end
