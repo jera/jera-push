@@ -1,7 +1,7 @@
 module JeraPush::Admin::DevicesHelper
 
   def resource_extras(device)
-    if JeraPush.resource_attributes && JeraPush.resource_attributes.any? && device&.pushable.present?
+    if JeraPush.resource_attributes && JeraPush.resource_attributes.any?
       return resource_attributes(JeraPush.resource_attributes, device)
     end
     return [device&.pushable]
