@@ -3,7 +3,7 @@ module JeraPush
 
     def index
       @filter = JeraPush::DeviceFilter.new params_filter
-      @devices = @filter.search.order(created_at: :desc).page(params[:page]).per(params[:per])
+      @devices = @filter.search.order(created_at: :desc).page(params[:page]).per(10)
 
       respond_to do |format|
         format.js {}

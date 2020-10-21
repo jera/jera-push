@@ -22,7 +22,7 @@
           <%= label_tag "device_#{device.id}", ''%>
         </td>
         <td><%= device.id %></td>
-        <td><%= device.token %></td>
+        <td><%= device.token.truncate(50) %></td>
         <td><%= device.platform %></td>
         <td colspan="4">
           <% resource_extras(device).each do |attribute| %>

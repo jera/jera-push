@@ -371,6 +371,10 @@ table {
   width:100%;
   display: table;
 
+  tbody > tr {
+    word-break: break-all;
+  }
+
   &.bordered > thead > tr,
   &.bordered > tbody > tr {
     border-bottom: 1px solid $table-border-color;
