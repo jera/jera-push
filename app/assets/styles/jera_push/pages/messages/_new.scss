@@ -1,7 +1,15 @@
 .container-messages-new {
 
+  h3 {
+    margin-left: -14px;
+  }
+
   .options {
     margin-bottom: 32px;
+
+    label {
+      margin-left: -4px;
+    }
   }
 
   .message-attributes {
@@ -12,10 +20,11 @@
     text-decoration: underline;
     color: #0000EE;
     cursor: pointer;
+    float: left;
   }
 
   .btn-submit {
-    margin-right: 24px;
+    margin-left: -10px;
   }
 }
 

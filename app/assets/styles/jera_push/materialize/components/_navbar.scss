@@ -1,7 +1,7 @@
 nav {
   color: $navbar-font-color;
   @extend .z-depth-1;
-  background-color: $primary-color;
+  background-color: $navbar-background-color;
   width: 100%;
   height: $navbar-height-mobile;
   line-height: $navbar-height-mobile;
@@ -20,6 +20,12 @@ nav {
   .nav-wrapper {
     position: relative;
     height: 100%;
+
+    li {
+      a {
+        font-weight: 500;
+      }
+    }
   }
 
   @media #{$large-and-up} {
@@ -50,10 +56,11 @@ nav {
     font-size: $navbar-brand-font-size;
     padding: 0;
     white-space: nowrap;
-    
+
     img {
       width: 100px;
       height: auto;
+      vertical-align: middle;
     }
 
     &.center {

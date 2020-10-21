@@ -2,7 +2,7 @@
   <%= form_tag filter_path, method: :get, class: 'col s12', remote: true do |f| %>
     <div class="row">
       <% JeraPush::Device.platform.values.each do |platform|  %>
-        <div class="input-field col s2">
+        <div class="input-field col s2 custom-col">
           <p>
             <%= check_box_tag :"platform[]", platform, filter.platform.include?(platform), id: "platform_#{platform}"  %>
             <label for="platform_<%= platform %>"><%= platform %><label>
@@ -12,7 +12,7 @@
     </div>
     <div class="row">
       <div class="input-field col s12">
-        <%= select_tag :resource_name, options_for_select(JeraPush.resources_name, filter.resource_name) %>
+        <%= select_tag :resource_name, options_for_select(translate_resource_names(JeraPush.resources_name), filter.resource_name) %>
       </div>
     </div>
     <div class="row">
@@ -22,7 +22,7 @@
       <div class="input-field col s9">
         <div class="col s6">
           <%= text_field_tag :value, filter.value %>
-          <label for="value"><%= t('jera_push.admin.filter.value') %></label>
+          <label class="fix-left-label" for="value"><%= t('jera_push.admin.filter.value') %></label>
         </div>
 
         <div class="input-field col s3">

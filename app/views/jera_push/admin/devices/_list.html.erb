@@ -1,23 +1,23 @@
-<table class="highlight">
+<table class="highlight bordered">
   <thead>
     <tr>
       <th data-field="id"><%= t('jera_push.admin.devices.attributes.id') %></th>
-      <th data-field="token"><%= t('jera_push.admin.devices.attributes.token') %></th>
       <th data-field="platform"><%= t('jera_push.admin.devices.attributes.platform') %></th>
       <th data-field="resource"><%= t('jera_push.admin.devices.attributes.resource') %></th>
+      <th data-field="token"><%= t('jera_push.admin.devices.attributes.token') %></th>
     </tr>
   </thead>
   <tbody>
     <% devices.each do |device| %>
       <tr>
-        <td><%= device.id %></td>
-        <td><%= device.token.truncate(50) %></td>
-        <td><%= device.platform %></td>
-        <td>
+        <td class="col s2"><%= device.id %></td>
+        <td class="col s2"><%= device.platform %></td>
+        <td class="col s2">
           <% resource_extras(device).each do |attribute| %>
             <div><%= attribute %></div>
           <% end %>
         </td>
+        <td class="col s2"><%= device.token %></td>
       </tr>
     <% end %>
   </tbody>
