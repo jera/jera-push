@@ -46,7 +46,7 @@ JeraPush.setup do |config|
   # IMPORTANT: All models need to have this attributes #
   # config.resource_attributes = [:email, :name]       #
   ######################################################
-  
+
   # Topic default
   # You should put with your environment
   config.default_topic = 'jera_push_staging'
@@ -316,3 +316,32 @@ Body
 No Content
 ```
 ---
+
+```
+## Traduções (Fazendo os dois as traduções irão funcionar corretamente!)
+
+> Para o admin ficar com as traduções corretas, adicione as traduções do do modelo e dos atributos do modelo
+> Caso o `resource_attributes` tenha campos diferentes de `name` ou `email`, adicione no arquivo `jera_push.pt-BR.yml`, dentro de `admin.attributes`, exemplos logo abaixo.
+
+### Tradução do nome do modelo e atributos
+
+```yml
+  activerecord:
+    attributes:
+      user:
+        id: '#'
+        name: Nome
+        email: E-mail
+    models:
+      user: Usuário
+```
+
+### Tradução de atributos para o admin jera_push
+
+```yml
+  jera_push:
+    admin:
+      attributes:
+        phone: "Telefone"
+        cpf: "CPF"
+```
