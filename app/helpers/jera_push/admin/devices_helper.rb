@@ -2,20 +2,20 @@ module JeraPush::Admin::DevicesHelper
 
   def resource_extras(device)
     if JeraPush.resource_attributes && JeraPush.resource_attributes.any?
-      return resource_attributes(JeraPush.resource_attributes, device)
+      return resource_attributes(JeraPush.resource_attributes, device.try(:pushable))
     end
-    return [device&.pushable]
+    return [device.try(:pushable)]
   end
 
   def resource_attributes(attributes, resource)
-    if resource
-      attrs = attributes.collect do |attribute|
-        if resource&.send(attribute)
-          "#{I18n.t("activerecord.attributes.#{resource.class.to_s.downcase}.#{attribute}")}: #{resource.send(attribute)}"
-        end
+    return [] unless resource.present?
+
+    attrs = attributes.collect do |attribute|
+      if resource&.send(attribute)
+        "#{I18n.t("activerecord.attributes.#{resource.class.to_s.downcase}.#{attribute}")}: #{resource.send(attribute)}"
       end
-      return attrs.delete_if { |v| v.nil?}
     end
+    attrs.delete_if { |v| v.nil?}
   end
 
   def translate_resource_names(resources_name=[])
