@@ -10,7 +10,9 @@ module JeraPush::Admin::DevicesHelper
   def resource_attributes(attributes, resource)
     if resource
       attrs = attributes.collect do |attribute|
-        "#{I18n.t("activerecord.attributes.#{resource.class.to_s.downcase}.#{attribute}")}: #{resource.send(attribute)}"
+        if resource&.send(attribute)
+          "#{I18n.t("activerecord.attributes.#{resource.class.to_s.downcase}.#{attribute}")}: #{resource.send(attribute)}"
+        end
       end
       return attrs.delete_if { |v| v.nil?}
     end
