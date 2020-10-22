@@ -314,14 +314,14 @@ Body
 `Error` | `Status: 404`
 ```
 No Content
-```
+
 ---
 
-```
 ## Traduções (Fazendo os dois as traduções irão funcionar corretamente!)
 
 > Para o admin ficar com as traduções corretas, adicione as traduções do do modelo e dos atributos do modelo
 > Caso o `resource_attributes` tenha campos diferentes de `name` ou `email`, adicione no arquivo `jera_push.pt-BR.yml`, dentro de `admin.attributes`, exemplos logo abaixo.
+
 
 ### Tradução do nome do modelo e atributos
 
