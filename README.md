@@ -314,7 +314,6 @@ Body
 `Error` | `Status: 404`
 ```
 No Content
-
 ---
 
 ## Traduções (Fazendo os dois as traduções irão funcionar corretamente!)
