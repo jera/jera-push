@@ -28,7 +28,7 @@ module JeraPush
     end
 
     def create
-      push_message = JeraPush::Service::SendMessage.new(params).call
+      push_message = JeraPush::Service::SendMessage.new(message_params).call
 
       if push_message
         flash[:notice] = t('jera_push.admin.messages.new.toast.success')
@@ -46,6 +46,10 @@ module JeraPush
         @filter = JeraPush::DeviceFilter.new device_filter_params
         @devices = @filter.search.limit(params[:limit]).order(created_at: :desc)
         @message_devices = JeraPush::MessageDevice.includes(:device).where('message_id = :id and device_id in (:device_ids)', id: params[:id], device_ids: @devices.pluck(:id))
+      end
+
+      def message_params
+        params.permit(:type, devices: [], message: [:key, :value])
       end
 
       def device_filter_params

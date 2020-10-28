@@ -3,15 +3,16 @@ module JeraPush
     class SendMessage
 
       def initialize(*args)
-        args[0].map { |attr_name, value| instance_variable_set("@#{attr_name}", value) }
+        @type = args.first[:type].to_sym
+        @message = args.first[:message]
+        @devices = args.first[:devices]
       end
 
       def call
         return false unless valid?
 
         message_content = JeraPush::Message.format_hash @message
-
-        case @type.to_sym
+        case @type
         when :broadcast
           JeraPush::Message.send_broadcast(content: message_content)
         when :specific
