@@ -7,8 +7,8 @@ class JeraPush::Device < ActiveRecord::Base
 
   self.table_name = "jera_push_devices"
 
-  has_many :message_devices, table_name: "jera_push_message_devices"
-  has_many :messages, through: :message_devices, table_name: "jera_push_messages"
+  has_many :message_devices, class_name: 'JeraPush::MessageDevice'
+  has_many :messages, through: :message_devices, class_name: 'JeraPush::Message'
 
   belongs_to :pushable, polymorphic: true
 
