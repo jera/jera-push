@@ -27,8 +27,5 @@ Gem::Specification.new 'jera_push', '2.0' do |spec|
   spec.add_dependency 'jquery-rails', '>= 4.5.1'
 
   spec.add_development_dependency 'rake', '~> 13.0.6'
-  spec.add_development_dependency 'rspec', '~> 3.12'
-  spec.add_development_dependency 'rspec-rails', '~> 6.0'
-  spec.add_development_dependency 'simplecov', '~> 0.22.0'
   spec.add_development_dependency 'sqlite3'
 end
