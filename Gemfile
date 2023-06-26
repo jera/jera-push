@@ -20,4 +20,6 @@ group :test do
   gem 'shoulda', '~> 4.0'
   gem 'database_cleaner', '~> 2.0', '>= 2.0.1'
   gem 'rspec-rails', '~> 5.0', '>= 5.0.2'
+  gem 'vcr', '~> 6.1'
+  gem 'webmock', '~> 3.18', '>= 3.18.1'
 end

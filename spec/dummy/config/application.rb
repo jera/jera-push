@@ -13,6 +13,7 @@ require "action_controller/railtie"
 require "action_view/railtie"
 # require "action_cable/engine"
 # require "rails/test_unit/railtie"
+require "jera_push"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -34,6 +35,6 @@ module Dummy
     # Don't generate system test files.
     config.generators.system_tests = nil
 
-    config.factory_bot.definition_file_paths = ["../factories"]
+    config.i18n.default_locale = :'pt-BR'
   end
 end

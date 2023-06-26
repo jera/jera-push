@@ -5,10 +5,10 @@ require 'kaminari'
 require 'jera_push/engine'
 require 'jera_push/firebase/client'
 require 'jera_push/firebase/api_result'
-require 'jera_push/services/send_message'
+require 'jera_push/services/base_service'
+require 'jera_push/services/send_message_to_user_service'
 
 module JeraPush
-
   autoload :Device, 'jera_push/models/device.rb'
   autoload :Message, 'jera_push/models/message.rb'
   autoload :MessageDevice, 'jera_push/models/message_device.rb'

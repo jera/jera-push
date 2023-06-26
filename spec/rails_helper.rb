@@ -1,6 +1,7 @@
 require 'spec_helper'
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
+require 'vcr'
 
 ActiveRecord::Migration.maintain_test_schema!
 
@@ -32,4 +33,9 @@ RSpec.configure do |config|
       example.run
     end
   end
+end
+
+VCR.configure do |config|
+  config.cassette_library_dir = "spec/cassettes"
+  config.hook_into :webmock
 end
