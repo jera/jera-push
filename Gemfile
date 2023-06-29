@@ -12,9 +12,14 @@ gem "faker"
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
 
-# To use a debugger
-# gem 'byebug', group: [:development, :test]
+gem 'byebug', group: [:development, :test]
 
 group :test do
   gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+  gem 'factory_bot_rails', '~> 6.2'
+  gem 'shoulda', '~> 4.0'
+  gem 'database_cleaner', '~> 2.0', '>= 2.0.1'
+  gem 'rspec-rails', '~> 5.0', '>= 5.0.2'
+  gem 'vcr', '~> 6.1'
+  gem 'webmock', '~> 3.18', '>= 3.18.1'
 end

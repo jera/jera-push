@@ -1,16 +1,13 @@
-# require 'dotenv/load'
-require 'simplecov'
+RSpec.configure do |config|
+  config.expect_with :rspec do |expectations|
+    expectations.include_chain_clauses_in_custom_matcher_descriptions = true
+  end
 
-SimpleCov.start 'rails' do
-  add_filter 'spec/'
-  add_filter '.github/'
-  add_filter 'lib/generators/templates/'
-  add_filter 'lib/lokalise_rails/version'
-end
+  config.mock_with :rspec do |mocks|
+    mocks.verify_partial_doubles = true
+  end
 
-if ENV['CI'] == 'true'
-  require 'codecov'
-  SimpleCov.formatter = SimpleCov::Formatter::Codecov
+  config.shared_context_metadata_behavior = :apply_to_host_groups
 end
 
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].sort.each { |f| require f }

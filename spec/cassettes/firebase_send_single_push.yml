@@ -1,0 +1,21 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://fcm.googleapis.com/fcm/send
+  response:
+    status:
+      code: 200
+      message: OK
+    body:
+      encoding: UTF-8
+      # https://firebase.google.com/docs/cloud-messaging/send-message?hl=pt-br#http-response
+      string: '{ "multicast_id": 108,
+                "success": 1,
+                "failure": 0,
+                "results": [
+                  { "message_id": "1:08" }
+                ]
+              }'
+  recorded_at: Tue, 13 Sep 2022 20:35:11 GMT
+recorded_with: VCR 6.1.0
