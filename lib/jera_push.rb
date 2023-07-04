@@ -7,6 +7,7 @@ require 'jera_push/firebase/client'
 require 'jera_push/firebase/api_result'
 require 'jera_push/services/base_service'
 require 'jera_push/services/send_message_to_user_service'
+require 'jera_push/services/topic_service'
 
 module JeraPush
   autoload :Device, 'jera_push/models/device.rb'
@@ -42,7 +43,4 @@ module JeraPush
     @@ios_topic ||= "#{@@default_topic}_ios"
   end
 
-  def self.topic_chrome
-    @@chrome_topic ||= "#{@@default_topic}_chrome"
-  end
 end

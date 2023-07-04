@@ -7,7 +7,9 @@ describe 'Enviar uma mensagem para um unico usuario' do
 
   context 'usuario com informações validas' do
     it 'envia uma nova mensagem para o usuario especifico' do
-      @user.devices.create(token: Faker::Crypto.sha256, platform: :android)
+      VCR.use_cassette('firebase_add_to_topic') do
+        @user.devices.create(token: '0d734c01a134e87014ffbf95c307c9bf8819e96d9a636a1c77ccaed9dfaac63d', platform: :android)
+      end
 
       VCR.use_cassette('firebase_send_single_push') do
         @response = JeraPush::Services::SendMessageToUserService.new(user: @user, title: 'Push Title Test', body: 'Push Body Test').call
