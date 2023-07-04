@@ -5,8 +5,11 @@ require 'kaminari'
 require 'jera_push/engine'
 require 'jera_push/firebase/client'
 require 'jera_push/firebase/api_result'
+
 require 'jera_push/services/base_service'
-require 'jera_push/services/send_message_to_user_service'
+require 'jera_push/services/message/send_to_user_service'
+require 'jera_push/services/message/send_to_everyone_service'
+require 'jera_push/services/message/send_to_topic_service'
 require 'jera_push/services/topic_service'
 
 module JeraPush
@@ -29,7 +32,6 @@ module JeraPush
 
   mattr_accessor :admin_login
   @@resource_name =  { username: 'jera_push', password: 'JeraPushAdmin' }
-
 
   def self.setup
     yield self

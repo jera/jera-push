@@ -1,5 +1,5 @@
-module JeraPush::Services
-  class SendMessageToUserService < JeraPush::Services::BaseService
+module JeraPush::Services::Message
+  class SendToUserService < JeraPush::Services::BaseService
     def initialize(user:, title:, body:)
       super
       @user = user

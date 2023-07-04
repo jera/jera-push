@@ -12,7 +12,7 @@ describe 'Enviar uma mensagem para um unico usuario' do
       end
 
       VCR.use_cassette('firebase_send_single_push') do
-        @response = JeraPush::Services::SendMessageToUserService.new(user: @user, title: 'Push Title Test', body: 'Push Body Test').call
+        @response = JeraPush::Services::Message::SendToUserService.new(user: @user, title: 'Push Title Test', body: 'Push Body Test').call
       end
 
       expect(@response.multicast_id).to eq('108')
@@ -23,8 +23,8 @@ describe 'Enviar uma mensagem para um unico usuario' do
 
   context 'usuario com informações invalidas' do
     it 'a mensaagem nao é enviada e um erro é disparado' do
-      VCR.use_cassette('firebase_send_single_push') do
-        @response = JeraPush::Services::SendMessageToUserService.new(user: @user, title: 'Push Title Test', body: 'Push Body Test').call
+      VCR.use_cassette('firebase_send_single_push', allow_playback_repeats: true) do
+        @response = JeraPush::Services::Message::SendToUserService.new(user: @user, title: 'Push Title Test', body: 'Push Body Test').call
       end
 
       expect(@response.errors.present?).to be_truthy
