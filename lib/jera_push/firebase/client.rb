@@ -39,6 +39,18 @@ module JeraPush::Firebase
       )
     end
 
+    def send_message_to_topic(message:, topic:)
+      send(
+        url: FIREBASE_URL,
+        body: {
+          title: message.title,
+          body: message.body,
+          to: "/topics/#{topic}",
+          priority: 'high'
+        }.to_json
+      )
+    end
+
     private
 
     def send(url:, body: {})

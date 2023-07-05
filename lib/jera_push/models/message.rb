@@ -8,6 +8,6 @@ class JeraPush::Message < ActiveRecord::Base
   has_many :message_devices
   has_many :devices, through: :message_devices
 
-  enumerize :kind, in: [:broadcast, :specific], predicate: true, default: :specific
+  enumerize :kind, in: [:specific, :everyone, :topic], predicate: true, default: :specific
 
 end
