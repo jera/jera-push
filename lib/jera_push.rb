@@ -5,10 +5,14 @@ require 'kaminari'
 require 'jera_push/engine'
 require 'jera_push/firebase/client'
 require 'jera_push/firebase/api_result'
-require 'jera_push/services/send_message'
+
+require 'jera_push/services/base_service'
+require 'jera_push/services/message/send_to_user_service'
+require 'jera_push/services/message/send_to_everyone_service'
+require 'jera_push/services/message/send_to_topic_service'
+require 'jera_push/services/topic_service'
 
 module JeraPush
-
   autoload :Device, 'jera_push/models/device.rb'
   autoload :Message, 'jera_push/models/message.rb'
   autoload :MessageDevice, 'jera_push/models/message_device.rb'
@@ -29,7 +33,6 @@ module JeraPush
   mattr_accessor :admin_login
   @@resource_name =  { username: 'jera_push', password: 'JeraPushAdmin' }
 
-
   def self.setup
     yield self
   end
@@ -42,7 +45,4 @@ module JeraPush
     @@ios_topic ||= "#{@@default_topic}_ios"
   end
 
-  def self.topic_chrome
-    @@chrome_topic ||= "#{@@default_topic}_chrome"
-  end
 end

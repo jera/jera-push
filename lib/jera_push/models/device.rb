@@ -3,47 +3,43 @@ require 'enumerize'
 class JeraPush::Device < ActiveRecord::Base
   extend Enumerize
 
-  DEFAULT_TOPIC = 'general'
-
   self.table_name = "jera_push_devices"
 
-  has_many :messages, through: :message_devices, table_name: "jera_push_messages"
-  has_many :message_devices, table_name: "jera_push_message_devices"
   belongs_to :resource, class_name: JeraPush.resource_name
+
+  has_many :messages, through: :message_devices, class_name: "jera_push_messages"
+  has_many :message_devices, class_name: "jera_push_message_devices"
 
   validates :token, :platform, presence: true
   validates :token, uniqueness: { scope: :platform }
 
-  after_create :register_to_current_topic
-  before_destroy :unregister_from_current_topic
+  enumerize :platform, in: [:android, :ios], predicate: true
 
-  enumerize :platform, in: [:android, :ios, :chrome], predicate: true
+  after_create :subscribe_to_topic
+  before_destroy :unsubscribe_to_topic
 
-  scope :ios,  -> { where(platform: :ios) }
-  scope :android, -> { where(platform: :android) }
-  scope :chrome, -> { where(platform: :chrome) }
+  scope :ios, -> {
+    where(platform: :ios)
+  }
 
-  def send_message(message)
-    JeraPush::Message.send_to self, content: message
-  end
-
-  def subscribe(topic)
-    client = JeraPush::Firebase::Client.instance
-    client.add_device_to_topic(topic: topic, device: self)
-  end
-
-  def unsubscribe(topic)
-    client = JeraPush::Firebase::Client.instance
-    client.remove_device_from_topic(topic: topic, devices: [self])
-  end
+  scope :android, -> {
+    where(platform: :android)
+  }
 
   private
 
-    def register_to_current_topic
-      subscribe(JeraPush.send("topic_#{self.platform}"))
-    end
+  def subscribe_to_topic
+    JeraPush::Services::TopicService.new.subscribe(
+      device: self,
+      topic: JeraPush.send("topic_#{platform}")
+    )
+  end
 
-    def unregister_from_current_topic
-      unsubscribe(JeraPush.send("topic_#{self.platform}"))
-    end
+  def unsubscribe_to_topic
+    JeraPush::Services::TopicService.new.unsubscribe(
+      device: self,
+      topic: JeraPush.send("topic_#{platform}")
+    )
+  end
+
 end

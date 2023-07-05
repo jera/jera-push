@@ -1,20 +1,20 @@
 .bundle/
 log/*.log
 pkg/
-test/dummy/db/*.sqlite3
-test/dummy/db/*.sqlite3-journal
-test/dummy/log/*.log
-test/dummy/tmp/
-test/dummy/.sass-cache
-test/dummy/config/initializers/jera_push.rb
-test/dummy/db/migrate/*create_jera_push_devices.rb
-test/dummy/db/migrate/*create_jera_push_messages.rb
-test/dummy/db/migrate/*create_jera_push_messages_devices.rb
-test/dummy/config/locales/jera_push.pt-BR.yml
+spec/dummy/db/*.sqlite3
+spec/dummy/db/*.sqlite3-journal
+spec/dummy/log/*.log
+spec/dummy/tmp/
+spec/dummy/.sass-cache
+spec/dummy/config/initializers/jera_push.rb
+spec/dummy/db/migrate/*create_jera_push_devices.rb
+spec/dummy/db/migrate/*create_jera_push_messages.rb
+spec/dummy/db/migrate/*create_jera_push_messages_devices.rb
+spec/dummy/config/locales/jera_push.pt-BR.yml
 
-test/dummy/app/views/jera_push/*
-test/dummy/app/views/kaminari/*
-test/dummy/app/views/layouts/jera_push/*
+spec/dummy/app/views/jera_push/*
+spec/dummy/app/views/kaminari/*
+spec/dummy/app/views/layouts/jera_push/*
 
 # Created by https://www.gitignore.io/api/osx,linux,ruby
 
@@ -72,8 +72,8 @@ Temporary Items
 /pkg/
 /spec/reports/
 /spec/examples.txt
-/test/tmp/
-/test/version_tmp/
+/spec/tmp/
+/spec/version_tmp/
 /tmp/
 
 # Used by dotenv library to load environment variables.
@@ -114,3 +114,4 @@ build-iPhoneSimulator/
 
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
+.byebug_history

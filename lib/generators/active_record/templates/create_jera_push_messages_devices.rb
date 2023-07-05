@@ -1,4 +1,4 @@
-class CreateJeraPushMessagesDevices < ActiveRecord::Migration
+class CreateJeraPushMessagesDevices < ActiveRecord::Migration[7.0]
   def change
     create_table :jera_push_messages_devices do |t|
       t.integer :device_id, index: true, foreign_key: true
@@ -7,7 +7,7 @@ class CreateJeraPushMessagesDevices < ActiveRecord::Migration
       t.string :error_message
       t.string :firebase_id
 
-      t.timestamps null: false
+      t.timestamps
     end
 
     add_index :jera_push_messages_devices, [:device_id, :message_id], unique: true, name: :jera_push_index_messages_id_devices_id
