@@ -7,8 +7,8 @@ class JeraPush::Device < ActiveRecord::Base
 
   belongs_to :resource, class_name: JeraPush.resource_name
 
-  has_many :messages, through: :message_devices, class_name: "jera_push_messages"
-  has_many :message_devices, class_name: "jera_push_message_devices"
+  has_many :message_devices, class_name: "JeraPush::MessageDevice"
+  has_many :messages, through: :message_devices, class_name: "JeraPush::Message"
 
   validates :token, :platform, presence: true
   validates :token, uniqueness: { scope: :platform }
