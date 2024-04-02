@@ -10,7 +10,7 @@ module JeraPush::Services
       @firebase.add_device_to_topic(device: device, topic: topic)
     end
 
-    def unsubscribe(device, topic = DEFAULT_TOPIC)
+    def unsubscribe(device:, topic: DEFAULT_TOPIC)
       @firebase.remove_device_from_topic(devices: [device], topic: topic)
     end
 

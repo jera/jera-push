@@ -4,7 +4,7 @@ module JeraPush::Services
 
     def initialize(*)
       @errors = ActiveModel::Errors.new(self)
-      @firebase = JeraPush::Firebase::Client.instance
+      @firebase = JeraPush::Firebase::Client.new
     end
 
     def read_attribute_for_validation(attr)

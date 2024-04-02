@@ -5,9 +5,14 @@ require 'kaminari'
 require 'jera_push/engine'
 require 'jera_push/firebase/client'
 require 'jera_push/firebase/api_result'
+require 'googleauth'
+require 'google/apis/fcm_v1'
 
 require 'jera_push/services/base_service'
-require 'jera_push/services/message/send_to_user_service'
+require 'jera_push/services/send_message'
+require 'jera_push/services/message/send_push_service'
+require 'jera_push/services/message/send_to_device_service'
+require 'jera_push/services/message/send_to_devices_service'
 require 'jera_push/services/message/send_to_everyone_service'
 require 'jera_push/services/message/send_to_topic_service'
 require 'jera_push/services/topic_service'
@@ -21,11 +26,20 @@ module JeraPush
   mattr_accessor :firebase_api_key
   @@firebase_api_key = nil
 
+  mattr_accessor :project_name
+  @@project_name = nil
+
+  mattr_accessor :project_id
+  @@project_id = nil
+
   mattr_accessor :default_topic
   @@default_topic = 'jera_push_development'
 
   mattr_accessor :resource_name
   @@resource_name = nil
+  
+  mattr_accessor :credentials_path
+  @@credentials_path = nil
 
   mattr_accessor :resource_attributes
   @@resource_attributes = []

@@ -2,7 +2,10 @@
 
   <div class="details">
     <h3><%= t('jera_push.active_record.model.message.one') %></h3>
-
+    <%= form_tag resend_push_jera_push_admin_message_path(@message), method: :get, class: 'col s12', remote: true do |f| %>
+      <%= submit_tag t('jera_push.admin.messages.resend'), class: 'btn' %>
+    <% end %>
+    <br>
     <span class="field">
       <%= t('jera_push.active_record.messages.attributes.id') %>
     </span>
@@ -13,7 +16,7 @@
     </span>
     <blockquote class="json-message"><%= @message.display_content %></blockquote>
 
-    <% unless @message.kind.broadcast? %>
+    <% unless @message.kind.everyone? %>
       <span class="field">
         <%= t('jera_push.active_record.messages.attributes.status') %>
       </span>
@@ -25,8 +28,8 @@
     <% end %>
   </div>
 
-  <% if @message.kind.broadcast? %>
-    <h3><%= JeraPush::Message.kind.broadcast.text %></h3>
+  <% if @message.kind.everyone? %>
+    <h3><%= JeraPush::Message.kind.everyone.text %></h3>
 
     <div class="message-info">
       <%= render partial: 'jera_push/admin/messages/broadcast_message', message: @message %>

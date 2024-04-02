@@ -52,6 +52,7 @@ pt-BR:
       messages:
         failures: "Falhas: %{value}"
         success: "Sucessos: %{value}"
+        resend: Reenviar a push
         show:
           broadcast:
             platform: Plataforma

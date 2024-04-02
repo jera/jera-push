@@ -25,6 +25,7 @@ Gem::Specification.new 'jera_push', '2.0' do |spec|
   spec.add_dependency 'kaminari', '>= 1.2.2'
   spec.add_dependency 'responders', '>= 3.1'
   spec.add_dependency 'jquery-rails', '>= 4.5.1'
+  spec.add_dependency 'google-apis-fcm_v1', '>= 0.19.0', '< 1.0'
 
   spec.add_development_dependency 'rake', '~> 13.0.6'
   spec.add_development_dependency 'sqlite3'
