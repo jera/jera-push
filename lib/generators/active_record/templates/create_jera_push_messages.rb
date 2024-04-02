@@ -2,7 +2,7 @@ class CreateJeraPushMessages < ActiveRecord::Migration[7.0]
   def change
     create_table :jera_push_messages do |t|
       t.string :title
-      t.json :body
+      t.text :body
       t.string :multicast_id
       t.text :broadcast_result
       t.string :status

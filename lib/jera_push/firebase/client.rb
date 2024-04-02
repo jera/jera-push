@@ -1,8 +1,10 @@
 module JeraPush::Firebase
   class Client
     cattr_accessor :client
-
-    FIREBASE_URL = "https://fcm.googleapis.com/fcm/send"
+    # TODO: Update to FCM V1 API -> https://firebase.google.com/docs/cloud-messaging/migrate-v1?hl=pt-br
+    # FIREBASE_URL = "https://fcm.googleapis.com/fcm/send"
+    FIREBASE_API_VERSION = 'v1'
+    FIREBASE_URL = "https://fcm.googleapis.com/#{FIREBASE_API_VERSION}/projects/#{::JeraPush.project_name}/messages:send"
     FIREBASE_INSTANCE_ID_URL = "https://iid.googleapis.com/iid"
     
     @instance = new
@@ -14,15 +16,7 @@ module JeraPush::Firebase
     end
 
     def send_to_devices(message:)
-      send(
-        url: FIREBASE_URL,
-        body: {
-          title: message.title,
-          body: message.body,
-          registration_ids: message.devices.pluck(:token),
-          priority: 'high'
-        }
-      )
+      send(url: FIREBASE_URL, body: message)
     end
 
     def add_device_to_topic(topic:, device:)
@@ -59,7 +53,7 @@ module JeraPush::Firebase
 
     def default_headers
       {
-        "Authorization" => "key=#{::JeraPush.firebase_api_key}",
+        "Authorization" => "Bearer #{::JeraPush.firebase_api_key}",
         "Content-Type" => "application/json"
       }
     end
