@@ -12,36 +12,36 @@ module JeraPush::Firebase
       )
     end
       
-    def send_to_devices(message:)
+    def send_to_device(message:)
       @client.authorization = fetch_access_token  
       @client.send_message("projects/#{::JeraPush.project_name}", message, options: { retries: 3, multiplier: 1, max_interval: 2 })
     end
 
-    # def add_device_to_topic(topic:, device:)
-    #   send(url: "#{FIREBASE_INSTANCE_ID_URL}/v1/#{device.token}/rel/topics/#{topic}")
-    # end
+    def add_device_to_topic(topic:, device:)
+      send(url: "#{FIREBASE_INSTANCE_ID_URL}/v1/#{device.token}/rel/topics/#{topic}")
+    end
 
-    # def remove_device_from_topic(topic:, devices: [])
-    #   send(
-    #     url: "#{FIREBASE_INSTANCE_ID_URL}/v1:batchRemove",
-    #     body: {
-    #       to: "/topics/#{topic}",
-    #       registration_tokens: devices.pluck(:token)
-    #     }.to_json
-    #   )
-    # end
+    def remove_device_from_topic(topic:, devices: [])
+      send(
+        url: "#{FIREBASE_INSTANCE_ID_URL}/v1:batchRemove",
+        body: {
+          to: "/topics/#{topic}",
+          registration_tokens: devices.pluck(:token)
+        }.to_json
+      )
+    end
 
-    # def send_message_to_topic(message:, topic:)
-    #   send(
-    #     url: FIREBASE_URL,
-    #     body: {
-    #       title: message.title,
-    #       body: message.body,
-    #       to: "/topics/#{topic}",
-    #       priority: 'high'
-    #     }.to_json
-    #   )
-    # end
+    def send_message_to_topic(message:, topic:)
+      send(
+        url: FIREBASE_URL,
+        body: {
+          title: message.title,
+          body: message.body,
+          to: "/topics/#{topic}",
+          priority: 'high'
+        }.to_json
+      )
+    end
 
     private
 

@@ -10,11 +10,11 @@ require 'google/apis/fcm_v1'
 
 require 'jera_push/services/base_service'
 require 'jera_push/services/send_message'
-require 'jera_push/services/message/send_push_service'
-require 'jera_push/services/message/send_to_device_service'
-require 'jera_push/services/message/send_to_devices_service'
-require 'jera_push/services/message/send_to_everyone_service'
-require 'jera_push/services/message/send_to_topic_service'
+require 'jera_push/services/send_push_service'
+require 'jera_push/services/send_to_device_service'
+require 'jera_push/services/send_to_devices_service'
+require 'jera_push/services/send_to_everyone_service'
+require 'jera_push/services/send_to_topic_service'
 require 'jera_push/services/topic_service'
 
 module JeraPush

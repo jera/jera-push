@@ -1,4 +1,4 @@
-module JeraPush::Services::Message
+module JeraPush::Services
   class SendToDeviceService < JeraPush::Services::BaseService
     def initialize(device:, title:, body:, data:, android: {}, ios: {})
       super
@@ -37,7 +37,7 @@ module JeraPush::Services::Message
     end
 
     def send_push
-      JeraPush::Services::Message::SendPushService.new(device: @device, 
+      JeraPush::Services::SendPushService.new(device: @device, 
         message: @message, 
         message_device: @message_device,
         ios_config: @ios_config,

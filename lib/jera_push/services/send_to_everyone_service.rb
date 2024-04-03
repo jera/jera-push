@@ -1,4 +1,4 @@
-module JeraPush::Services::Message
+module JeraPush::Services
   class SendToEveryoneService < JeraPush::Services::BaseService
     def initialize(title:, body:)
       super

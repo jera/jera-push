@@ -1,4 +1,4 @@
-module JeraPush::Services::Message
+module JeraPush::Services
   class SendPushService < JeraPush::Services::BaseService
     def initialize(device:, message:, message_device:, android_config: {}, ios_config: {})
       super
@@ -20,7 +20,7 @@ module JeraPush::Services::Message
     private
 
     def send_push
-      @response = @firebase.send_to_devices(message: message_params(@device))
+      @response = @firebase.send_to_device(message: message_params(@device))
       @message_device.update(status: :success)
       @message.update(success_count: @message.success_count + 1)
     rescue Google::Apis::AuthorizationError => e
@@ -39,10 +39,8 @@ module JeraPush::Services::Message
     def message_params(device)
       case device.platform.to_sym
       when :android
-        puts "android -> #{android_params(device.token)}"
         android_params(device.token)
       when :ios
-        puts "ios -> #{ios_params(device.token)}"
         ios_params(device.token)
       else
         {}
