@@ -1,6 +1,6 @@
 module JeraPush::Firebase
   class Client
-    FIREBASE_API_VERSION = 'v1'
+    FIREBASE_API_VERSION = 'v1'.freeze
     FIREBASE_INSTANCE_ID_URL = "https://iid.googleapis.com/iid"
     SCOPE = 'https://www.googleapis.com/auth/firebase.messaging'.freeze
     
