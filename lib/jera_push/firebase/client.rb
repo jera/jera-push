@@ -10,10 +10,10 @@ module JeraPush::Firebase
         json_key_io: File.open(::JeraPush::credentials_path),
         scope: SCOPE
       )
+      @client.authorization = fetch_access_token  
     end
       
     def send_to_device(message:)
-      @client.authorization = fetch_access_token  
       @client.send_message("projects/#{::JeraPush.project_name}", message, options: { retries: 3, multiplier: 1, max_interval: 2 })
     end
 
