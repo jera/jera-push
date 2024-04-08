@@ -42,7 +42,7 @@ module JeraPush
 
     def resend_push
       message = JeraPush::Message.find(params[:id])
-      message.devices.each do |device|
+      message.devices.find_each do |device|
         JeraPush::Services::SendPushService.new(device: device, 
           message: message,
           message_device: message.message_devices.where(device: device).last
