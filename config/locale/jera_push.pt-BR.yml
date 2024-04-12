@@ -52,6 +52,7 @@ pt-BR:
       messages:
         failures: "Falhas: %{value}"
         success: "Sucessos: %{value}"
+        resend: Reenviar a push
         show:
           broadcast:
             platform: Plataforma
@@ -66,3 +67,8 @@ pt-BR:
           new_attribute: Novo Atributo
           specific: Específico
           broadcast: Broadcast
+    services:
+      errors:
+        not_found:
+          device: Dispositivo não pode ficar em branco
+
