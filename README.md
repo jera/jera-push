@@ -1,9 +1,9 @@
-![Jera Logo](https://raw.github.com/jera/jera-push/master/update-compatibility-rails/logo_jera.png)
+![Jera Logo](https://jera.com.br/images/logo-jera-light.svg)
 
 JeraPush is a easy tool to work with push messages and firebase API.
 
 It's composed for:
-
+ * [Services](#sending-your-notifications): Services to send notifications.
  * [Device](#devices): model responsible for register and interact with device tokens.
  * [Message](#messages): model responsible for register the message content and status after sent.
  * [MessageDevice](#message-devise): model responsible for connect the message sent and the target devices.
@@ -16,6 +16,10 @@ It's composed for:
 * Rest Routes to register and remove devices
 * Web Interface
 
+---
+
+## Warning
+* Device registration in Firebase topics is disabled for now. Therefore, topic pushes are also temporarily disabled
 ---
 
 ## Getting started
@@ -40,6 +44,9 @@ JeraPush.setup do |config|
   config.firebase_api_key = "YOUR_API_KEY"
   #Update this for every new model
   config.resources_name = ["User"]
+  config.project_name = "YOUR_PROJECT_NAME"
+  config.credentials_path = "YOUR_CREDENTIALS_PATH" #https://firebase.google.com/docs/cloud-messaging/migrate-v1?hl=pt-br#provide-credentials-manually
+
 
   ######################################################
   # Resource attribute showed in views                 #
@@ -49,7 +56,7 @@ JeraPush.setup do |config|
 
   # Topic default
   # You should put with your environment
-  config.default_topic = 'jera_push_staging'
+  config.default_topic = 'jera_push_development'
 
   # Admin credentials
   # config.admin_login = {
@@ -57,6 +64,7 @@ JeraPush.setup do |config|
   #   password: 'JeraPushAdmin'
   # }
 end
+
 
 ```
 ### You has to change the default_topic for your environment, because that's the topic that a brodcast sends a message, and it wouldn't be the same in diferents environment
@@ -67,20 +75,94 @@ This gem doesn't support scheduled messages yet. For it, you need implement your
 
 ---
 
+## Sending your notifications
+
+### Sending one push for one device
+
+* Values inside of data need to be a string
+
+```ruby
+send_to_device = JeraPush::Services::SendToDeviceService.new(
+  device: JeraPush::Device.last,
+  title: 'Notification Title',
+  body: 'Notification Body', 
+  data: { kind: :some_kind_to_something_in_app, resource_id: '3' }
+)
+send_to_device.call
+```
+* If you need to specify some android os ios configuration you can pass a `android` or `ios` hash like this:
+```ruby
+send_to_device = JeraPush::Services::SendToDeviceService.new(
+  device: JeraPush::Device.last, 
+  title: 'Notification Title',
+  body: 'Notification Body', 
+  data: { kind: :some_kind_to_something_in_app, resource_id: '3' }, 
+  android: {}, 
+  ios: {}
+)
+send_to_service.call
+```
+
+* The default config to Android is: 
+  `{ priority: 'high'}`
+* And for iOS is:
+```json
+{
+  headers: {
+    'apns-priority': '5'
+  },
+  payload: {
+    aps: {
+      'content-available': 1
+    }
+  }
+}
+```
+- So, if you send some params in ios hash, the default config is will be overridden
+- And if you send android params, they has been merged with the default params
+* Android config: https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages?hl=pt-br#AndroidConfig
+* iOS config: https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages?hl=pt-br#ApnsConfig
+
+### Sending one push for many devices
+
+```ruby
+send_to_device = JeraPush::Services::SendToDevicesService.new(
+  devices: JeraPush::Device.where('id < 10'),
+  title: 'Notification Title',
+  body: 'Notification Body', 
+  data: { kind: :some_kind_to_something_in_app, resource_id: '3' }
+)
+send_to_device.call
+```
+* If you need to specify some android os ios configuration you can pass a `android` or `ios` hash like this:
+```ruby
+send_to_device = JeraPush::Services::SendToDevicesService.new(
+  device: JeraPush::Device.where('id < 10'), 
+  title: 'Notification Title', 
+  body: 'Notification Body', 
+  data: { kind: :some_kind_to_something_in_app, resource_id: '3' }, 
+  android: {}, 
+  ios: {}
+)
+send_to_device.call
+```
+
+---
 ## Firebase::Client
 > Class responsible for interact with Firebase.
 
 ### Methods
-* instance `static`
+* send_to_device
 * add_device_to_topic
 * add_devices_to_topic
 * remove_device_from_topic
 
-#### `instance()`
-Gets the client instance.
 
+### Device registration in Firebase topics is disabled for now. Therefore, topic pushes are also temporarily disabled
+
+#### Initialize the firebase client
 ```ruby
-client = JeraPush::Firebase::Client.instance
+client = JeraPush::Firebase::Client.new
 ```
 
 #### `add_device_to_topic(topic: String, device: Object)`
@@ -120,32 +202,6 @@ client.remove_device_from_topic(topic: 'your_topic', devices: [JeraPush::Device.
 | Token | String | Token for target device |
 | Platform | Enumerize | Type of device platform. Can be `:ios`, `:android` or `:chrome` |
 
-### Methods
-
-* send_message
-* subscribe
-* unsubscribe
-
-#### `send_message(Hash)`
-Sends push message to current device.
-
-```ruby
-JeraPush::Device.first.send_message({ body: 'Hello World', title: 'Hey' })
-```
-
-#### `subscribe(String)`
-Subscribe current device to topic.
-
-```ruby
-JeraPush::Device.first.subscribe('your_topic')
-```
-
-#### `unsubscribe(String)`
-Unsubscribes current device from topic.
-
-```ruby
-JeraPush::Device.first.unsubscribe('your_topic')
-```
 ---
 
 ## Message
@@ -161,6 +217,7 @@ JeraPush::Device.first.unsubscribe('your_topic')
 | failure_count | Integer | failure count after sending |
 | success_count | Integer | success count after sending |
 
+<<<<<<< HEAD
 ### Methods
 * send_broadcast `static`
 * send_to `static`
@@ -200,6 +257,8 @@ Sends current message to one target device.
 ```ruby
 JeraPush::Message.first.send_to_device(device: JeraPush::Device.last)
 ```
+=======
+>>>>>>> develop
 
 ---
 

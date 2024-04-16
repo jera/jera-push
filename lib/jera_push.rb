@@ -5,10 +5,19 @@ require 'kaminari'
 require 'jera_push/engine'
 require 'jera_push/firebase/client'
 require 'jera_push/firebase/api_result'
+require 'googleauth'
+require 'google/apis/fcm_v1'
+
+require 'jera_push/services/base_service'
 require 'jera_push/services/send_message'
+require 'jera_push/services/send_push_service'
+require 'jera_push/services/send_to_device_service'
+require 'jera_push/services/send_to_devices_service'
+require 'jera_push/services/send_to_everyone_service'
+require 'jera_push/services/send_to_topic_service'
+require 'jera_push/services/topic_service'
 
 module JeraPush
-
   autoload :Device, 'jera_push/models/device.rb'
   autoload :Message, 'jera_push/models/message.rb'
   autoload :MessageDevice, 'jera_push/models/message_device.rb'
@@ -17,18 +26,26 @@ module JeraPush
   mattr_accessor :firebase_api_key
   @@firebase_api_key = nil
 
+  mattr_accessor :project_name
+  @@project_name = nil
+
+  mattr_accessor :project_id
+  @@project_id = nil
+
   mattr_accessor :default_topic
   @@default_topic = 'jera_push_development'
 
   mattr_accessor :resources_name
   @@resources_name = nil
+  
+  mattr_accessor :credentials_path
+  @@credentials_path = nil
 
   mattr_accessor :resource_attributes
   @@resource_attributes = []
 
   mattr_accessor :admin_login
   @@resources_name =  { username: 'jera_push', password: 'JeraPushAdmin' }
-
 
   def self.setup
     yield self
@@ -42,7 +59,4 @@ module JeraPush
     @@ios_topic ||= "#{@@default_topic}_ios"
   end
 
-  def self.topic_chrome
-    @@chrome_topic ||= "#{@@default_topic}_chrome"
-  end
 end

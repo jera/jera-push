@@ -28,7 +28,7 @@ module JeraPush
     end
 
     def create
-      push_message = JeraPush::Service::SendMessage.new(message_params).call
+      push_message = JeraPush::Services::SendMessage.new(params).call
 
       if push_message
         flash[:notice] = t('jera_push.admin.messages.new.toast.success')
@@ -40,20 +40,29 @@ module JeraPush
       end
     end
 
+    def resend_push
+      message = JeraPush::Message.find(params[:id])
+      message.devices.find_each do |device|
+        JeraPush::Services::SendPushService.new(device: device, 
+          message: message,
+          message_device: message.message_devices.where(device: device).last
+        ).call
+      end
+      flash[:notice] = t('jera_push.admin.messages.new.toast.success')
+      redirect_to jera_push_admin_message_path(message)
+    end
+
     private
 
-      def apply_filter
-        @filter = JeraPush::DeviceFilter.new device_filter_params
-        @devices = @filter.search.limit(params[:limit]).order(created_at: :desc)
-        @message_devices = JeraPush::MessageDevice.includes(:device).where('message_id = :id and device_id in (:device_ids)', id: params[:id], device_ids: @devices.pluck(:id))
-      end
+    def apply_filter
+      @filter = JeraPush::DeviceFilter.new device_filter_params
+      @devices = @filter.search.limit(params[:limit]).order(created_at: :desc)
+      @message_devices = JeraPush::MessageDevice.includes(:device).where(message_id: params[:id], device_id: @devices.pluck(:id))
+    end
 
-      def message_params
-        params.permit(:type, devices: [], message: [:key, :value])
-      end
+    def device_filter_params
+      params.permit(:value, :field, platform: []).merge({ message_id: params[:id] })
+    end
 
-      def device_filter_params
-        params.permit(:value, :field, :resource_name, platform: []).merge({ message_id: params[:id] })
-      end
   end
 end

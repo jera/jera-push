@@ -1,69 +1,66 @@
-module JeraPush
-  module Firebase
-    class Client
+module JeraPush::Firebase
+  class Client
+    FIREBASE_API_VERSION = 'v1'.freeze
+    FIREBASE_INSTANCE_ID_URL = 'https://iid.googleapis.com/iid'.freeze
+    SCOPE = 'https://www.googleapis.com/auth/firebase.messaging'.freeze
+    
+    def initialize
+      @client = Google::Apis::FcmV1::FirebaseCloudMessagingService.new
+      @authorizer = Google::Auth::ServiceAccountCredentials.make_creds(
+        json_key_io: File.open(::JeraPush::credentials_path),
+        scope: SCOPE
+      )
+      @client.authorization = fetch_access_token  
+    end
+      
+    def send_to_device(message:)
+      @client.send_message("projects/#{::JeraPush.project_name}", message, options: { retries: 3, multiplier: 1, max_interval: 2 })
+    end
 
-      cattr_accessor :client
+    def add_device_to_topic(topic:, device:)
+      send(url: "#{FIREBASE_INSTANCE_ID_URL}/v1/#{device.token}/rel/topics/#{topic}")
+    end
 
-      FIREBASE_URL = "https://fcm.googleapis.com/fcm/send"
-      FIREBASE_INSTANCE_ID_URL = "https://iid.googleapis.com/iid"
+    def remove_device_from_topic(topic:, devices: [])
+      send(
+        url: "#{FIREBASE_INSTANCE_ID_URL}/v1:batchRemove",
+        body: {
+          to: "/topics/#{topic}",
+          registration_tokens: devices.pluck(:token)
+        }.to_json
+      )
+    end
 
-      def default_headers
-        return {
-          "Authorization" => "key=#{::JeraPush.firebase_api_key}",
-          "Content-Type" => "application/json"
-        }
-      end
+    def send_message_to_topic(message:, topic:)
+      send(
+        url: FIREBASE_URL,
+        body: {
+          title: message.title,
+          body: message.body,
+          to: "/topics/#{topic}",
+          priority: 'high'
+        }.to_json
+      )
+    end
 
-      def self.instance
-        @@client ||= JeraPush::Firebase::Client.new
-      end
+    private
 
-      def send_message(message:, devices: [])
-        registration_ids = devices.map(&:token)
-        body = { registration_ids: registration_ids, priority: 'high' }
-        response = HTTParty.post(FIREBASE_URL, { body: body.merge!(message).to_json, headers: default_headers })
-        puts response
-        ApiResult.new(response, registration_ids: registration_ids)
-      end
+    def send(url:, body: {})
+      response = HTTParty.post(url, { body: body, headers: default_headers })
+      JSON.parse(response)
+    end
 
-      def send_message_to_topic(message:, topic:)
-        body = { to: "/topics/#{topic}", priority: 'high' }
-        response = HTTParty.post(FIREBASE_URL, { body: body.merge!(message).to_json, headers: default_headers })
-        puts response
-        ApiResult.new(response, topic: topic)
-      end
+    def fetch_access_token
+      @authorizer.fetch_access_token! if @authorizer.needs_access_token?
+  
+      @authorizer
+    end  
 
-      def device_details(device:)
-        url = "#{FIREBASE_INSTANCE_ID_URL}/info/#{device.token}/"
-        response = HTTParty.post(url, { body: Hash.new.to_json, headers: default_headers })
-        ApiResult.new(response)
-      end
-
-      def add_device_to_topic(topic:, device:)
-        url = "#{FIREBASE_INSTANCE_ID_URL}/v1/#{device.token}/rel/topics/#{topic}"
-        response = HTTParty.post(url, { body: Hash.new.to_json, headers: default_headers })
-        ApiResult.new(response)
-      end
-
-      def add_devices_to_topic(topic:, devices: [])
-        url = "#{FIREBASE_INSTANCE_ID_URL}/v1:batchAdd"
-        body = {
-          "to": "/topics/#{topic}",
-          "registration_tokens": devices.map(&:token),
-        }
-        response = HTTParty.post(url, { body: body.to_json, headers: default_headers })
-        ApiResult.new(response)
-      end
-
-      def remove_device_from_topic(topic:, devices: [])
-        url = "#{FIREBASE_INSTANCE_ID_URL}/v1:batchRemove"
-        body = {
-          "to": "/topics/#{topic}",
-          "registration_tokens": devices.map(&:token),
-        }
-        response = HTTParty.post(url, { body: body.to_json, headers: default_headers })
-        ApiResult.new(response)
-      end
+    def default_headers
+      {
+        "Authorization" => "key=#{::JeraPush.firebase_api_key}",
+        "Content-Type" => "application/json"
+      }
     end
   end
 end

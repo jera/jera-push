@@ -10,6 +10,7 @@ Rails.application.routes.draw do
         end
         member do
           get :message_devices_filter, format: :js
+          get :resend_push, format: :js
         end
       end
       resources :devices, only: [:index]

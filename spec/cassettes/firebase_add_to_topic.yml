@@ -1,0 +1,15 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://iid.googleapis.com/iid/v1/0d734c01a134e87014ffbf95c307c9bf8819e96d9a636a1c77ccaed9dfaac63d/rel/topics/jera_push_development_android
+  response:
+    status:
+      code: 200
+      message: OK
+    body:
+      encoding: UTF-8
+      # https://firebase.google.com/docs/cloud-messaging/send-message?hl=pt-br#http-response
+      string: '{}'
+  recorded_at: Tue, 13 Sep 2022 20:35:11 GMT
+recorded_with: VCR 6.1.0
