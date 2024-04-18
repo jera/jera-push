@@ -1,5 +1,5 @@
 module JeraPush
-  class Push
+  class PushBody
     attr_accessor :device
     attr_accessor :devices
     attr_accessor :notification
