@@ -77,6 +77,17 @@ This gem doesn't support scheduled messages yet. For it, you need implement your
 
 ## Sending your notifications
 
+* Firs of all, create your device"
+
+```ruby
+# considering your push is to a User model
+
+token = "DEVICE_TOKEN_GENERATED_BY_APP"
+pushable = User.last
+platform = :android # enum [:android, :ios]
+JeraPush::Device.create(token: token, platform: platform, pushable: pushable)
+```
+
 ### Sending one push for one device
 
 * Values inside of data need to be a string
@@ -90,7 +101,9 @@ send_to_device = JeraPush::Services::SendToDeviceService.new(
 )
 send_to_device.call
 ```
+
 * If you need to specify some android os ios configuration you can pass a `android` or `ios` hash like this:
+
 ```ruby
 send_to_device = JeraPush::Services::SendToDeviceService.new(
   device: JeraPush::Device.last, 
@@ -106,7 +119,7 @@ send_to_service.call
 * The default config to Android is: 
   `{ priority: 'high'}`
 * And for iOS is:
-```json
+```
 {
   headers: {
     'apns-priority': '5'
@@ -216,49 +229,6 @@ client.remove_device_from_topic(topic: 'your_topic', devices: [JeraPush::Device.
 | status | Enumerize | Message status after sending |
 | failure_count | Integer | failure count after sending |
 | success_count | Integer | success count after sending |
-
-<<<<<<< HEAD
-### Methods
-* send_broadcast `static`
-* send_to `static`
-* send_to_devices
-* send_to_device
-
-#### `send_broadcast(content: {})`
-Sends message to all registered devices.
-
-```ruby
-JeraPush::Message.send_broadcast(content: { body: 'Hello World', title: 'Hey' })
-```
-
-#### `send_to(Object or ActiveRecord_Relation, content: {})`
-Creates message with content and relates with object or collection, then sends push message.
-
-- One Object
-```ruby
-JeraPush::Message.send_to(JeraPush::Device.first, content: { body: 'Hello World', title: 'Hey' })
-```
-
-- Active Record Relation
-```ruby
-JeraPush::Message.send_to(JeraPush::Device.where('id < 10'), content: { body: 'Hello World', title: 'Hey' })
-```
-
-#### `send_to_devices(Array)`
-Sends current message to targets devices.
-
-```ruby
-JeraPush::Message.first.send_to_devices(devices: JeraPush::Device.last(3))
-```
-
-#### `send_to_device(Object)`
-Sends current message to one target device.
-
-```ruby
-JeraPush::Message.first.send_to_device(device: JeraPush::Device.last)
-```
-=======
->>>>>>> develop
 
 ---
 
