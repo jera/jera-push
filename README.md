@@ -93,25 +93,35 @@ JeraPush::Device.create(token: token, platform: platform, pushable: pushable)
 * Values inside of data need to be a string
 
 ```ruby
-send_to_device = JeraPush::Services::SendToDeviceService.new(
+push_body = JeraPush::PushBody.new(
+  title: 'Title', 
+  body: 'Body', 
   device: JeraPush::Device.last,
-  title: 'Notification Title',
-  body: 'Notification Body', 
-  data: { kind: :some_kind_to_something_in_app, resource_id: '3' }
+  data: { kind: :some_kind_to_something_in_app, resource_id: '3' },
+  analytics_label: 'my_analytics_label'
 )
+send_to_device = JeraPush::Services::SendToDeviceService.new(push: push)
 send_to_device.call
 ```
 
 * If you need to specify some android os ios configuration you can pass a `android` or `ios` hash like this:
 
 ```ruby
+# REF https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages?hl=pt-br#AndroidConfig
+android_config = JeraPush::AndroidConfig.new(priority: 'high')
+# REF https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages?hl=pt-br#ApnsConfig
+ios_config = JeraPush::AppleConfig.new(apns_priority: '3')
+push_body = JeraPush::PushBody.new(
+  title: 'Title', 
+  body: 'Body', 
+  device: JeraPush::Device.last,
+  data: { kind: :some_kind_to_something_in_app, resource_id: '3' },
+  analytics_label: 'my_analytics_label',
+  android_config: android_config,
+  ios_config: ios_config
+)
 send_to_device = JeraPush::Services::SendToDeviceService.new(
-  device: JeraPush::Device.last, 
-  title: 'Notification Title',
-  body: 'Notification Body', 
-  data: { kind: :some_kind_to_something_in_app, resource_id: '3' }, 
-  android: {}, 
-  ios: {}
+  push: push_body
 )
 send_to_service.call
 ```
@@ -131,77 +141,41 @@ send_to_service.call
   }
 }
 ```
-- So, if you send some params in ios hash, the default config is will be overridden
-- And if you send android params, they has been merged with the default params
-* Android config: https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages?hl=pt-br#AndroidConfig
-* iOS config: https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages?hl=pt-br#ApnsConfig
 
 ### Sending one push for many devices
 
 ```ruby
-send_to_device = JeraPush::Services::SendToDevicesService.new(
+push_body = JeraPush::PushBody.new(
+  title: 'Title', 
+  body: 'Body', 
   devices: JeraPush::Device.where('id < 10'),
-  title: 'Notification Title',
-  body: 'Notification Body', 
-  data: { kind: :some_kind_to_something_in_app, resource_id: '3' }
+  data: { kind: :some_kind_to_something_in_app, resource_id: '3' },
+  analytics_label: 'my_analytics_label'
 )
-send_to_device.call
+send_to_devices = JeraPush::Services::SendToDevicesService.new(push: push)
+send_to_devices.call
 ```
 * If you need to specify some android os ios configuration you can pass a `android` or `ios` hash like this:
 ```ruby
-send_to_device = JeraPush::Services::SendToDevicesService.new(
-  device: JeraPush::Device.where('id < 10'), 
-  title: 'Notification Title', 
-  body: 'Notification Body', 
-  data: { kind: :some_kind_to_something_in_app, resource_id: '3' }, 
-  android: {}, 
-  ios: {}
+# REF https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages?hl=pt-br#AndroidConfig
+android_config = JeraPush::AndroidConfig.new(priority: 'high')
+# REF https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages?hl=pt-br#ApnsConfig
+ios_config = JeraPush::AppleConfig.new(apns_priority: '3')
+push_body = JeraPush::PushBody.new(
+  title: 'Title', 
+  body: 'Body', 
+  devices: JeraPush::Device.where('id < 10'),
+  data: { kind: :some_kind_to_something_in_app, resource_id: '3' },
+  analytics_label: 'my_analytics_label',
+  android_config: android_config,
+  ios_config: ios_config
 )
-send_to_device.call
+send_to_devices = JeraPush::Services::SendToDevicesService.new(
+  push: push_body
+)
+send_to_services.call
 ```
 
----
-## Firebase::Client
-> Class responsible for interact with Firebase.
-
-### Methods
-* send_to_device
-* add_device_to_topic
-* add_devices_to_topic
-* remove_device_from_topic
-
-
-### Device registration in Firebase topics is disabled for now. Therefore, topic pushes are also temporarily disabled
-
-#### Initialize the firebase client
-```ruby
-client = JeraPush::Firebase::Client.new
-```
-
-#### `add_device_to_topic(topic: String, device: Object)`
-Subscribe the device to topic.
-
-```ruby
-client = JeraPush::Firebase::Client.instance
-client.add_device_to_topic(topic: 'your_topic', device: JeraPush::Device.first)
-```
-
-#### `add_devices_to_topic(topic: String, devices: Array)`
-Subscribe the devices to topic.
-
-```ruby
-client = JeraPush::Firebase::Client.instance
-client.add_devices_to_topic(topic: 'your_topic', devices: JeraPush::Device.last(5))
-```
-
-#### `remove_device_from_topic(topic: String, devices: Array)`
-Unsubscribe the devices to topic.
-
-```ruby
-client = JeraPush::Firebase::Client.instance
-client.remove_device_from_topic(topic: 'your_topic', devices: JeraPush::Device.last(5))
-client.remove_device_from_topic(topic: 'your_topic', devices: [JeraPush::Device.last]) # For one object
-```
 ---
 
 ## Device

@@ -18,11 +18,13 @@ module JeraPush
           # JeraPush::Message.send_broadcast(content: message_content)
         when :specific
           target_devices = JeraPush::Device.where(id: @devices.uniq.map(&:to_i))
-          result = JeraPush::Services::SendToDevicesService.new(devices: target_devices, 
-            title: message_content[:title], 
-            body: message_content[:body], 
-            data: message_content
-          ).call
+          push = JeraPush::PushBody.new(
+            title: message_content[:title],
+            body: message_content[:body],
+            data: message_content,
+            devices: target_devices
+          )
+          result = JeraPush::Services::SendToDevicesService.new(push: push).call
           result
         end
       end

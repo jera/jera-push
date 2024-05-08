@@ -22,6 +22,10 @@ module JeraPush
   autoload :Message, 'jera_push/models/message.rb'
   autoload :MessageDevice, 'jera_push/models/message_device.rb'
   autoload :DeviceFilter, 'jera_push/models/device_filter.rb'
+  autoload :PushBody, 'jera_push/models/push_body.rb'
+  autoload :AppleConfig, 'jera_push/models/apple_config.rb'
+  autoload :AndroidConfig, 'jera_push/models/android_config.rb'
+  autoload :Notification, 'jera_push/models/notification.rb'
 
   mattr_accessor :firebase_api_key
   @@firebase_api_key = nil
@@ -37,7 +41,7 @@ module JeraPush
 
   mattr_accessor :resources_name
   @@resources_name = nil
-  
+
   mattr_accessor :credentials_path
   @@credentials_path = nil
 
