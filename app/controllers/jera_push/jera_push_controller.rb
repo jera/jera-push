@@ -1,7 +1,5 @@
 module JeraPush
   class JeraPushController < ::ApplicationController
-    protect_from_forgery unless: -> { request.format.json? }
-
     protected
 
     def render_invalid_params
