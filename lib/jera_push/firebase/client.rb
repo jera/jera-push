@@ -14,53 +14,15 @@ module JeraPush::Firebase
     end
 
     def send_to_device(push:)
-      @client.send_message("projects/#{::JeraPush.project_name}", push.to_json, options: { retries: 3, multiplier: 1, max_interval: 2 })
-    end
-
-    def add_device_to_topic(topic:, device:)
-      send(url: "#{FIREBASE_INSTANCE_ID_URL}/v1/#{device.token}/rel/topics/#{topic}")
-    end
-
-    def remove_device_from_topic(topic:, devices: [])
-      send(
-        url: "#{FIREBASE_INSTANCE_ID_URL}/v1:batchRemove",
-        body: {
-          to: "/topics/#{topic}",
-          registration_tokens: devices.pluck(:token)
-        }.to_json
-      )
-    end
-
-    def send_message_to_topic(message:, topic:)
-      send(
-        url: FIREBASE_URL,
-        body: {
-          title: message.title,
-          body: message.body,
-          to: "/topics/#{topic}",
-          priority: 'high'
-        }.to_json
-      )
+      @client.send_message("projects/#{::JeraPush.project_id}", push.to_json, options: { retries: 3, multiplier: 1, max_interval: 2 })
     end
 
     private
-
-    def send(url:, body: {})
-      response = HTTParty.post(url, { body: body, headers: default_headers })
-      JSON.parse(response)
-    end
 
     def fetch_access_token
       @authorizer.fetch_access_token! if @authorizer.needs_access_token?
 
       @authorizer
-    end
-
-    def default_headers
-      {
-        "Authorization" => "key=#{::JeraPush.firebase_api_key}",
-        "Content-Type" => "application/json"
-      }
     end
   end
 end

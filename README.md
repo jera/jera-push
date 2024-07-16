@@ -36,17 +36,17 @@ Next, you need to run the generator and inform the model to associate with devic
 $> rails generate jera_push MODEL_NAME
 ~~~
 
+You need to create a Account Service on google cloud, with editor permission or administrator. Flow this doc: https://cloud.google.com/iam/docs/service-accounts-create?hl=pt-br
+
 That command will create the necessary migrations and the initialize file. The file will be like this:
 ```ruby
 #this is the intilizer
 #here you will set up the jera push configuration
 JeraPush.setup do |config|
-  config.firebase_api_key = "YOUR_API_KEY"
   #Update this for every new model
   config.resources_name = ["User"]
-  config.project_name = "YOUR_PROJECT_NAME"
+  config.project_id = "YOUR_PROJECT_ID"
   config.credentials_path = "YOUR_CREDENTIALS_PATH" #https://firebase.google.com/docs/cloud-messaging/migrate-v1?hl=pt-br#provide-credentials-manually
-
 
   ######################################################
   # Resource attribute showed in views                 #
@@ -105,7 +105,7 @@ send_to_device.call
 ```
 
 * If you need to specify some android os ios configuration you can pass a `android` or `ios` hash like this:
-
+- `ios_config` and `android_config` have a default value, so if you don't need it, you don't need to pass a value like the previous examples
 ```ruby
 # REF https://firebase.google.com/docs/reference/fcm/rest/v1/projects.messages?hl=pt-br#AndroidConfig
 android_config = JeraPush::AndroidConfig.new(priority: 'high')
@@ -123,7 +123,7 @@ push_body = JeraPush::PushBody.new(
 send_to_device = JeraPush::Services::SendToDeviceService.new(
   push: push_body
 )
-send_to_service.call
+send_to_device.call
 ```
 
 * The default config to Android is: 
@@ -173,7 +173,7 @@ push_body = JeraPush::PushBody.new(
 send_to_devices = JeraPush::Services::SendToDevicesService.new(
   push: push_body
 )
-send_to_services.call
+send_to_devices.call
 ```
 
 ---

@@ -26,7 +26,7 @@ module JeraPush
       self.device = device
       self.devices = devices
       self.validate_only = validate_only
-      self.analytics_label = analytics_label
+      self.analytics_label = analytics_label.gsub(/\s/, '_').gsub(/[^a-zA-Z0-9.~%_]/, '').slice(0, 50).downcase
       self.ios = ios_config
       self.notification = notification.nil? ? Notification.new(title: title, body: body, image: image) : notification
       self.android = android_config

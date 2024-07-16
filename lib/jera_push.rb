@@ -27,11 +27,8 @@ module JeraPush
   autoload :AndroidConfig, 'jera_push/models/android_config.rb'
   autoload :Notification, 'jera_push/models/notification.rb'
 
-  mattr_accessor :firebase_api_key
-  @@firebase_api_key = nil
-
-  mattr_accessor :project_name
-  @@project_name = nil
+  mattr_accessor :project_id
+  @@project_id = nil
 
   mattr_accessor :project_id
   @@project_id = nil
