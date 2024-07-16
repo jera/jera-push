@@ -4,7 +4,7 @@ class CreateJeraPushMessagesDevices < ActiveRecord::Migration<%= migration_versi
       t.integer :device_id, index: true
       t.integer :message_id, index: true
       t.string :status
-      t.string :error_message
+      t.text :error_message
       t.string :firebase_id
 
       t.timestamps
