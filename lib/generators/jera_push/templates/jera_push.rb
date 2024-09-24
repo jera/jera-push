@@ -5,7 +5,7 @@ JeraPush.setup do |config|
   config.resources_name = ["<%= file_name.classify %>"]
   # You need to create a Account Service on google cloud, with editor permission or administrator. Flow this doc: https://cloud.google.com/iam/docs/service-accounts-create?hl=pt-br
   config.project_id = "YOUR_PROJECT_ID" # inside of the account service json
-  config.credentials_path = "YOUR_CREDENTIALS_PATH" #https://firebase.google.com/docs/cloud-messaging/migrate-v1?hl=pt-br#provide-credentials-manually
+  config.credentials_path = Rails.root.join("YOUR_CREDENTIALS_NAME").to_path #https://firebase.google.com/docs/cloud-messaging/migrate-v1?hl=pt-br#provide-credentials-manually
   ######################################################
   # Resource attribute showed in views                 #
   # IMPORTANT: All models need to have this attributes #

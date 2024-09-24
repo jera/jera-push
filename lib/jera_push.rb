@@ -30,9 +30,6 @@ module JeraPush
   mattr_accessor :project_id
   @@project_id = nil
 
-  mattr_accessor :project_id
-  @@project_id = nil
-
   mattr_accessor :default_topic
   @@default_topic = 'jera_push_development'
 

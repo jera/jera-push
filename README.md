@@ -43,11 +43,11 @@ That command will create the necessary migrations and the initialize file. The f
 #this is the intilizer
 #here you will set up the jera push configuration
 JeraPush.setup do |config|
-  #Update this for every new model
-  config.resources_name = ["User"]
-  config.project_id = "YOUR_PROJECT_ID"
-  config.credentials_path = "YOUR_CREDENTIALS_PATH" #https://firebase.google.com/docs/cloud-messaging/migrate-v1?hl=pt-br#provide-credentials-manually
-
+  # Change this for every new model
+  config.resources_name = ["<%= file_name.classify %>"]
+  # You need to create a Account Service on google cloud, with editor permission or administrator. Flow this doc: https://cloud.google.com/iam/docs/service-accounts-create?hl=pt-br
+  config.project_id = "YOUR_PROJECT_ID" # inside of the account service json
+  config.credentials_path = Rails.root.join("YOUR_CREDENTIALS_NAME").to_path #https://firebase.google.com/docs/cloud-messaging/migrate-v1?hl=pt-br#provide-credentials-manually
   ######################################################
   # Resource attribute showed in views                 #
   # IMPORTANT: All models need to have this attributes #
@@ -64,7 +64,6 @@ JeraPush.setup do |config|
   #   password: 'JeraPushAdmin'
   # }
 end
-
 
 ```
 ### You has to change the default_topic for your environment, because that's the topic that a brodcast sends a message, and it wouldn't be the same in diferents environment
