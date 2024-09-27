@@ -3,7 +3,7 @@ module JeraPush::Services
     def initialize(push:)
       super
       @push = push
-      @device = @push.devices
+      @devices = @push.devices
     end
 
     def call
@@ -29,9 +29,9 @@ module JeraPush::Services
 
     def send_push_to_devices
       @devices.each do |device|
-        message_device = @message.message_devices.create(device: device)
+        @message_device = @message.message_devices.create(device: device)
         @push.device = device
-        send_push(device, message_device)
+        send_push
       end
     end
 
