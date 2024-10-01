@@ -4,7 +4,7 @@ $:.push File.expand_path("../lib", __FILE__)
 require "jera_push/version"
 
 # Describe your gem and declare its dependencies:
-Gem::Specification.new 'jera_push', '2.1.3' do |spec|
+Gem::Specification.new 'jera_push', '2.1.4' do |spec|
   spec.name                  = "jera_push"
   spec.version               = JeraPush::VERSION
   spec.required_ruby_version = '>= 3.0.3'
