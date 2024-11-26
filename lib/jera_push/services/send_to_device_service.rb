@@ -25,7 +25,7 @@ module JeraPush::Services
     end
 
     def create_message
-      @message = JeraPush::Message.create(title: @push.notification.title, body: @push.notification.body, data: @push.data)
+      @message = JeraPush::Message.create(title: @push.notification.title, body: @push.notification.body)
     end
 
     def add_devices_to_message
