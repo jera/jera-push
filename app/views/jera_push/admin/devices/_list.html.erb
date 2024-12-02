@@ -10,14 +10,25 @@
   <tbody>
     <% devices.each do |device| %>
       <tr>
-        <td class="col s2"><%= device.id %></td>
-        <td class="col s2"><%= device.platform %></td>
         <td class="col s2">
-          <% resource_extras(device).each do |attribute| %>
-            <div><%= attribute %></div>
-          <% end %>
+          <%= device.id %>
         </td>
-        <td class="col s2"><%= device.token %></td>
+        <td class="col s2">
+          <%= device.platform %>
+        </td>
+        <td class="col s2">
+          <span><%= device.pushable.name %></span>
+          <strong style="white-space: nowrap;">
+            <%=
+              if (device.pushable.email)
+                device.pushable.email
+              end
+            %>
+          <strong>
+        </td>
+        <td class="col s2">
+          <%= device.token %>
+        </td>
       </tr>
     <% end %>
   </tbody>
