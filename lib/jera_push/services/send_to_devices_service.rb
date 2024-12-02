@@ -36,7 +36,8 @@ module JeraPush::Services
     end
 
     def send_push
-      JeraPush::Services::SendPushService.new(push: @push,
+      JeraPush::Services::SendPushService.new(
+        push: @push,
         message: @message,
         message_device: @message_device
       ).call
