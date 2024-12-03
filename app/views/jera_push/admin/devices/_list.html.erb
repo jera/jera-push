@@ -16,7 +16,13 @@
         <td class="col s2">
           <%= device.platform.titleize %>
         </td>
-        <td class="col s2">
+        <td
+          class="col s2"
+          style="
+            display: flex;
+            flex-direction: column;
+          "
+        >
           <span><%= device.pushable.name %></span>
           <strong style="white-space: nowrap;">
             <%=

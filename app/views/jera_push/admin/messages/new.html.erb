@@ -18,13 +18,6 @@
 
       <div class="row options" id="message_options">
         <div class="row">
-          <!--
-          TODO: ainda nao temos envio por broadcast
-          <p class="col s3">
-            <%= radio_button_tag :type, :broadcast, true, class: 'with-gap' %>
-            <%= label_tag :type_broadcast, t('jera_push.admin.messages.new.broadcast') %>
-          </p>
-          -->
           <p class="col s4">
             <%= radio_button_tag :type, :specific, true, class: 'with-gap' %>
             <%= label_tag :type_specific, t('jera_push.admin.messages.new.specific') %>
