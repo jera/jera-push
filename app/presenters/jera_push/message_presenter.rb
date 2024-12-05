@@ -10,8 +10,7 @@ class JeraPush::MessagePresenter < BasePresenter
   def display_content
     JSON.pretty_generate({
       title: item.title,
-      body: item.body,
-      data: item.data
+      body: item.body
     })
   end
 
